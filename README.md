@@ -1,16 +1,25 @@
-# racego
+[![Website](https://img.shields.io/badge/Web-neofix.ch-brightgreen?style=for-the-badge)](https://neofix.ch)
+[![GitHub](https://img.shields.io/github/license/maheini/racego?style=for-the-badge&color=blue)](LICENSE)
+![GitHub top language](https://img.shields.io/github/languages/top/maheini/racego?style=for-the-badge&color=blue)
+![Visitor count](https://shields-io-visitor-counter.herokuapp.com/badge?page=maheini.Racego&style=for-the-badge&color=blue)
+![Platform](https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge)
+
+# Racego for Android
 
 A cross-platform race-management tool.
 
-## Getting Started
+## Supported Platforms
 
-This project is a starting point for a Flutter application.
+Currently, Racego is supported as a Windows and Web app. In the future, Racego will also gain support for Linux and Mac. Racego uses the [Racego api](https://github.com/maheini/Racego-api) as backend.
 
-A few resources to get you started if this is your first Flutter project:
+## Feature requested or Issue found?
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Every idea is welcome. Feel free to contribute via pull request or opening a issues.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Some backgrounds about Racego
+
+Racego was first released as a native Windows application in 2020. Later on, Neofix further increased the capabilities and refactored everythin up to a new release in 2021. Racego did served well on it's first tests and as it grows in popularity, Neofix decided to bring Racego to cross-platform with further possibilities of extensions.
+
+## License & copyright
+ 
+Licensed under the [GPLv3 License](LICENSE).
