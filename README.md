@@ -2,9 +2,9 @@
 [![GitHub](https://img.shields.io/github/license/maheini/racego?style=for-the-badge&color=blue)](LICENSE)
 ![GitHub top language](https://img.shields.io/github/languages/top/maheini/racego?style=for-the-badge&color=blue)
 ![Visitor count](https://shields-io-visitor-counter.herokuapp.com/badge?page=maheini.Racego&style=for-the-badge&color=blue)
-![Platform](https://img.shields.io/badge/Platform-Web-blue?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-Web%20&%20Windows-blue?style=for-the-badge)
 
-# Racego for Android
+# Racego
 
 A cross-platform race-management tool.
 
