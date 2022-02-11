@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'homescreen.dart';
-import 'loginscreen.dart';
-import 'userscreen.dart';
+import 'presentation/pages/homescreen.dart';
+import 'presentation/pages/loginscreen.dart';
+import 'presentation/pages/userscreen.dart';
 
 void main(){
   runApp(const Racego());
