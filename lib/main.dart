@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:racego/data/locator/locator.dart';
 import 'ui/pages/loginscreen.dart';
 
 void main() {
@@ -10,6 +11,7 @@ class Racego extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setupLocator();
     return MaterialApp(
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
