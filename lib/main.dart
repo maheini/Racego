@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'ui/pages/loginscreen.dart';
 
-void main(){
+void main() {
   runApp(const Racego());
 }
 
@@ -12,13 +12,12 @@ class Racego extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateRoute: (settings) {
-        if (settings.name == '/login') {
-          // return MaterialPageRoute(builder: (_) => const LoginScreen());
+        if (settings.name == '/') {
+          return MaterialPageRoute(builder: (_) => const LoginPage());
         }
         if (settings.name == '/user') {
           // return MaterialPageRoute(builder: (_) => UserScreen(id: ???));
-        }
-        else if (settings.name == '/'){
+        } else if (settings.name == '/') {
           // return MaterialPageRoute(builder: (_) => const HomeScreen());
         }
         return null; // Let `onUnknownRoute` handle this behavior.
