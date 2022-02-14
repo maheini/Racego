@@ -106,12 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     );
                   } else if (state is Loading) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        ElevatedButton(onPressed: null, child: Text('Melde an'))
-                      ],
-                    );
+                    return const CircularProgressIndicator();
                   } else if (state is LoggedIn) {
                     WidgetsBinding.instance?.addPostFrameCallback((_) {
                       Navigator.of(context).pushNamed('/');
