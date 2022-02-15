@@ -9,5 +9,10 @@ class Loading extends LoginState {}
 
 class LoggedIn extends LoginState {
   LoggedIn({required this.username});
-  String username;
+  final String username;
+}
+
+class LoginError extends LoginState {
+  LoginError(this.errorMessage);
+  final String errorMessage;
 }

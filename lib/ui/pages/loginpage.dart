@@ -132,6 +132,29 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushReplacementNamed(context, '/');
           });
           return Text('Hallo ${state.username}');
+        } else if (state is LoginError) {
+          return Column(
+            children: [
+              Text(
+                state.errorMessage,
+                style: const TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        locator.get<LoginBloc>().add(Login(
+                            _emailController.text, _passwordController.text));
+                      },
+                      child: const Text('Anmelden'))
+                ],
+              ),
+            ],
+          );
         } else {
           return const Text('Unbekannter Fehler');
         }

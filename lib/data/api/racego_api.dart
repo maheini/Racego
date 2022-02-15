@@ -11,6 +11,30 @@ class RacegoApi {
 
   final http.Client _client;
 
+  Future<Map<bool, String>> login(String username, String password) async {
+    try {
+      Map<String, String> loginData = {
+        'username': username,
+        'password': password
+      };
+      String response = await _postRequest(_apiBaseUrl + 'login', loginData);
+      Map<String, dynamic> data = jsonDecode(response);
+
+      return {true: data['username']};
+    } on AuthException catch (authError) {
+      if (authError.errorMessage.contains('Login fehlgeschlagen')) ;
+      return {false: ''};
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantword');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantword');
+    } catch (error) {
+      throw UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+    }
+  }
 
   Future<String> _postRequest(String url, Object? body) async {
     try {
@@ -23,6 +47,8 @@ class RacegoApi {
           return response.body;
         case 401:
           throw AuthException('Keine Berechtigung');
+        case 403:
+          throw AuthException('Login fehlgeschlagen');
         case 404:
           throw ServerException(
               'Fehler: Fehlerhafte Quelle für den Datenaustausch.');
@@ -38,6 +64,9 @@ class RacegoApi {
       rethrow;
     } on SocketException catch (_) {
       throw InternetException('Der Server kann nicht erreicht werden.');
+    } on TimeoutException catch (_) {
+      throw InternetException(
+          'Der Server kann nicht erreicht werden: Timeout.');
     } catch (error) {
       throw UnknownException(
           'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
@@ -55,6 +84,8 @@ class RacegoApi {
           return response.body;
         case 401:
           throw AuthException('Keine Berechtigung');
+        case 403:
+          throw AuthException('Login Fehlgeschlagen');
         case 404:
           throw ServerException(
               'Fehler: Fehlerhafte Quelle für den Datenaustausch.');
@@ -70,6 +101,9 @@ class RacegoApi {
       rethrow;
     } on SocketException catch (_) {
       throw InternetException('Der Server kann nicht erreicht werden.');
+    } on TimeoutException catch (_) {
+      throw InternetException(
+          'Der Server kann nicht erreicht werden: Timeout.');
     } catch (error) {
       throw UnknownException(
           'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
