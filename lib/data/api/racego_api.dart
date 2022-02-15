@@ -5,13 +5,18 @@ import 'package:http/http.dart' as http;
 import 'package:racego/data/exceptions/racego_exception.dart';
 
 class RacegoApi {
+  String? _username;
+  bool _isLoggedIn = false;
   RacegoApi(this._client);
   Map<String, String> headers = {};
   static const String _apiBaseUrl = 'http://localhost/api.php/';
 
   final http.Client _client;
 
-  Future<Map<bool, String>> login(String username, String password) async {
+  bool get isLoggedIn => _isLoggedIn;
+  String get username => _username ?? '';
+
+  Future<bool> login(String username, String password) async {
     try {
       Map<String, String> loginData = {
         'username': username,
@@ -19,17 +24,21 @@ class RacegoApi {
       };
       String response = await _postRequest(_apiBaseUrl + 'login', loginData);
       Map<String, dynamic> data = jsonDecode(response);
+      username = data['username'];
 
-      return {true: data['username']};
+      return true;
     } on AuthException catch (authError) {
-      if (authError.errorMessage.contains('Login fehlgeschlagen')) ;
-      return {false: ''};
+      if (authError.errorMessage.contains('Login fehlgeschlagen')) {
+        return false;
+      } else {
+        rethrow;
+      }
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantword');
+      throw DataException('Fehler beim Parsen der Serverantwort');
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantword');
+      throw DataException('Fehler beim Parsen der Serverantwort');
     } catch (error) {
       throw UnknownException(
           'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
@@ -46,8 +55,12 @@ class RacegoApi {
         case 200:
           return response.body;
         case 401:
+          _isLoggedIn = false;
+          _username = null;
           throw AuthException('Keine Berechtigung');
         case 403:
+          _isLoggedIn = false;
+          _username = null;
           throw AuthException('Login fehlgeschlagen');
         case 404:
           throw ServerException(
@@ -83,8 +96,12 @@ class RacegoApi {
         case 200:
           return response.body;
         case 401:
+          _isLoggedIn = false;
+          _username = null;
           throw AuthException('Keine Berechtigung');
         case 403:
+          _isLoggedIn = false;
+          _username = null;
           throw AuthException('Login Fehlgeschlagen');
         case 404:
           throw ServerException(

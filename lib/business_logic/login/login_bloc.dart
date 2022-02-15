@@ -16,10 +16,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _login(Login event, Emitter<LoginState> emit) async {
     emit(Loading());
     try {
-      Map<bool, String> result =
-          await _api.login(event._username, event._password);
-      if (result.isNotEmpty && result.keys.first) {
-        emit(LoggedIn(username: result.values.first));
+      bool isLoggedIn = await _api.login(event._username, event._password);
+      if (isLoggedIn) {
+        emit(LoggedIn(username: _api.username));
       } else {
         emit(LoginError('Email oder Passwort ist ungültig'));
       }
