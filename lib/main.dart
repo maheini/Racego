@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:racego/business_logic/blocs/login/login_bloc.dart';
+import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/data/locator/locator.dart';
 import 'package:racego/ui/pages/homepage.dart';
 import 'ui/pages/loginpage.dart';
@@ -23,7 +23,7 @@ class Racego extends StatelessWidget {
           } else {
             return MaterialPageRoute(builder: (_) => const LoginPage());
           }
-          return MaterialPageRoute(builder: (_) => const LoginPage());
+          // return MaterialPageRoute(builder: (_) => const LoginPage());
         }
         if (settings.name == '/user') {
           // return MaterialPageRoute(builder: (_) => UserScreen(id: ???));
