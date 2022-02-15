@@ -109,9 +109,9 @@ class _LoginPageState extends State<LoginPage> {
                     return const CircularProgressIndicator();
                   } else if (state is LoggedIn) {
                     WidgetsBinding.instance?.addPostFrameCallback((_) {
-                      Navigator.of(context).pushNamed('/');
+                      Navigator.pushReplacementNamed(context, '/');
                     });
-                    return const Text('Anmelden erfolgreich');
+                    return Text('Hallo ${state.username}');
                   } else {
                     return const Text('Unbekannter Fehler');
                   }
