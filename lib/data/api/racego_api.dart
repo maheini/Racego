@@ -16,6 +16,34 @@ class RacegoApi {
   bool get isLoggedIn => _isLoggedIn;
   String get username => _username ?? '';
 
+  Future<bool> checkLoginStatus() async {
+    try {
+      Map<String, String> status =
+          jsonDecode(await _getRequest(_apiBaseUrl + 'me'));
+      if (status.containsKey('username')) {
+        _username = status['username'];
+        _isLoggedIn = true;
+        return true;
+      }
+      return false;
+    } on AuthException catch (authException) {
+      if (authException.errorMessage.contains('Login fehlgeschlagen')) {
+        return false;
+      } else {
+        rethrow;
+      }
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+    }
+  }
+
   Future<bool> login(String username, String password) async {
     try {
       Map<String, String> loginData = {
