@@ -13,8 +13,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => locator<LoginBloc>()..add(RegenerateSession()),
+    return BlocProvider.value(
+      value: locator<LoginBloc>()..add(RegenerateSession()),
       child: Scaffold(
         body: Center(
           child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
