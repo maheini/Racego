@@ -68,6 +68,14 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   Widget _emailInput() {
     return TextField(
+      onSubmitted: (_) {
+        if (_emailController.text.isNotEmpty &&
+            _passwordController.text.isNotEmpty) {
+          context
+              .read<LoginBloc>()
+              .add(Login(_emailController.text, _passwordController.text));
+        }
+      },
       controller: _emailController,
       onChanged: (email) {
         if (email.isEmpty && !_showEmailEmptyMessage) {
@@ -94,6 +102,14 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   Widget _passwordInput() {
     return TextField(
+      onSubmitted: (_) {
+        if (_emailController.text.isNotEmpty &&
+            _passwordController.text.isNotEmpty) {
+          context
+              .read<LoginBloc>()
+              .add(Login(_emailController.text, _passwordController.text));
+        }
+      },
       obscureText: true,
       controller: _passwordController,
       onChanged: (password) {
@@ -126,8 +142,11 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    context.read<LoginBloc>().add(
-                        Login(_emailController.text, _passwordController.text));
+                    if (_emailController.text.isNotEmpty &&
+                        _passwordController.text.isNotEmpty) {
+                      context.read<LoginBloc>().add(Login(
+                          _emailController.text, _passwordController.text));
+                    }
                   },
                   child: const Text('Anmelden'))
             ],
