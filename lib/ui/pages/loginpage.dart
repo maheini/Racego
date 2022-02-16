@@ -14,43 +14,54 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => locator<LoginBloc>(),
+      create: (context) => locator<LoginBloc>()..add(RegenerateSession()),
       child: Scaffold(
         body: Center(
-          child: Container(
-            child: SizedBox(
-              child: Column(
-                children: [
-                  const Text(
-                    'Racego Login',
-                    style: TextStyle(fontSize: 20),
-                    textAlign: TextAlign.center,
+          child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+            if (state is RegeneratingSession) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is LoggedIn) {
+              WidgetsBinding.instance?.addPostFrameCallback((_) {
+                Navigator.pushReplacementNamed(context, '/');
+              });
+              return const SizedBox(height: 20);
+            } else {
+              return Container(
+                child: SizedBox(
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Racego Login',
+                        style: TextStyle(fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _emailInput(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _passwordInput(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _loginBar(),
+                    ],
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _emailInput(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _passwordInput(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _loginBar(),
-                ],
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-              ),
-              width: 300,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.1),
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
-            ),
-            padding: const EdgeInsets.all(40),
-          ),
+                  width: 300,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.1),
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                ),
+                padding: const EdgeInsets.all(40),
+              );
+            }
+          }),
         ),
       ),
     );
@@ -113,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBar() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        if (state is LoggedOut) {
+        if (state is LoggedOut || state is RegeneratingSession) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -127,11 +138,6 @@ class _LoginPageState extends State<LoginPage> {
           );
         } else if (state is Loading) {
           return const CircularProgressIndicator();
-        } else if (state is LoggedIn) {
-          WidgetsBinding.instance?.addPostFrameCallback((_) {
-            Navigator.pushReplacementNamed(context, '/');
-          });
-          return Text('Hallo ${state.username}');
         } else if (state is LoginError) {
           return Column(
             children: [
@@ -141,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.red,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

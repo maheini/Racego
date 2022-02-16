@@ -3,9 +3,11 @@ part of 'login_bloc.dart';
 @immutable
 abstract class LoginEvent {}
 
+class RegenerateSession extends LoginEvent {}
+
 class Login extends LoginEvent {
-  String _username;
-  String _password;
+  final String _username;
+  final String _password;
   Login(this._username, this._password);
 }
 

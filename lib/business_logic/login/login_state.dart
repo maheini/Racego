@@ -3,6 +3,8 @@ part of 'login_bloc.dart';
 @immutable
 abstract class LoginState {}
 
+class RegeneratingSession extends LoginState {}
+
 class LoggedOut extends LoginState {}
 
 class Loading extends LoginState {}

@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:racego/data/exceptions/racego_exception.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class RacegoApi {
   String? _username;
   bool _isLoggedIn = false;
-  RacegoApi(this._client);
+  FlutterSecureStorage secureStorage;
+  RacegoApi(this._client, this.secureStorage);
   Map<String, String> headers = {};
   static const String _apiBaseUrl = 'http://localhost/api.php/';
 
@@ -16,9 +19,15 @@ class RacegoApi {
   bool get isLoggedIn => _isLoggedIn;
   String get username => _username ?? '';
 
-  Future<bool> checkLoginStatus() async {
+  Future<bool> regenerateSession() async {
     try {
-      Map<String, String> status =
+      if (kIsWeb) {
+        // if platform is not web ->set cookie
+        String? cookie = await secureStorage.read(key: 'racego_cookie');
+        if (cookie != null) setCookie(cookie);
+      }
+
+      Map<String, dynamic> status =
           jsonDecode(await _getRequest(_apiBaseUrl + 'me'));
       if (status.containsKey('username')) {
         _username = status['username'];
@@ -26,12 +35,8 @@ class RacegoApi {
         return true;
       }
       return false;
-    } on AuthException catch (authException) {
-      if (authException.errorMessage.contains('Login fehlgeschlagen')) {
-        return false;
-      } else {
-        rethrow;
-      }
+    } on AuthException catch (_) {
+      return false;
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
@@ -52,9 +57,12 @@ class RacegoApi {
       };
       String response = await _postRequest(_apiBaseUrl + 'login', loginData);
       Map<String, dynamic> data = jsonDecode(response);
-      username = data['username'];
-
-      return true;
+      if (data.containsKey('username')) {
+        _username = data['username'];
+        _isLoggedIn = true;
+        return true;
+      }
+      return false;
     } on AuthException catch (authError) {
       if (authError.errorMessage.contains('Login fehlgeschlagen')) {
         return false;
@@ -155,11 +163,16 @@ class RacegoApi {
     }
   }
 
-  void _updateCookie(http.Response response) {
+  void _updateCookie(http.Response response) async {
     String? rawCookie = response.headers['set-cookie'];
     if (rawCookie != null) {
       int index = rawCookie.indexOf(';');
-      setCookie((index == -1) ? rawCookie : rawCookie.substring(0, index));
+      String cookie = (index == -1) ? rawCookie : rawCookie.substring(0, index);
+      setCookie(cookie);
+      if (!kIsWeb) {
+        // is platform not web?
+        await secureStorage.write(key: 'racego_cookie', value: cookie);
+      }
     }
   }
 
