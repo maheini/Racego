@@ -42,7 +42,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  void _logout(Logout event, Emitter<LoginState> emit) {
+  void _logout(Logout event, Emitter<LoginState> emit) async {
+    try {
+      await _api.logout();
+    } catch (e) {
+      emit(LoggedOut());
+    }
     emit(LoggedOut());
   }
 }
