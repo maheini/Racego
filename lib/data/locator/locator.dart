@@ -10,5 +10,5 @@ GetIt locator = GetIt.instance;
 void setupLocator() {
   const storage = FlutterSecureStorage();
   RacegoApi api = RacegoApi(client, storage);
-  locator.registerSingleton(LoginBloc(api));
+  locator.registerSingleton(LoginBloc(api)..add(RegenerateSession()));
 }
