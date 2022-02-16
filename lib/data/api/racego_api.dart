@@ -21,7 +21,7 @@ class RacegoApi {
 
   Future<bool> regenerateSession() async {
     try {
-      if (kIsWeb) {
+      if (!kIsWeb) {
         // if platform is not web ->set cookie
         String? cookie = await secureStorage.read(key: 'racego_cookie');
         if (cookie != null) setCookie(cookie);
