@@ -28,16 +28,20 @@ class _UserListState extends State<UserList> {
   final ListSelectionCubit _listCubit = ListSelectionCubit();
 
   @override
-  Widget build(BuildContext context) {
-    // check if (maybe new) items contain current id, else update selection
-    if (_listCubit.state > -1) {
-      var contain =
-          widget._list.where((element) => element.id == _listCubit.state);
-      if (contain.isEmpty) {
-        _listCubit.itemPressed(-1);
-        widget._onSelectionChanged?.call(-1, -1, false);
-      }
+  void didUpdateWidget(UserList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // check if new items contain current id, else update selection
+    var contain =
+        widget._list.where((element) => element.id == _listCubit.state);
+    if (contain.isEmpty) {
+      _listCubit.itemPressed(-1);
+      widget._onSelectionChanged?.call(-1, -1, false);
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return _userListDecoration(
       child: Column(
         children: [
