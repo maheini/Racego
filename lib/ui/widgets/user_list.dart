@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/models/user.dart';
 import '../../business_logic/widgets/list_selection_cubit.dart';
 
-// ignore: must_be_immutable
-class UserList extends StatelessWidget {
-  UserList(List<User> userList,
+class UserList extends StatefulWidget {
+  const UserList(List<User> userList,
       {void Function(int index, int userID, bool isSelected)?
           onSelectionChanged,
       void Function(int index, int userID)? onDoubleTap,
@@ -20,6 +19,11 @@ class UserList extends StatelessWidget {
       _onSelectionChanged;
   final void Function(int index, int userID)? _onDoubleTap;
 
+  @override
+  _UserListState createState() => _UserListState();
+}
+
+class _UserListState extends State<UserList> {
   final ScrollController _controller = ScrollController();
   final ListSelectionCubit _listCubit = ListSelectionCubit();
 
@@ -34,9 +38,9 @@ class UserList extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               controller: _controller,
-              itemCount: _list.length,
+              itemCount: widget._list.length,
               itemBuilder: (context, index) {
-                return _userListTile(_list[index], index);
+                return _userListTile(widget._list[index], index);
               },
               separatorBuilder: (context, index) {
                 return const Divider(
@@ -101,26 +105,26 @@ class UserList extends StatelessWidget {
   }
 
   int _pendingTabs = 0;
-  int _currentIndex = -1;
+  int _currentID = -1;
   void onTab(int index, int id) async {
     // is new item selected? ->remove all pending items and update current item
-    if (_currentIndex != index) {
+    if (_currentID != id) {
       _pendingTabs = 0;
-      _currentIndex = index;
+      _currentID = id;
     }
     // if there are waiting tabs, then send doubletab and reset waiting tabs
     if (_pendingTabs > 0) {
-      _onDoubleTap?.call(index, id);
+      widget._onDoubleTap?.call(index, id);
       _pendingTabs = 0;
     }
     // else send tab and start waiting for doubletab
     else {
-      _onSelectionChanged?.call(index, id, _listCubit.state != index);
-      _listCubit.itemPressed(index);
+      widget._onSelectionChanged?.call(index, id, _listCubit.state != id);
+      _listCubit.itemPressed(id);
       _pendingTabs++;
-      await Future.delayed(const Duration(milliseconds: 50000));
-      // if there are pending tabs and still the same index, then reset
-      if (_pendingTabs > 0 && _currentIndex == index) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      // if there are pending tabs and still the same id, then reset
+      if (_pendingTabs > 0 && _currentID == id) {
         _pendingTabs--;
       }
     }
@@ -128,10 +132,10 @@ class UserList extends StatelessWidget {
 
   Widget _userListTile(User user, int index) {
     return InkWell(
-      onTap: () => onTab(index, user.id),
+      onTap: () => onTab(index, user.id), //() => onTab(index, user.id),
       child: BlocBuilder<ListSelectionCubit, int>(
         buildWhen: (previousSelection, currentSelection) {
-          if (index == currentSelection || index == previousSelection) {
+          if (user.id == currentSelection || user.id == previousSelection) {
             return true;
           } else {
             return false;
@@ -140,7 +144,7 @@ class UserList extends StatelessWidget {
         bloc: _listCubit,
         builder: (context, currentSelection) {
           return Container(
-            color: currentSelection == index
+            color: _listCubit.state == user.id
                 ? Colors.white.withOpacity(0.1)
                 : null,
             padding: const EdgeInsets.all(10),

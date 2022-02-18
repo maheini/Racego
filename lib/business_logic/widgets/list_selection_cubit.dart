@@ -4,12 +4,13 @@ class ListSelectionCubit extends Cubit<int> {
   ListSelectionCubit() : super(-1);
   int _currentSelection = -1;
 
-  void itemPressed(int index) {
-    if (index == _currentSelection) {
+  void itemPressed(int id) {
+    if (id == _currentSelection) {
+      _currentSelection = -1;
       emit(-1);
     } else {
-      _currentSelection = index;
-      emit(index);
+      _currentSelection = id;
+      emit(id);
     }
   }
 }
