@@ -5,15 +5,17 @@ import '../../business_logic/widgets/list_selection_cubit.dart';
 
 class UserList extends StatefulWidget {
   const UserList(List<User> userList,
-      {void Function(int index, int userID, bool isSelected)?
-          onSelectionChanged,
+      {String? title,
+      void Function(int index, int userID, bool isSelected)? onSelectionChanged,
       void Function(int index, int userID)? onDoubleTap,
       Key? key})
-      : _list = userList,
+      : _title = title,
+        _list = userList,
         _onSelectionChanged = onSelectionChanged,
         _onDoubleTap = onDoubleTap,
         super(key: key);
 
+  final String? _title;
   final List<User> _list;
   final void Function(int index, int userID, bool isSelected)?
       _onSelectionChanged;
@@ -113,11 +115,41 @@ class _UserListState extends State<UserList> {
   }
 
   Widget _userListDecoration({required Widget child}) {
-    return Container(
-      child: child,
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
-    );
+    if (widget._title == null) {
+      return Container(
+        child: child,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
+      );
+    } else {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            color: Colors.grey.shade800.withOpacity(0.7),
+            width: double.infinity,
+            child: Text(
+              widget._title!,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(height: 5),
+          Expanded(
+            child: Container(
+              child: child,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
+            ),
+          ),
+          // Expanded(child: child),
+        ],
+      );
+    }
   }
 
   int _pendingTabs = 0;
