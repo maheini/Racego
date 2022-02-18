@@ -68,44 +68,47 @@ class _UserListState extends State<UserList> {
   }
 
   Widget _title() {
-    return Row(
-      children: const [
-        Expanded(
-          flex: 1,
-          child: Text(
-            'ID',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold),
+    return Container(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      child: Row(
+        children: const [
+          Expanded(
+            flex: 1,
+            child: Text(
+              'ID',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        SizedBox(width: 5),
-        Expanded(
-          flex: 3,
-          child: Text(
-            'Vorname',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          SizedBox(width: 5),
+          Expanded(
+            flex: 3,
+            child: Text(
+              'Vorname',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        SizedBox(width: 5),
-        Expanded(
-          flex: 3,
-          child: Text(
-            'Nachname',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          SizedBox(width: 5),
+          Expanded(
+            flex: 3,
+            child: Text(
+              'Nachname',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        SizedBox(width: 5),
-        Expanded(
-          flex: 1,
-          child: Text(
-            'Runden',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          SizedBox(width: 5),
+          Expanded(
+            flex: 1,
+            child: Text(
+              'Runden',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
