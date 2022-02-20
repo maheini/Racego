@@ -13,7 +13,7 @@ class ListToolbarCubit extends Cubit<ListToolbarState> {
   void selectionChanged(int id) {
     _currentId = id;
     _isValidLaptime = false;
-    emit(UserSelected(id));
+    emit(UserSelected(id, userHasChanged: true));
   }
 
   void userUnselected() {
@@ -24,6 +24,9 @@ class ListToolbarCubit extends Cubit<ListToolbarState> {
 
   void lapTimeChanged(bool isValid) {
     _isValidLaptime = isValid;
-    emit(UserSelected(_currentId, validLaptime: _isValidLaptime));
+    emit(
+      UserSelected(_currentId,
+          validLaptime: _isValidLaptime, userHasChanged: false),
+    );
   }
 }
