@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/ui/widgets/user_list.dart';
+import 'package:racego/ui/widgets/timeinput.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: Column(
         children: [
-          const TimeInput(),
+          // const TimeInput(),
           const SizedBox(height: 30),
           const Text(
             'Willkommen zurück',
@@ -124,8 +125,11 @@ class _HomePageState extends State<HomePage> {
         ),
         Row(
           children: [
-            _toolButton(const Icon(Icons.info)),
-            _toolButton(const Icon(Icons.remove_circle)),
+            Container(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: TimeInput()),
+            _toolButton(const Icon(Icons.access_alarm)),
+            _toolButton(const Icon(Icons.dangerous)),
           ],
         ),
       ],
@@ -215,31 +219,31 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class TimeInput extends StatelessWidget {
-  const TimeInput({Key? key}) : super(key: key);
+// class TimeInput extends StatelessWidget {
+//   const TimeInput({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: Row(
-        children: [
-          TextField(
-            keyboardType: TextInputType.datetime,
-          )
-        ],
-      ),
-    );
-    return Container(
-      constraints: BoxConstraints.tight(Size.square(50)),
-      padding: const EdgeInsets.all(5),
-      child: Row(
-        children: [
-          TextField(
-            keyboardType: TextInputType.datetime,
-          )
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 100,
+//       child: Row(
+//         children: [
+//           TextField(
+//             keyboardType: TextInputType.datetime,
+//           )
+//         ],
+//       ),
+//     );
+//     return Container(
+//       constraints: BoxConstraints.tight(Size.square(50)),
+//       padding: const EdgeInsets.all(5),
+//       child: Row(
+//         children: [
+//           TextField(
+//             keyboardType: TextInputType.datetime,
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
