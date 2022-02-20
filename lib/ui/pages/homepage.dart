@@ -4,6 +4,7 @@ import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/ui/widgets/user_list.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
+import 'package:racego/business_logic/listtoolbar/listtoolbar_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +14,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final ListToolbarCubit _userListCubit = ListToolbarCubit();
+  final ListToolbarCubit _trackListCubit = ListToolbarCubit();
+
   bool _forcedLogout = false;
 
   @override
@@ -101,14 +105,38 @@ class _HomePageState extends State<HomePage> {
           child: UserList(
             gg2on ? gg2 : gg,
             title: 'Teilnehmer',
+            onSelectionChanged: (index, userID, isSelected) =>
+                _userListCubit.selectionChanged(isSelected ? userID : 0),
           ),
         ),
-        Row(
-          children: [
-            _toolButton(const Icon(Icons.info)),
-            _toolButton(const Icon(Icons.remove_circle)),
-            _toolButton(const Icon(Icons.assistant_photo)),
-          ],
+        BlocBuilder<ListToolbarCubit, ListToolbarState>(
+          bloc: _userListCubit,
+          builder: (context, state) {
+            bool disabled = true;
+            if (state is UserSelected && state.id > 0) disabled = false;
+            return AbsorbPointer(
+              absorbing: disabled,
+              child: Row(
+                children: [
+                  _toolButton(
+                    const Icon(Icons.info),
+                    color: disabled ? Colors.grey : Colors.blue,
+                    onpressed: () => {/* TODO implement function*/},
+                  ),
+                  _toolButton(
+                    const Icon(Icons.remove_circle),
+                    color: disabled ? Colors.grey : Colors.red,
+                    onpressed: () => {/* TODO implement function*/},
+                  ),
+                  _toolButton(
+                    const Icon(Icons.assistant_photo),
+                    color: disabled ? Colors.grey : Colors.green,
+                    onpressed: () => {/* TODO implement function*/},
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ],
     );
