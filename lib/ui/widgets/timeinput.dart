@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:racego/ui/widgets/timeinputformatter.dart';
 
-class TimeInput extends StatelessWidget {
-  TimeInput({Function(Time time)? onChanged, Key? key})
+class TimeInput extends StatefulWidget {
+  const TimeInput({Function(Time time)? onChanged, Key? key, bool? reset})
       : _onChanged = onChanged,
+        _reset = reset ?? false,
         super(key: key);
-
+  final bool _reset;
   final Function(Time time)? _onChanged;
+
+  @override
+  _TimeInputState createState() => _TimeInputState();
+}
+
+class _TimeInputState extends State<TimeInput> {
+  @override
+  void didUpdateWidget(covariant TimeInput oldWidget) {
+    if (widget._reset) {
+      _millisecondController.text = '000';
+      _secondController.text = '00';
+      _minuteController.text = '00';
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   final Time _duration = Time();
 
@@ -20,12 +36,6 @@ class TimeInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return Container(
-    //   padding: const EdgeInsets.all(10),
-    //   decoration: BoxDecoration(
-    //     color: Colors.grey.shade400,
-    //     borderRadius: BorderRadius.circular(4),
-    //   ),
-    // child: Row(
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -37,7 +47,7 @@ class TimeInput extends StatelessWidget {
           child: TextField(
             onChanged: (val) {
               _duration.minutes = int.tryParse(_minuteController.text) ?? 0;
-              _onChanged?.call(_duration);
+              widget._onChanged?.call(_duration);
             },
             controller: _minuteController,
             onTap: () => _minuteController.selection = TextSelection(
@@ -67,7 +77,7 @@ class TimeInput extends StatelessWidget {
           child: TextField(
             onChanged: (val) {
               _duration.seconds = int.tryParse(_secondController.text) ?? 0;
-              _onChanged?.call(_duration);
+              widget._onChanged?.call(_duration);
             },
             controller: _secondController,
             onTap: () => _secondController.selection = TextSelection(
@@ -98,7 +108,7 @@ class TimeInput extends StatelessWidget {
             onChanged: (val) {
               _duration.milliseconds =
                   int.tryParse(_millisecondController.text) ?? 0;
-              _onChanged?.call(_duration);
+              widget._onChanged?.call(_duration);
             },
             controller: _millisecondController,
             onTap: () => _millisecondController.selection = TextSelection(
@@ -124,8 +134,6 @@ class TimeInput extends StatelessWidget {
         ),
       ],
     );
-    //   );
-    // }
   }
 }
 
@@ -170,4 +178,7 @@ class Time {
   int get seconds => _seconds;
   int get minutes => _minutes;
   int get hours => _hours;
+
+  bool get isValid =>
+      _milliseconds > 0 || _seconds > 0 || _minutes > 0 || _hours > 0;
 }
