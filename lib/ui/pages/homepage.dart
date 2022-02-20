@@ -176,14 +176,19 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: TimeInput(
                       reset: userHasChanged | disabled ? true : false,
-                      onChanged: (time) =>
-                          _trackListCubit.lapTimeChanged(time.isValid),
+                      onChanged: (time) {
+                        bool isValid = time.isValid;
+                        if (validTime != isValid)
+                          _trackListCubit.lapTimeChanged(time.isValid);
+                      },
                     ),
                   ),
                   _toolButton(
                     const Icon(Icons.access_alarm),
                     color: disabled | !validTime ? Colors.grey : Colors.green,
-                    onpressed: () => {/* TODO implement function*/},
+                    onpressed: !validTime
+                        ? null
+                        : () => {/* TODO implement function*/},
                   ),
                   _toolButton(
                     const Icon(Icons.dangerous),
@@ -283,32 +288,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-// class TimeInput extends StatelessWidget {
-//   const TimeInput({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 100,
-//       child: Row(
-//         children: [
-//           TextField(
-//             keyboardType: TextInputType.datetime,
-//           )
-//         ],
-//       ),
-//     );
-//     return Container(
-//       constraints: BoxConstraints.tight(Size.square(50)),
-//       padding: const EdgeInsets.all(5),
-//       child: Row(
-//         children: [
-//           TextField(
-//             keyboardType: TextInputType.datetime,
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
