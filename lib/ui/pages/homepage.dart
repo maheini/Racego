@@ -149,16 +149,51 @@ class _HomePageState extends State<HomePage> {
           child: UserList(
             gg,
             title: 'Rennstrecke',
+            onSelectionChanged: (index, userID, isSelected) {
+              isSelected
+                  ? _trackListCubit.selectionChanged(userID)
+                  : _trackListCubit.userUnselected();
+            },
           ),
         ),
-        Row(
-          children: [
-            Container(
-                padding: const EdgeInsets.only(left: 15, right: 15),
-                child: TimeInput()),
-            _toolButton(const Icon(Icons.access_alarm)),
-            _toolButton(const Icon(Icons.dangerous)),
-          ],
+        BlocBuilder<ListToolbarCubit, ListToolbarState>(
+          bloc: _trackListCubit,
+          builder: (context, state) {
+            bool disabled = true;
+            bool validTime = false;
+            bool userHasChanged = false;
+
+            if (state is UserSelected) {
+              disabled = false;
+              validTime = state.isValidLaptime;
+              userHasChanged = state.userHasChanged;
+            }
+            return AbsorbPointer(
+              absorbing: disabled,
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: TimeInput(
+                      reset: userHasChanged | disabled ? true : false,
+                      onChanged: (time) =>
+                          _trackListCubit.lapTimeChanged(time.isValid),
+                    ),
+                  ),
+                  _toolButton(
+                    const Icon(Icons.access_alarm),
+                    color: disabled | !validTime ? Colors.grey : Colors.green,
+                    onpressed: () => {/* TODO implement function*/},
+                  ),
+                  _toolButton(
+                    const Icon(Icons.dangerous),
+                    color: disabled ? Colors.grey : Colors.red,
+                    onpressed: () => {/* TODO implement function*/},
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ],
     );
