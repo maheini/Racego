@@ -102,18 +102,18 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         Expanded(
-          child: UserList(
-            gg2on ? gg2 : gg,
-            title: 'Teilnehmer',
-            onSelectionChanged: (index, userID, isSelected) =>
-                _userListCubit.selectionChanged(isSelected ? userID : 0),
-          ),
+          child: UserList(gg2on ? gg2 : gg, title: 'Teilnehmer',
+              onSelectionChanged: (index, userID, isSelected) {
+            isSelected
+                ? _userListCubit.selectionChanged(userID)
+                : _userListCubit.userUnselected();
+          }),
         ),
         BlocBuilder<ListToolbarCubit, ListToolbarState>(
           bloc: _userListCubit,
           builder: (context, state) {
             bool disabled = true;
-            if (state is UserSelected && state.id > 0) disabled = false;
+            if (state is UserSelected) disabled = false;
             return AbsorbPointer(
               absorbing: disabled,
               child: Row(
