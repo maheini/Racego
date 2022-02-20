@@ -136,12 +136,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _toolButton(Icon icon, {VoidCallback? onpressed}) {
+  Widget _toolButton(Icon icon, {Color? color, VoidCallback? onpressed}) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: ElevatedButton(
           style: ButtonStyle(
+            backgroundColor:
+                color != null ? MaterialStateProperty.all<Color>(color) : null,
             padding:
                 MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(20)),
           ),
