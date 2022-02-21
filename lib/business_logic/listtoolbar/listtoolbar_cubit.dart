@@ -23,6 +23,7 @@ class ListToolbarCubit extends Cubit<ListToolbarState> {
   }
 
   void lapTimeChanged(bool isValid) {
+    if (isValid == _isValidLaptime) return;
     _isValidLaptime = isValid;
     emit(
       UserSelected(_currentId,

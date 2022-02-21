@@ -176,11 +176,8 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: TimeInput(
                       reset: userHasChanged | disabled ? true : false,
-                      onChanged: (time) {
-                        bool isValid = time.isValid;
-                        if (validTime != isValid)
-                          _trackListCubit.lapTimeChanged(time.isValid);
-                      },
+                      onChanged: (time) =>
+                          _trackListCubit.lapTimeChanged(time.isValid),
                     ),
                   ),
                   _toolButton(
