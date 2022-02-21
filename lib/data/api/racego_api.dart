@@ -208,6 +208,47 @@ class RacegoApi {
     }
   }
 
+  Future<String> _putRequest(String url, Object? body) async {
+    try {
+      http.Response response =
+          await _client.put(Uri.parse(url), body: body, headers: headers);
+      _updateCookie(response);
+
+      switch (response.statusCode) {
+        case 200:
+          return response.body;
+        case 401:
+          _isLoggedIn = false;
+          _username = null;
+          throw AuthException('Keine Berechtigung');
+        case 403:
+          _isLoggedIn = false;
+          _username = null;
+          throw AuthException('Login fehlgeschlagen');
+        case 404:
+          throw ServerException(
+              'Fehler: Fehlerhafte Quelle für den Datenaustausch.');
+        case 409:
+          throw DataException('Konflikt bei den gesendeten Daten');
+        case 422:
+          throw DataException('Eingabe konnte nicht verarbeitet werden');
+        default:
+          throw ServerException(
+              'Serverantwort ungültig. Statuscode ${response.statusCode}');
+      }
+    } on RacegoException catch (_) {
+      rethrow;
+    } on SocketException catch (_) {
+      throw InternetException('Der Server kann nicht erreicht werden.');
+    } on TimeoutException catch (_) {
+      throw InternetException(
+          'Der Server kann nicht erreicht werden: Timeout.');
+    } catch (error) {
+      throw UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+    }
+  }
+
   Future<String> _deleteRequest(String url, Object? body) async {
     try {
       http.Response response =
