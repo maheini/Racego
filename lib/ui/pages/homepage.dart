@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
+import 'package:racego/business_logic/userlist_cubit/userlist_cubit.dart';
+import 'package:racego/data/api/racego_api.dart';
+import 'package:racego/data/locator/locator.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/ui/widgets/user_list.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
@@ -14,8 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ListToolbarCubit _userListCubit = ListToolbarCubit();
-  final ListToolbarCubit _trackListCubit = ListToolbarCubit();
+  final ListToolbarCubit _userToolsCubit = ListToolbarCubit();
+  final ListToolbarCubit _trackToolsCubit = ListToolbarCubit();
+
+  final UserlistCubit _userlistCubit = UserlistCubit(locator<RacegoApi>());
 
   bool _forcedLogout = false;
 
@@ -101,16 +106,30 @@ class _HomePageState extends State<HomePage> {
   Widget _userList() {
     return Column(
       children: [
+        ElevatedButton(
+            onPressed: () => _userlistCubit.reload(), child: Text('reload')),
         Expanded(
-          child: UserList(gg2on ? gg2 : gg, title: 'Teilnehmer',
-              onSelectionChanged: (index, userID, isSelected) {
-            isSelected
-                ? _userListCubit.selectionChanged(userID)
-                : _userListCubit.userUnselected();
-          }),
+          child: BlocBuilder<UserlistCubit, UserlistState>(
+            bloc: _userlistCubit,
+            builder: (context, state) {
+              if (state is Loaded) {
+                return UserList(state.list,
+                    searchChanged: (text) => _userlistCubit.setFilter(text),
+                    title: 'Teilnehmer',
+                    onSelectionChanged: (index, userID, isSelected) {
+                      isSelected
+                          ? _userToolsCubit.selectionChanged(userID)
+                          : _userToolsCubit.userUnselected();
+                    });
+              } else {
+                _userToolsCubit.userUnselected();
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
         ),
         BlocBuilder<ListToolbarCubit, ListToolbarState>(
-          bloc: _userListCubit,
+          bloc: _userToolsCubit,
           builder: (context, state) {
             bool disabled = true;
             if (state is UserSelected) disabled = false;
@@ -151,13 +170,13 @@ class _HomePageState extends State<HomePage> {
             title: 'Rennstrecke',
             onSelectionChanged: (index, userID, isSelected) {
               isSelected
-                  ? _trackListCubit.selectionChanged(userID)
-                  : _trackListCubit.userUnselected();
+                  ? _trackToolsCubit.selectionChanged(userID)
+                  : _trackToolsCubit.userUnselected();
             },
           ),
         ),
         BlocBuilder<ListToolbarCubit, ListToolbarState>(
-          bloc: _trackListCubit,
+          bloc: _trackToolsCubit,
           builder: (context, state) {
             bool disabled = true;
             bool validTime = false;
@@ -177,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                     child: TimeInput(
                       reset: userHasChanged | disabled ? true : false,
                       onChanged: (time) =>
-                          _trackListCubit.lapTimeChanged(time.isValid),
+                          _trackToolsCubit.lapTimeChanged(time.isValid),
                     ),
                   ),
                   _toolButton(
