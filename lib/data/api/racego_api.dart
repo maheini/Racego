@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:racego/data/models/user.dart';
 
 class RacegoApi {
   String? _username;
@@ -91,6 +92,26 @@ class RacegoApi {
         return true;
       }
       return false;
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+    }
+  }
+
+  Future<List<User>> getUser() async {
+    try {
+      String response = await _getRequest(_apiBaseUrl + 'v1/user');
+      List<dynamic> users = jsonDecode(response);
+      List<User> userList = users.map((e) => User.fromJson(e)).toList();
+      return userList;
     } on AuthException catch (_) {
       rethrow;
     } on RacegoException catch (_) {
