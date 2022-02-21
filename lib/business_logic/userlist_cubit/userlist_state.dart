@@ -7,13 +7,13 @@ class Loading extends UserlistState {
   Loading(List<User> previousList) : _previousList = previousList;
   final List<User> _previousList;
 
-  get previousList => _previousList;
+  List<User> get previousList => _previousList;
 }
 
 class Loaded extends UserlistState {
   Loaded(List<User> list) : _list = list;
   final List<User> _list;
-  get list => _list;
+  List<User> get list => _list;
 }
 
 class Error extends UserlistState {
@@ -23,6 +23,6 @@ class Error extends UserlistState {
   final List<User> _previousList;
   final RacegoException _exception;
 
-  get exception => _exception;
-  get previousList => _previousList;
+  RacegoException get exception => _exception;
+  List<User> get previousList => _previousList;
 }
