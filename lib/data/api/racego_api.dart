@@ -151,9 +151,11 @@ class RacegoApi {
 
   Future<bool> deleteUser(int userId) async {
     try {
-      Map<String, int> body = {'id': userId};
+      Map<String, int> bodyMap = {'id': userId};
+      String body = jsonEncode(bodyMap);
       String response = await _deleteRequest(_apiBaseUrl + 'v1/user', body);
       Map<String, dynamic> map = jsonDecode(response);
+
       if (map.keys.contains('affected_rows') && map['affected_rows'] > 0) {
         return true;
       } else {
@@ -178,8 +180,9 @@ class RacegoApi {
 
   Future<bool> addOnTrack(int userId) async {
     try {
-      Map<String, int> body = {'id': userId};
-      String response = await _postRequest(_apiBaseUrl + 'v1/user', body);
+      Map<String, int> bodyMap = {'id': userId};
+      String body = jsonEncode(bodyMap);
+      String response = await _postRequest(_apiBaseUrl + 'v1/ontrack', body);
       Map<String, dynamic> map = jsonDecode(response);
       if (map.keys.contains('result') && map['successful'] > 0) {
         return true;
