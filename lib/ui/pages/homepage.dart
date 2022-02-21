@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
-import 'package:racego/business_logic/userlist_cubit/userlist_cubit.dart';
+import 'package:racego/business_logic/userlist_cubit/userlist_cubit.dart'
+    as listcubit;
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/locator/locator.dart';
 import 'package:racego/data/models/user.dart';
@@ -20,7 +21,8 @@ class _HomePageState extends State<HomePage> {
   final ListToolbarCubit _userToolsCubit = ListToolbarCubit();
   final ListToolbarCubit _trackToolsCubit = ListToolbarCubit();
 
-  final UserlistCubit _userlistCubit = UserlistCubit(locator<RacegoApi>());
+  final listcubit.UserlistCubit _userlistCubit =
+      listcubit.UserlistCubit(locator<RacegoApi>());
 
   bool _forcedLogout = false;
 
@@ -109,10 +111,10 @@ class _HomePageState extends State<HomePage> {
         ElevatedButton(
             onPressed: () => _userlistCubit.reload(), child: Text('reload')),
         Expanded(
-          child: BlocBuilder<UserlistCubit, UserlistState>(
+          child: BlocBuilder<listcubit.UserlistCubit, listcubit.UserlistState>(
             bloc: _userlistCubit,
             builder: (context, state) {
-              if (state is Loaded) {
+              if (state is listcubit.Loaded) {
                 return UserList(state.list,
                     searchChanged: (text) => _userlistCubit.setFilter(text),
                     title: 'Teilnehmer',
@@ -122,8 +124,21 @@ class _HomePageState extends State<HomePage> {
                           : _userToolsCubit.userUnselected();
                     });
               } else {
-                _userToolsCubit.userUnselected();
-                return const Center(child: CircularProgressIndicator());
+                // TODO: implement error-message and reloading indicator
+                List<User> newList = [];
+                if (state is listcubit.Loading) {
+                  newList = state.previousList;
+                } else if (state is listcubit.Error) {
+                  newList = state.previousList;
+                }
+                return UserList(newList,
+                    searchChanged: (text) => _userlistCubit.setFilter(text),
+                    title: 'Teilnehmer',
+                    onSelectionChanged: (index, userID, isSelected) {
+                      isSelected
+                          ? _userToolsCubit.selectionChanged(userID)
+                          : _userToolsCubit.userUnselected();
+                    });
               }
             },
           ),
@@ -145,12 +160,14 @@ class _HomePageState extends State<HomePage> {
                   _toolButton(
                     const Icon(Icons.remove_circle),
                     color: disabled ? Colors.grey : Colors.red,
-                    onpressed: () => {/* TODO implement function*/},
+                    onpressed: () => _userlistCubit
+                        .removeUser(state is UserSelected ? state.id : 0),
                   ),
                   _toolButton(
                     const Icon(Icons.assistant_photo),
                     color: disabled ? Colors.grey : Colors.green,
-                    onpressed: () => {/* TODO implement function*/},
+                    onpressed: () => _userlistCubit
+                        .addToTrack(state is UserSelected ? state.id : 0),
                   ),
                 ],
               ),
