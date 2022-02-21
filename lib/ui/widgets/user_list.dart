@@ -6,17 +6,20 @@ import '../../business_logic/widgets/list_selection_cubit.dart';
 class UserList extends StatefulWidget {
   const UserList(List<User> userList,
       {String? title,
+      void Function(String searchText)? searchChanged,
       void Function(int index, int userID, bool isSelected)? onSelectionChanged,
       void Function(int index, int userID)? onDoubleTap,
       Key? key})
       : _title = title,
         _list = userList,
+        _searchChanged = searchChanged,
         _onSelectionChanged = onSelectionChanged,
         _onDoubleTap = onDoubleTap,
         super(key: key);
 
   final String? _title;
   final List<User> _list;
+  final void Function(String searchText)? _searchChanged;
   final void Function(int index, int userID, bool isSelected)?
       _onSelectionChanged;
   final void Function(int index, int userID)? _onDoubleTap;
@@ -47,6 +50,8 @@ class _UserListState extends State<UserList> {
     return _userListDecoration(
       child: Column(
         children: [
+          if (widget._searchChanged != null)
+            _searchBar(onChanged: widget._searchChanged),
           _title(),
           const SizedBox(height: 3),
           const Divider(thickness: 2, height: 4),
@@ -110,6 +115,41 @@ class _UserListState extends State<UserList> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  final TextEditingController _searchTextController = TextEditingController();
+  Widget _searchBar({void Function(String searchtext)? onChanged}) {
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.only(bottom: 7),
+      child: TextField(
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 15),
+        decoration: InputDecoration(
+          hintText: 'Suchen...',
+          suffix: IconButton(
+            icon: const Icon(
+              Icons.clear,
+              size: 15,
+            ),
+            splashRadius: 15,
+            onPressed: () {
+              _searchTextController.clear();
+              onChanged?.call(_searchTextController.text);
+            },
+          ),
+          isDense: true,
+          border: const OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
+          contentPadding: const EdgeInsets.all(10),
+          filled: true,
+        ),
+        onChanged: onChanged,
+        controller: _searchTextController,
       ),
     );
   }
