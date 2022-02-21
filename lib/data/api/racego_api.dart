@@ -142,7 +142,37 @@ class RacegoApi {
       throw DataException('Fehler beim Parsen der Serverantwort');
     } catch (error) {
       throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+        'Unbekannter Fehler',
+        error.toString(),
+        error.runtimeType.toString(),
+      );
+    }
+  }
+
+  Future<bool> deleteUser(int userId) async {
+    try {
+      Map<String, int> body = {'id': userId};
+      String response = await _deleteRequest(_apiBaseUrl + 'v1/user', body);
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('affected_rows') && map['affected_rows'] > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+        'Unbekannter Fehler',
+        error.toString(),
+        error.runtimeType.toString(),
+      );
     }
   }
 
