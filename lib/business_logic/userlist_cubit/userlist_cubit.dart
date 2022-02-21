@@ -62,8 +62,12 @@ class UserlistCubit extends Cubit<UserlistState> {
   List<User> _filterList(List<User> list, String filter) {
     return _newestList.where(
       (element) {
-        String fullName = '${element.firstName} ${element.lastName}';
-        return fullName.contains(_filter);
+        String fullName =
+            '${element.firstName} ${element.lastName}'.toLowerCase();
+        String reverseFullName =
+            '${element.lastName} ${element.firstName}'.toLowerCase();
+        return fullName.contains(_filter.toLowerCase()) ||
+            reverseFullName.contains(_filter.toLowerCase());
       },
     ).toList();
   }
