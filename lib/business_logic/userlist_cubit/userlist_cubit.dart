@@ -44,6 +44,64 @@ class UserlistCubit extends Cubit<UserlistState> {
     }
   }
 
+  /// remove user
+  ///
+  void removeUser(int userId) async {
+    try {
+      bool successful = await _api.deleteUser(userId);
+      if (!successful) {
+        throw DataException(
+            'Benutzer konnte nicht entfernt werden: Id ungültig.');
+      }
+      reload();
+    } catch (e) {
+      if (e is RacegoException) {
+        emit(Error(
+            e,
+            _filter.isNotEmpty
+                ? _filterList(_newestList, _filter)
+                : _newestList));
+      } else {
+        UnknownException error = UnknownException(
+            'Unbekannter Fehler', e.toString(), e.runtimeType.toString());
+        emit(Error(
+            error,
+            _filter.isNotEmpty
+                ? _filterList(_newestList, _filter)
+                : _newestList));
+      }
+    }
+  }
+
+  /// adds user on track
+  ///
+  void addToTrack(int userId) async {
+    try {
+      bool successful = await _api.addOnTrack(userId);
+      if (!successful) {
+        throw DataException(
+            'Benutzer konnte nicht auf die Rennstrecke gestellt werden: Id ungültig.');
+      }
+      reload();
+    } catch (e) {
+      if (e is RacegoException) {
+        emit(Error(
+            e,
+            _filter.isNotEmpty
+                ? _filterList(_newestList, _filter)
+                : _newestList));
+      } else {
+        UnknownException error = UnknownException(
+            'Unbekannter Fehler', e.toString(), e.runtimeType.toString());
+        emit(Error(
+            error,
+            _filter.isNotEmpty
+                ? _filterList(_newestList, _filter)
+                : _newestList));
+      }
+    }
+  }
+
   /// set/reset filter. Empty filter means no filter
   ///
   void setFilter(String filter) {
