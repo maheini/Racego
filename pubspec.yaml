@@ -31,7 +31,7 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   get_it: ^7.2.0
   flutter_bloc: ^8.0.1
-  test: ^1.20.1  <-really neccessary to test bloc?
+#  test: ^1.20.1  <-really neccessary to test bloc?
   bloc_test: ^9.0.2
   flutter:
     sdk: flutter
