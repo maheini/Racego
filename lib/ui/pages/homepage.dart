@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/business_logic/userlist_cubit/userlist_cubit.dart'
     as listcubit;
+import 'package:racego/business_logic/tracklist_cubit/tracklist_cubit.dart'
+    as trackcubit;
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/locator/locator.dart';
 import 'package:racego/data/models/user.dart';
@@ -23,6 +25,8 @@ class _HomePageState extends State<HomePage> {
 
   final listcubit.UserlistCubit _userlistCubit =
       listcubit.UserlistCubit(locator<RacegoApi>());
+  final trackcubit.TracklistCubit _tracklistCubit =
+      trackcubit.TracklistCubit(locator<RacegoApi>());
 
   bool _forcedLogout = false;
 
@@ -181,14 +185,41 @@ class _HomePageState extends State<HomePage> {
   Widget _trackList() {
     return Column(
       children: [
+        ElevatedButton(
+          onPressed: () => _tracklistCubit.reload(),
+          child: Text('reload'),
+        ),
         Expanded(
-          child: UserList(
-            gg,
-            title: 'Rennstrecke',
-            onSelectionChanged: (index, userID, isSelected) {
-              isSelected
-                  ? _trackToolsCubit.selectionChanged(userID)
-                  : _trackToolsCubit.userUnselected();
+          child:
+              BlocBuilder<trackcubit.TracklistCubit, trackcubit.TracklistState>(
+            bloc: _tracklistCubit,
+            builder: (context, state) {
+              if (state is trackcubit.Loaded) {
+                return UserList(state.list,
+                    searchChanged: (text) => _tracklistCubit.setFilter(text),
+                    title: 'Rennstrecke',
+                    onSelectionChanged: (index, userID, isSelected) {
+                      isSelected
+                          ? _trackToolsCubit.selectionChanged(userID)
+                          : _trackToolsCubit.userUnselected();
+                    });
+              } else {
+                // TODO: implement error-message and reloading indicator
+                List<User> newList = [];
+                if (state is trackcubit.Loading) {
+                  newList = state.previousList;
+                } else if (state is trackcubit.Error) {
+                  newList = state.previousList;
+                }
+                return UserList(newList,
+                    searchChanged: (text) => _tracklistCubit.setFilter(text),
+                    title: 'Teilnehmer',
+                    onSelectionChanged: (index, userID, isSelected) {
+                      isSelected
+                          ? _trackToolsCubit.selectionChanged(userID)
+                          : _trackToolsCubit.userUnselected();
+                    });
+              }
             },
           ),
         ),
