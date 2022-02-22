@@ -181,4 +181,13 @@ class Time {
 
   bool get isValid =>
       _milliseconds > 0 || _seconds > 0 || _minutes > 0 || _hours > 0;
+
+  String get toTimeString {
+    return '00:' +
+        _minutes.toString().padLeft(2, '0') +
+        ':' +
+        _seconds.toString().padLeft(2, '0') +
+        '.' +
+        _milliseconds.toString().padLeft(3, '0');
+  }
 }
