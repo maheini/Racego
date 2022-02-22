@@ -81,7 +81,6 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: Column(
         children: [
-          // const TimeInput(),
           const SizedBox(height: 30),
           const Text(
             'Willkommen zurück',
@@ -165,13 +164,13 @@ class _HomePageState extends State<HomePage> {
                     const Icon(Icons.remove_circle),
                     color: disabled ? Colors.grey : Colors.red,
                     onpressed: () => _userlistCubit
-                        .removeUser(state is UserSelected ? state.id : 0),
+                        .removeUser(_userToolsCubit.getSelectedId()),
                   ),
                   _toolButton(
                     const Icon(Icons.assistant_photo),
                     color: disabled ? Colors.grey : Colors.green,
                     onpressed: () => _userlistCubit
-                        .addToTrack(state is UserSelected ? state.id : 0),
+                        .addToTrack(_userToolsCubit.getSelectedId()),
                   ),
                 ],
               ),
@@ -213,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                 }
                 return UserList(newList,
                     searchChanged: (text) => _tracklistCubit.setFilter(text),
-                    title: 'Teilnehmer',
+                    title: 'Rennstrecke',
                     onSelectionChanged: (index, userID, isSelected) {
                       isSelected
                           ? _trackToolsCubit.selectionChanged(userID)
@@ -244,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                     child: TimeInput(
                       reset: userHasChanged | disabled ? true : false,
                       onChanged: (time) =>
-                          _trackToolsCubit.lapTimeChanged(time.isValid),
+                          _trackToolsCubit.lapTimeChanged(time),
                     ),
                   ),
                   _toolButton(
@@ -252,12 +251,15 @@ class _HomePageState extends State<HomePage> {
                     color: disabled | !validTime ? Colors.grey : Colors.green,
                     onpressed: !validTime
                         ? null
-                        : () => {/* TODO implement function*/},
+                        : () => _tracklistCubit.finishLap(
+                            _trackToolsCubit.getSelectedId(),
+                            _trackToolsCubit.getCurrentTime()),
                   ),
                   _toolButton(
                     const Icon(Icons.dangerous),
                     color: disabled ? Colors.grey : Colors.red,
-                    onpressed: () => {/* TODO implement function*/},
+                    onpressed: () => _tracklistCubit
+                        .cancelLap(_trackToolsCubit.getSelectedId()),
                   ),
                 ],
               ),
