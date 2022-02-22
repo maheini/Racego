@@ -190,4 +190,22 @@ class Time {
         '.' +
         _milliseconds.toString().padLeft(3, '0');
   }
+
+  Time fromTimeString(String timeString) {
+    if (!RegExp(r'^([0-5][0-9]:){2}[0-5][0-9].[0-9]{3}$')
+        .hasMatch(timeString)) {
+      throw const FormatException();
+    }
+    List<String> parts = timeString.split(':');
+    final int hour = int.parse(parts[0]);
+    final int minute = int.parse(parts[1]);
+    parts = parts[2].split('.');
+    final int second = int.parse(parts[0]);
+    final int millisecond = int.parse(parts[1]);
+    return Time(
+        hours: hour,
+        minutes: minute,
+        seconds: second,
+        milliseconds: millisecond);
+  }
 }
