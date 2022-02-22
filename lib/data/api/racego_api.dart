@@ -6,6 +6,7 @@ import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:racego/data/models/user.dart';
+import 'package:racego/ui/widgets/timeinput.dart';
 
 class RacegoApi {
   String? _username;
@@ -185,6 +186,63 @@ class RacegoApi {
       String response = await _postRequest(_apiBaseUrl + 'v1/ontrack', body);
       Map<String, dynamic> map = jsonDecode(response);
       if (map.keys.contains('result') && map['successful'] > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+        'Unbekannter Fehler',
+        error.toString(),
+        error.runtimeType.toString(),
+      );
+    }
+  }
+
+  Future<bool> cancelLap(int userId) async {
+    try {
+      Map<String, int> bodyMap = {'id': userId};
+      String body = jsonEncode(bodyMap);
+      String response = await _deleteRequest(_apiBaseUrl + 'v1/ontrack', body);
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('affected_rows') && map['affected_rows'] > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+        'Unbekannter Fehler',
+        error.toString(),
+        error.runtimeType.toString(),
+      );
+    }
+  }
+
+  Future<bool> finishLap(int userId, Time time) async {
+    try {
+      if (!time.isValid) return false;
+      Map<String, dynamic> bodyMap = {'id': userId, 'time': time.toTimeString};
+      String body = jsonEncode(bodyMap);
+      String response = await _putRequest(_apiBaseUrl + 'v1/ontrack', body);
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('result') && map['result'] == 'successful') {
         return true;
       } else {
         return false;
