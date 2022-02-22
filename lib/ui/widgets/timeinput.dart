@@ -191,7 +191,7 @@ class Time {
         _milliseconds.toString().padLeft(3, '0');
   }
 
-  Time fromTimeString(String timeString) {
+  static Time fromTimeString(String timeString) {
     if (!RegExp(r'^([0-5][0-9]:){2}[0-5][0-9].[0-9]{3}$')
         .hasMatch(timeString)) {
       throw const FormatException();
