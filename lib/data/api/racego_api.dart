@@ -157,7 +157,7 @@ class RacegoApi {
       String response = await _deleteRequest(_apiBaseUrl + 'v1/user', body);
       Map<String, dynamic> map = jsonDecode(response);
 
-      if (map.keys.contains('affected_rows') && map['affected_rows'] > 0) {
+      if (map.keys.contains('result') && map['result'] == 'successful') {
         return true;
       } else {
         return false;
