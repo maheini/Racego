@@ -132,6 +132,8 @@ class _HomePageState extends State<HomePage> {
                   },
                   onDoubleTap: (index, userID) => Navigator.of(context)
                       .pushNamed('/user', arguments: userID),
+                  onAddPressed: (searchtest) =>
+                      Navigator.of(context).pushNamed('/user'),
                 );
               } else {
                 // TODO: implement error-message and reloading indicator
@@ -152,6 +154,8 @@ class _HomePageState extends State<HomePage> {
                   },
                   onDoubleTap: (index, userID) => Navigator.of(context)
                       .pushNamed('/user', arguments: userID),
+                  onAddPressed: (searchtest) =>
+                      Navigator.of(context).pushNamed('/user'),
                 );
               }
             },
