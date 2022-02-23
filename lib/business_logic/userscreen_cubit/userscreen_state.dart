@@ -7,7 +7,10 @@ class UserScreenAdd extends UserscreenState {}
 
 class UserScreenAddSaving extends UserscreenState {}
 
-class UserScreenAddError extends UserscreenState {}
+class UserScreenAddError extends UserscreenState {
+  UserScreenAddError(this.exception);
+  final RacegoException exception;
+}
 
 class UserScreenLoading extends UserscreenState {}
 

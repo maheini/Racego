@@ -22,9 +22,21 @@ class UserscreenCubit extends Cubit<UserscreenState> {
   /// -> use this if you would like to upload the new user
   void addUser(UserDetails user) async {
     emit(UserScreenAddSaving());
-
-    // true -> UserScreenEdit
-    // error -> UserScreenAddError
+    try {
+      int id = await _api.addUser(user);
+      if (id > 0) {
+        loadEditUser(id);
+      } else {
+        throw UnknownException(
+            'Benutzer konnte nicht erstellt werden: Datenbank Id ist ungültig');
+      }
+    } on RacegoException catch (e) {
+      emit(UserScreenAddError(e));
+    } catch (error) {
+      UnknownException e = UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      emit(UserScreenAddError(e));
+    }
   }
 
   /// Load Screen to edit a existing user
