@@ -338,6 +338,25 @@ class RacegoApi {
     }
   }
 
+  Future<List<String>> getCategories() async {
+    try {
+      String response = await _getRequest(_apiBaseUrl + 'v1/categories');
+      List<dynamic> users = jsonDecode(response);
+      return users.map((e) => e as String).toList();
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+    }
+  }
+
   Future<String> _getRequest(String url) async {
     try {
       http.Response response =
