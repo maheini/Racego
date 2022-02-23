@@ -14,7 +14,10 @@ class UserScreenAddError extends UserscreenState {
 
 class UserScreenLoading extends UserscreenState {}
 
-class UserScreenEdit extends UserscreenState {}
+class UserScreenEdit extends UserscreenState {
+  UserScreenEdit(this.user);
+  final UserDetails user;
+}
 
 class UserScreenEditError extends UserscreenState {}
 

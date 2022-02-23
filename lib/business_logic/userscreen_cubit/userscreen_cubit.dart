@@ -44,9 +44,16 @@ class UserscreenCubit extends Cubit<UserscreenState> {
   /// -> use this function if you would like to edit a user
   void loadEditUser(int id) async {
     emit(UserScreenLoading());
-
-    // true -> UserScreenEdit
-    // error -> UserScreenEditError
+    try {
+      UserDetails user = await _api.getUserDetails(id);
+      emit(UserScreenEdit(user));
+    } on RacegoException catch (e) {
+      emit(UserScreenEditError(e));
+    } catch (error) {
+      UnknownException e = UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      emit(UserScreenEditError(e));
+    }
   }
 
   /// Store a existing user
