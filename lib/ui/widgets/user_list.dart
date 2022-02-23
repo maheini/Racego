@@ -9,12 +9,14 @@ class UserList extends StatefulWidget {
       void Function(String searchText)? searchChanged,
       void Function(int index, int userID, bool isSelected)? onSelectionChanged,
       void Function(int index, int userID)? onDoubleTap,
+      void Function(String searchText)? onAddPressed,
       Key? key})
       : _title = title,
         _list = userList,
         _searchChanged = searchChanged,
         _onSelectionChanged = onSelectionChanged,
         _onDoubleTap = onDoubleTap,
+        _onAddPressed = onAddPressed,
         super(key: key);
 
   final String? _title;
@@ -23,6 +25,7 @@ class UserList extends StatefulWidget {
   final void Function(int index, int userID, bool isSelected)?
       _onSelectionChanged;
   final void Function(int index, int userID)? _onDoubleTap;
+  final void Function(String searchText)? _onAddPressed;
 
   @override
   _UserListState createState() => _UserListState();
@@ -31,6 +34,8 @@ class UserList extends StatefulWidget {
 class _UserListState extends State<UserList> {
   final ScrollController _controller = ScrollController();
   final ListSelectionCubit _listCubit = ListSelectionCubit();
+
+  final TextEditingController _searchTextController = TextEditingController();
 
   @override
   void didUpdateWidget(UserList oldWidget) {
@@ -119,37 +124,65 @@ class _UserListState extends State<UserList> {
     );
   }
 
-  final TextEditingController _searchTextController = TextEditingController();
   Widget _searchBar({void Function(String searchtext)? onChanged}) {
     return Container(
       height: 40,
       padding: const EdgeInsets.only(bottom: 7),
-      child: TextField(
-        textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 15),
-        decoration: InputDecoration(
-          hintText: 'Suchen...',
-          suffix: IconButton(
-            icon: const Icon(
-              Icons.clear,
-              size: 15,
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 15),
+              decoration: InputDecoration(
+                hintText: 'Suchen...',
+                suffix: IconButton(
+                  icon: const Icon(
+                    Icons.clear,
+                    size: 15,
+                  ),
+                  splashRadius: 15,
+                  onPressed: () {
+                    _searchTextController.clear();
+                    onChanged?.call(_searchTextController.text);
+                  },
+                ),
+                isDense: true,
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(4),
+                      bottomLeft: Radius.circular(4)),
+                ),
+                contentPadding: const EdgeInsets.all(10),
+                filled: true,
+              ),
+              onChanged: onChanged,
+              controller: _searchTextController,
             ),
-            splashRadius: 15,
-            onPressed: () {
-              _searchTextController.clear();
-              onChanged?.call(_searchTextController.text);
-            },
           ),
-          isDense: true,
-          border: const OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-          ),
-          contentPadding: const EdgeInsets.all(10),
-          filled: true,
-        ),
-        onChanged: onChanged,
-        controller: _searchTextController,
+          if (widget._onAddPressed != null)
+            SizedBox(
+              height: double.infinity,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(4),
+                        bottomRight: Radius.circular(4)),
+                    // side: BorderSide(color: Colors.red))
+                  )),
+                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                ),
+                onPressed: () =>
+                    widget._onAddPressed?.call(_searchTextController.text),
+                child: const Icon(Icons.add),
+                // st
+                // color: Colors.blue,
+              ),
+            ),
+        ],
       ),
     );
   }
