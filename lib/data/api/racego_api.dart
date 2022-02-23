@@ -259,7 +259,7 @@ class RacegoApi {
       String body = jsonEncode(bodyMap);
       String response = await _postRequest(_apiBaseUrl + 'v1/ontrack', body);
       Map<String, dynamic> map = jsonDecode(response);
-      if (map.keys.contains('result') && map['successful'] > 0) {
+      if (map.keys.contains('result') && map['result'] == 'successful') {
         return true;
       } else {
         return false;

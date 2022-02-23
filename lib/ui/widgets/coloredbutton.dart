@@ -38,7 +38,6 @@ class ColoredButton extends StatelessWidget {
         ),
         onPressed: isLoading || isDisabled ? () {} : onPressed,
         child: SizedBox(
-          width: 25,
           height: 25,
           child: isLoading ? const CircularProgressIndicator() : child,
         ),
