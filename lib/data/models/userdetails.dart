@@ -7,7 +7,7 @@ class UserDetails {
   final String _firstName;
   final String _lastName;
 
-  UserDetails fromJson(Map<String, dynamic> json) {
+  static UserDetails fromJson(Map<String, dynamic> json) {
     List<String> laps = json['laps'];
     return UserDetails(
       json['id'],
