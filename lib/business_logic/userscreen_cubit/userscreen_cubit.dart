@@ -46,7 +46,8 @@ class UserscreenCubit extends Cubit<UserscreenState> {
     emit(UserScreenLoading());
     try {
       UserDetails user = await _api.getUserDetails(id);
-      emit(UserScreenEdit(user));
+      List<String> categories = await _api.getCategories();
+      emit(UserScreenEdit(user, categories));
     } on RacegoException catch (e) {
       emit(UserScreenEditError(e));
     } catch (error) {

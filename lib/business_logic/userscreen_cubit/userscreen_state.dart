@@ -15,8 +15,9 @@ class UserScreenAddError extends UserscreenState {
 class UserScreenLoading extends UserscreenState {}
 
 class UserScreenEdit extends UserscreenState {
-  UserScreenEdit(this.user);
+  UserScreenEdit(this.user, this.categories);
   final UserDetails user;
+  final List<String> categories;
 }
 
 class UserScreenEditError extends UserscreenState {
