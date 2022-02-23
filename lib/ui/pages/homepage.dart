@@ -121,14 +121,18 @@ class _HomePageState extends State<HomePage> {
             bloc: _userlistCubit,
             builder: (context, state) {
               if (state is listcubit.Loaded) {
-                return UserList(state.list,
-                    searchChanged: (text) => _userlistCubit.setFilter(text),
-                    title: 'Teilnehmer',
-                    onSelectionChanged: (index, userID, isSelected) {
-                      isSelected
-                          ? _userToolsCubit.selectionChanged(userID)
-                          : _userToolsCubit.userUnselected();
-                    });
+                return UserList(
+                  state.list,
+                  searchChanged: (text) => _userlistCubit.setFilter(text),
+                  title: 'Teilnehmer',
+                  onSelectionChanged: (index, userID, isSelected) {
+                    isSelected
+                        ? _userToolsCubit.selectionChanged(userID)
+                        : _userToolsCubit.userUnselected();
+                  },
+                  onDoubleTap: (index, userID) => Navigator.of(context)
+                      .pushNamed('/user', arguments: userID),
+                );
               } else {
                 // TODO: implement error-message and reloading indicator
                 List<User> newList = [];
@@ -137,14 +141,18 @@ class _HomePageState extends State<HomePage> {
                 } else if (state is listcubit.Error) {
                   newList = state.previousList;
                 }
-                return UserList(newList,
-                    searchChanged: (text) => _userlistCubit.setFilter(text),
-                    title: 'Teilnehmer',
-                    onSelectionChanged: (index, userID, isSelected) {
-                      isSelected
-                          ? _userToolsCubit.selectionChanged(userID)
-                          : _userToolsCubit.userUnselected();
-                    });
+                return UserList(
+                  newList,
+                  searchChanged: (text) => _userlistCubit.setFilter(text),
+                  title: 'Teilnehmer',
+                  onSelectionChanged: (index, userID, isSelected) {
+                    isSelected
+                        ? _userToolsCubit.selectionChanged(userID)
+                        : _userToolsCubit.userUnselected();
+                  },
+                  onDoubleTap: (index, userID) => Navigator.of(context)
+                      .pushNamed('/user', arguments: userID),
+                );
               }
             },
           ),
@@ -207,14 +215,18 @@ class _HomePageState extends State<HomePage> {
             bloc: _tracklistCubit,
             builder: (context, state) {
               if (state is trackcubit.Loaded) {
-                return UserList(state.list,
-                    searchChanged: (text) => _tracklistCubit.setFilter(text),
-                    title: 'Rennstrecke',
-                    onSelectionChanged: (index, userID, isSelected) {
-                      isSelected
-                          ? _trackToolsCubit.selectionChanged(userID)
-                          : _trackToolsCubit.userUnselected();
-                    });
+                return UserList(
+                  state.list,
+                  searchChanged: (text) => _tracklistCubit.setFilter(text),
+                  title: 'Rennstrecke',
+                  onSelectionChanged: (index, userID, isSelected) {
+                    isSelected
+                        ? _trackToolsCubit.selectionChanged(userID)
+                        : _trackToolsCubit.userUnselected();
+                  },
+                  onDoubleTap: (index, userID) => Navigator.of(context)
+                      .pushNamed('/user', arguments: userID),
+                );
               } else {
                 // TODO: implement error-message and reloading indicator
                 List<User> newList = [];
@@ -223,14 +235,18 @@ class _HomePageState extends State<HomePage> {
                 } else if (state is trackcubit.Error) {
                   newList = state.previousList;
                 }
-                return UserList(newList,
-                    searchChanged: (text) => _tracklistCubit.setFilter(text),
-                    title: 'Rennstrecke',
-                    onSelectionChanged: (index, userID, isSelected) {
-                      isSelected
-                          ? _trackToolsCubit.selectionChanged(userID)
-                          : _trackToolsCubit.userUnselected();
-                    });
+                return UserList(
+                  newList,
+                  searchChanged: (text) => _tracklistCubit.setFilter(text),
+                  title: 'Rennstrecke',
+                  onSelectionChanged: (index, userID, isSelected) {
+                    isSelected
+                        ? _trackToolsCubit.selectionChanged(userID)
+                        : _trackToolsCubit.userUnselected();
+                  },
+                  onDoubleTap: (index, userID) => Navigator.of(context)
+                      .pushNamed('/user', arguments: userID),
+                );
               }
             },
           ),
