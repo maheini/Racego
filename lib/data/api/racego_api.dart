@@ -177,7 +177,8 @@ class RacegoApi {
       }
 
       String response = await _putRequest(
-          _apiBaseUrl + 'v1/user/' + user.id.toString(), user.toJson());
+          _apiBaseUrl + 'v1/user/' + user.id.toString(),
+          jsonEncode(user.toJson()));
       Map<String, dynamic> map = jsonDecode(response);
       if (map.keys.contains('result') && map['result'] == 'successful') {
         return true;
@@ -199,12 +200,12 @@ class RacegoApi {
 
   Future<int> addUser(UserDetails user) async {
     try {
-      if (user.id <= 0 || user.firstName.isEmpty || user.lastName.isEmpty) {
+      if (user.firstName.isEmpty || user.lastName.isEmpty) {
         throw DataException('Die Benutzerangaben sind ungenügend');
       }
 
-      String response =
-          await _putRequest(_apiBaseUrl + 'v1/user/', user.toJson());
+      String response = await _postRequest(
+          _apiBaseUrl + 'v1/user/', jsonEncode(user.toJson()));
       Map<String, dynamic> map = jsonDecode(response);
       if (map.keys.contains('inserted_id') && map['inserted_id'] > 0) {
         return map['inserted_id'];
