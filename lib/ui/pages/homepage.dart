@@ -158,7 +158,8 @@ class _HomePageState extends State<HomePage> {
                   _toolButton(
                     const Icon(Icons.info),
                     color: disabled ? Colors.grey : Colors.blue,
-                    onpressed: () => {/* TODO implement function*/},
+                    onpressed: () => Navigator.of(context).pushNamed('/user',
+                        arguments: _userToolsCubit.getSelectedId()),
                   ),
                   _toolButton(
                     const Icon(Icons.remove_circle),
