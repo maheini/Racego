@@ -6,6 +6,7 @@ import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:racego/data/models/user.dart';
+import 'package:racego/data/models/userdetails.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
 
 class RacegoApi {
@@ -147,6 +148,79 @@ class RacegoApi {
         error.toString(),
         error.runtimeType.toString(),
       );
+    }
+  }
+
+  Future<UserDetails> getUserDetails(int id) async {
+    try {
+      String response =
+          await _getRequest(_apiBaseUrl + 'v1/user/' + id.toString());
+      return UserDetails.fromJson(jsonDecode(response));
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+    }
+  }
+
+  Future<bool> setUserDetails(UserDetails user) async {
+    try {
+      if (user.id <= 0 || user.firstName.isEmpty || user.lastName.isEmpty) {
+        throw DataException('Die Benutzerangaben sind ungenügend');
+      }
+
+      String response = await _putRequest(
+          _apiBaseUrl + 'v1/user/' + user.id.toString(), user.toJson());
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('result') && map['result'] == 'successful') {
+        return true;
+      }
+      return false;
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+    }
+  }
+
+  Future<int> addUser(UserDetails user) async {
+    try {
+      if (user.id <= 0 || user.firstName.isEmpty || user.lastName.isEmpty) {
+        throw DataException('Die Benutzerangaben sind ungenügend');
+      }
+
+      String response =
+          await _putRequest(_apiBaseUrl + 'v1/user/', user.toJson());
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('inserted_id') && map['inserted_id'] > 0) {
+        return map['inserted_id'];
+      }
+      return 0;
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } on FormatException catch (_) {
+      throw DataException('Fehler beim Parsen der Serverantwort');
+    } catch (error) {
+      throw UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
     }
   }
 
