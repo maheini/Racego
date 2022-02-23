@@ -59,10 +59,22 @@ class UserscreenCubit extends Cubit<UserscreenState> {
   /// Store a existing user
   ///
   /// -> use this if you would like to upload the existing user
-  void editUser() async {
+  void editUser(UserDetails user) async {
     emit(UserScreenEditSaving());
-
-    // true -> UserScreenStored
-    // error -> UserScreenEditError
+    try {
+      bool success = await _api.setUserDetails(user);
+      if (success) {
+        emit(UserScreenStored());
+      } else {
+        throw UnknownException(
+            'Benutzer konnte nicht aktualisiert werden: Unerwartete Serverantwort');
+      }
+    } on RacegoException catch (e) {
+      emit(UserScreenEditError(e));
+    } catch (error) {
+      UnknownException e = UnknownException(
+          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      emit(UserScreenEditError(e));
+    }
   }
 }

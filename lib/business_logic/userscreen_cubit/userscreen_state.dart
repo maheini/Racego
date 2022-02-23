@@ -19,7 +19,10 @@ class UserScreenEdit extends UserscreenState {
   final UserDetails user;
 }
 
-class UserScreenEditError extends UserscreenState {}
+class UserScreenEditError extends UserscreenState {
+  UserScreenEditError(this.exception);
+  final RacegoException exception;
+}
 
 class UserScreenEditSaving extends UserscreenState {}
 
