@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/data/locator/locator.dart';
 import 'package:racego/ui/pages/homepage.dart';
+import 'package:racego/ui/pages/userscreen.dart';
 import 'ui/pages/loginpage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/api/racego_api.dart';
@@ -34,12 +35,15 @@ class Racego extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => const LoginPage());
           }
           // return MaterialPageRoute(builder: (_) => const LoginPage());
-        }
-        if (settings.name == '/user') {
-          // return MaterialPageRoute(builder: (_) => UserScreen(id: ???));
-        } else if (settings.name == '/') {
-          // return MaterialPageRoute(builder: (_) => const homepage
-          //());
+        } else if (settings.name == '/user') {
+          if (settings.arguments != null) {
+            return MaterialPageRoute(
+                builder: (_) => UserScreen(
+                      userId: settings.arguments as int,
+                    ));
+          } else {
+            return MaterialPageRoute(builder: (_) => UserScreen());
+          }
         }
         return null; // Let `onUnknownRoute` handle this behavior.
       },
