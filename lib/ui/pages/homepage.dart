@@ -11,6 +11,9 @@ import 'package:racego/data/models/user.dart';
 import 'package:racego/ui/widgets/user_list.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
 import 'package:racego/business_logic/listtoolbar/listtoolbar_cubit.dart';
+import 'package:racego/ui/widgets/coloredbutton.dart';
+
+import '../widgets/loggedoutdialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -38,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           if (_forcedLogout) {
             Navigator.pushReplacementNamed(context, '/');
           } else {
-            await _loggedOutDialog();
+            await loggedOutDialog(context);
             WidgetsBinding.instance?.addPostFrameCallback((_) {
               Navigator.pushReplacementNamed(context, '/');
             });
@@ -155,23 +158,32 @@ class _HomePageState extends State<HomePage> {
               absorbing: disabled,
               child: Row(
                 children: [
-                  _toolButton(
-                    const Icon(Icons.info),
-                    color: disabled ? Colors.grey : Colors.blue,
-                    onpressed: () => Navigator.of(context).pushNamed('/user',
-                        arguments: _userToolsCubit.getSelectedId()),
+                  Expanded(
+                    child: ColoredButton(
+                      const Icon(Icons.info),
+                      color: Colors.blue,
+                      onPressed: () => Navigator.of(context).pushNamed('/user',
+                          arguments: _userToolsCubit.getSelectedId()),
+                      isDisabled: disabled,
+                    ),
                   ),
-                  _toolButton(
-                    const Icon(Icons.remove_circle),
-                    color: disabled ? Colors.grey : Colors.red,
-                    onpressed: () => _userlistCubit
-                        .removeUser(_userToolsCubit.getSelectedId()),
+                  Expanded(
+                    child: ColoredButton(
+                      const Icon(Icons.remove_circle),
+                      color: Colors.red,
+                      onPressed: () => _userlistCubit
+                          .removeUser(_userToolsCubit.getSelectedId()),
+                      isDisabled: disabled,
+                    ),
                   ),
-                  _toolButton(
-                    const Icon(Icons.assistant_photo),
-                    color: disabled ? Colors.grey : Colors.green,
-                    onpressed: () => _userlistCubit
-                        .addToTrack(_userToolsCubit.getSelectedId()),
+                  Expanded(
+                    child: ColoredButton(
+                      const Icon(Icons.assistant_photo),
+                      color: Colors.green,
+                      onPressed: () => _userlistCubit
+                          .addToTrack(_userToolsCubit.getSelectedId()),
+                      isDisabled: disabled,
+                    ),
                   ),
                 ],
               ),
@@ -247,20 +259,26 @@ class _HomePageState extends State<HomePage> {
                           _trackToolsCubit.lapTimeChanged(time),
                     ),
                   ),
-                  _toolButton(
-                    const Icon(Icons.access_alarm),
-                    color: disabled | !validTime ? Colors.grey : Colors.green,
-                    onpressed: !validTime
-                        ? null
-                        : () => _tracklistCubit.finishLap(
-                            _trackToolsCubit.getSelectedId(),
-                            _trackToolsCubit.getCurrentTime()),
+                  Expanded(
+                    child: ColoredButton(
+                      const Icon(Icons.access_alarm),
+                      color: Colors.green,
+                      onPressed: !validTime
+                          ? null
+                          : () => _tracklistCubit.finishLap(
+                              _trackToolsCubit.getSelectedId(),
+                              _trackToolsCubit.getCurrentTime()),
+                      isDisabled: disabled || !validTime,
+                    ),
                   ),
-                  _toolButton(
-                    const Icon(Icons.dangerous),
-                    color: disabled ? Colors.grey : Colors.red,
-                    onpressed: () => _tracklistCubit
-                        .cancelLap(_trackToolsCubit.getSelectedId()),
+                  Expanded(
+                    child: ColoredButton(
+                      const Icon(Icons.dangerous),
+                      color: Colors.red,
+                      onPressed: () => _tracklistCubit
+                          .cancelLap(_trackToolsCubit.getSelectedId()),
+                      isDisabled: disabled,
+                    ),
                   ),
                 ],
               ),
@@ -268,90 +286,6 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ],
-    );
-  }
-
-  Widget _toolButton(Icon icon, {Color? color, VoidCallback? onpressed}) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor:
-                color != null ? MaterialStateProperty.all<Color>(color) : null,
-            padding:
-                MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(20)),
-          ),
-          onPressed: onpressed,
-          child: icon,
-        ),
-      ),
-    );
-  }
-
-  List<User> listt = [];
-
-  bool gg2on = false;
-
-  final List<User> gg2 = [
-    User(0, 'dsfgdsfg', 'Heini', 3),
-    User(1, 'Müdsfgdfsgdsfgdsfgdsfgller', 'Markus', 5),
-    User(2, 'dfsgdsfgdsf', 'Heini', 3),
-    User(3, 'dsfgdsfgdfsg', 'Markus', 5),
-    User(4, 'fgsdfgdsfg', 'Heini', 3),
-    User(5, 'dfgdfgdsfgd', 'Markus', 5),
-    User(6, 'dsfdsfdfgdfsg', 'Heini', 3),
-    User(7, 'dsfgdfsgdfsg', 'Markus', 5),
-  ];
-
-  final List<User> gg = [
-    User(6, 'Martin', 'Heini', 3),
-    User(7, 'Müller', 'Markus', 5),
-    User(8, 'fgdfgdgf', 'Heini', 3),
-    User(9, 'Müller', 'Markus', 5),
-    User(10, 'dfsgdfsgdfsg', 'Heini', 3),
-    User(11, 'Müller', 'Markus', 5),
-    User(12, 'dfgdsfgdfsg', 'Heini', 3),
-    User(13, 'Müller', 'Markus', 5),
-    User(14, 'dfsgdsfgdfsg', 'Heini', 3),
-    User(15, 'Müller', 'Markus', 5),
-    User(16, 'dfsgdfsgdfsg', 'Heini', 3),
-    User(17, 'Müller', 'Markus', 5),
-    User(18, 'dsfgdsfgdfg', 'Heini', 3),
-    User(19, 'Müller', 'Markus', 5),
-    User(20, 'dsfkhdshdgfs', 'Heini', 3),
-    User(21, 'Müller', 'Markus', 5),
-    User(22, 'Peter', 'Heini', 3),
-    User(23, 'Müller', 'Markus', 5),
-    User(24, 'Marlies', 'Heini', 3),
-    User(25, 'Müller', 'Markus', 5),
-  ];
-
-  Future<void> _loggedOutDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Sitzung abgelaufen'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text(
-                    'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich neu an.')
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Anmelden'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }
