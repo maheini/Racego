@@ -8,12 +8,15 @@ class UserDetails {
   final String _lastName;
 
   static UserDetails fromJson(Map<String, dynamic> json) {
-    List<String> laps = json['laps'];
+    final List<String> laps =
+        (json["laps"] as List).map((e) => e as String).toList();
+    final List<String> classes =
+        (json["laps"] as List).map((e) => e as String).toList();
     return UserDetails(
       json['id'],
       json['first_name'],
       json['last_name'],
-      json['class'],
+      classes,
       laps.map((e) => Time.fromTimeString(e)).toList(),
     );
   }
