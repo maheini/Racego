@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
+import 'package:racego/ui/widgets/coloredbutton.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -140,15 +141,23 @@ class _LoginPageState extends State<LoginPage> {
           return Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              ElevatedButton(
+              SizedBox(
+                child: ColoredButton(
+                  const Text(
+                    'Anmelden',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  color: Colors.blue,
                   onPressed: () {
-                    if (_emailController.text.isNotEmpty &&
-                        _passwordController.text.isNotEmpty) {
-                      context.read<LoginBloc>().add(Login(
-                          _emailController.text, _passwordController.text));
-                    }
+                    context.read<LoginBloc>().add(
+                        Login(_emailController.text, _passwordController.text));
                   },
-                  child: const Text('Anmelden'))
+                ),
+              ),
             ],
           );
         } else if (state is Loading) {
@@ -166,12 +175,21 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        context.read<LoginBloc>().add(Login(
-                            _emailController.text, _passwordController.text));
-                      },
-                      child: const Text('Anmelden'))
+                  ColoredButton(
+                    const Text(
+                      'Anmelden',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    color: Colors.blue,
+                    onPressed: () {
+                      context.read<LoginBloc>().add(Login(
+                          _emailController.text, _passwordController.text));
+                    },
+                  ),
                 ],
               ),
             ],
