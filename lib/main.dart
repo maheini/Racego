@@ -42,7 +42,7 @@ class Racego extends StatelessWidget {
                       userId: settings.arguments as int,
                     ));
           } else {
-            return MaterialPageRoute(builder: (_) => UserScreen());
+            return MaterialPageRoute(builder: (_) => const UserScreen());
           }
         }
         return null; // Let `onUnknownRoute` handle this behavior.
