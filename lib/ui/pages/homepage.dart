@@ -105,7 +105,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 20),
-          // _userToolBar(),
         ],
       ),
     );
@@ -114,8 +113,6 @@ class _HomePageState extends State<HomePage> {
   Widget _userList() {
     return Column(
       children: [
-        ElevatedButton(
-            onPressed: () => _userlistCubit.reload(), child: Text('reload')),
         Expanded(
           child: BlocBuilder<listcubit.UserlistCubit, listcubit.UserlistState>(
             bloc: _userlistCubit,
@@ -209,10 +206,6 @@ class _HomePageState extends State<HomePage> {
   Widget _trackList() {
     return Column(
       children: [
-        ElevatedButton(
-          onPressed: () => _tracklistCubit.reload(),
-          child: Text('reload'),
-        ),
         Expanded(
           child:
               BlocBuilder<trackcubit.TracklistCubit, trackcubit.TracklistState>(
