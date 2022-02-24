@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/lapeditor_cubit/lapeditor_cubit.dart';
+import 'package:racego/data/models/time.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
 

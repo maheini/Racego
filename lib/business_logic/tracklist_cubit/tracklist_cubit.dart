@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/exceptions/racego_exception.dart';
+import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/user.dart';
-import '../../ui/widgets/timeinput.dart';
 
 part 'tracklist_state.dart';
 

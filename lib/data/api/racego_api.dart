@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/data/models/userdetails.dart';
-import 'package:racego/ui/widgets/timeinput.dart';
 
 class RacegoApi {
   String? _username;

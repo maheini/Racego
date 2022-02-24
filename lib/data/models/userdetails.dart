@@ -1,4 +1,4 @@
-import 'package:racego/ui/widgets/timeinput.dart';
+import 'package:racego/data/models/time.dart';
 
 class UserDetails {
   UserDetails(

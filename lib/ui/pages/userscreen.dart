@@ -5,13 +5,13 @@ import 'package:racego/business_logic/userscreen_cubit/userscreen_cubit.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:racego/data/locator/locator.dart';
+import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/userdetails.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/lapseditor.dart';
 import 'package:racego/ui/widgets/loggedoutdialog.dart';
 
 import '../widgets/selectablelist.dart';
-import '../widgets/timeinput.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({Key? key, int? userId})

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
-import '../../ui/widgets/timeinput.dart';
+import 'package:racego/data/models/time.dart';
 
 part 'lapeditor_state.dart';
 
