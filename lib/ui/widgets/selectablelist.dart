@@ -1,0 +1,190 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:racego/business_logic/selectablelist_cubit/selectablelist_cubit.dart';
+
+class SelectableList extends StatefulWidget {
+  const SelectableList(
+      {required this.selectedItems, required this.items, Key? key})
+      : super(key: key);
+
+  final List<String> items;
+  final List<String> selectedItems;
+
+  @override
+  _SelectableListState createState() => _SelectableListState();
+}
+
+class _SelectableListState extends State<SelectableList> {
+  late final SelectablelistCubit _cubit;
+  final TextEditingController _textControlller = TextEditingController();
+
+  @override
+  void initState() {
+    _cubit = SelectablelistCubit(widget.items, widget.selectedItems);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _title(),
+        Expanded(child: _list()),
+        _addBar(),
+      ],
+    );
+  }
+
+  Widget _title() {
+    return Container(
+        padding: const EdgeInsets.all(10),
+        color: Colors.grey.shade800.withOpacity(0.7),
+        width: double.infinity,
+        child: BlocBuilder<SelectablelistCubit, SelectablelistState>(
+          bloc: _cubit,
+          builder: (index, state) {
+            return Text(
+              'Rennklassen: ${_cubit.selection.length}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            );
+          },
+        ));
+  }
+
+  Widget _list() {
+    return BlocBuilder<SelectablelistCubit, SelectablelistState>(
+      bloc: _cubit,
+      buildWhen: (previous, current) =>
+          current is ListItemChanged ? true : false,
+      builder: (context, state) {
+        // assign state, because builder state isn't trustworthy ->read bloc docs
+        state = _cubit.state;
+        final List<String> items =
+            state is ListItemChanged ? state.items : widget.items;
+
+        return ListView.separated(
+          itemBuilder: ((context, index) {
+            return _listTile(items[index]);
+          }),
+          separatorBuilder: (context, index) => const Divider(height: 2),
+          itemCount: items.length,
+        );
+      },
+    );
+  }
+
+  Widget _listTile(String itemName) {
+    return BlocBuilder<SelectablelistCubit, SelectablelistState>(
+      bloc: _cubit,
+      buildWhen: (previous, current) {
+        if (current is ListSelectionChanged) {}
+        if (current is ListSelectionChanged &&
+            (current.selection.contains(itemName) ||
+                current.previousSelection.contains(itemName))) {
+          return true;
+        }
+        return false;
+      },
+      builder: (context, _) {
+        final bool selected = _cubit.selection.contains(itemName);
+        return InkWell(
+          onTap: () => _selectionChanged(itemName),
+          child: Container(
+            height: 30,
+            padding: const EdgeInsets.all(3),
+            color: selected ? Colors.white.withOpacity(0.1) : null,
+            child: Row(
+              children: [
+                const SizedBox(width: 10),
+                Icon(
+                  selected ? Icons.check_box : Icons.check_box_outline_blank,
+                  size: 15,
+                ),
+                const SizedBox(width: 20),
+                Text(itemName),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _selectionChanged(String item) {
+    if (_cubit.selection.contains(item)) {
+      _cubit.selectionChanged(item, false);
+    } else {
+      _cubit.selectionChanged(item, true);
+    }
+  }
+
+  void _addItem(String item) {
+    _cubit.addItem(item);
+  }
+
+  Widget _addBar() {
+    return Container(
+      height: 40,
+      padding: const EdgeInsets.only(bottom: 7),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              style: const TextStyle(fontSize: 15),
+              decoration: InputDecoration(
+                hintText: 'Klassen erstellen...',
+                suffix: IconButton(
+                  icon: const Icon(
+                    Icons.clear,
+                    size: 15,
+                  ),
+                  splashRadius: 15,
+                  onPressed: () {
+                    _textControlller.clear();
+                    _cubit.changeFilter('');
+                  },
+                ),
+                isDense: true,
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(4),
+                      bottomLeft: Radius.circular(4)),
+                ),
+                contentPadding: const EdgeInsets.all(10),
+                filled: true,
+              ),
+              onChanged: (filter) => _cubit.changeFilter(filter),
+              onSubmitted: (text) => _addItem(text),
+              controller: _textControlller,
+            ),
+          ),
+          // if (widget._onAddPressed != null)
+          SizedBox(
+            height: double.infinity,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(4),
+                      bottomRight: Radius.circular(4)),
+                  // side: BorderSide(color: Colors.red))
+                )),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+              ),
+              onPressed: () => _addItem(_textControlller.text),
+              child: const Icon(Icons.add),
+              // st
+              // color: Colors.blue,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
