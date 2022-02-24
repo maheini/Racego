@@ -12,7 +12,6 @@ class SelectablelistCubit extends Cubit<SelectablelistState> {
   List<String> _selection;
   String _filter = '';
 
-  List<String> get items => _items;
   List<String> get selection => _selection;
 
   set items(List<String> items) {
