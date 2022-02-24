@@ -11,7 +11,7 @@ class UserDetails {
     final List<String> laps =
         (json["laps"] as List).map((e) => e as String).toList();
     final List<String> classes =
-        (json["laps"] as List).map((e) => e as String).toList();
+        (json["class"] as List).map((e) => e as String).toList();
     return UserDetails(
       json['id'],
       json['first_name'],
