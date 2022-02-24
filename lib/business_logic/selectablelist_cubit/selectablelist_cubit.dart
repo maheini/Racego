@@ -26,10 +26,10 @@ class SelectablelistCubit extends Cubit<SelectablelistState> {
   }
 
   void selectionChanged(String item, bool isSelected) {
-    List<String> oldList = _selection;
+    List<String> oldList = _selection.toList();
     isSelected
         ? _selection.add(item)
-        : _selection.retainWhere((selectedItem) => selectedItem == item);
+        : _selection.removeWhere((selectedItem) => selectedItem == item);
     emit(ListSelectionChanged(_selection, oldList));
   }
 
