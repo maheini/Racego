@@ -17,6 +17,7 @@ class SelectableList extends StatefulWidget {
 class _SelectableListState extends State<SelectableList> {
   late final SelectablelistCubit _cubit;
   final TextEditingController _textControlller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -67,6 +68,7 @@ class _SelectableListState extends State<SelectableList> {
             state is ListItemChanged ? state.items : widget.items;
 
         return ListView.separated(
+          controller: _scrollController,
           itemBuilder: ((context, index) {
             return _listTile(items[index]);
           }),
