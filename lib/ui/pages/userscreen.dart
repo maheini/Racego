@@ -4,7 +4,6 @@ import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/business_logic/userscreen_cubit/userscreen_cubit.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/exceptions/racego_exception.dart';
-import 'package:racego/data/locator/locator.dart';
 import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/userdetails.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
@@ -25,7 +24,7 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  final UserscreenCubit _userCubit = UserscreenCubit(locator<RacegoApi>());
+  late final UserscreenCubit _userCubit;
 
   int _id = 0;
   final TextEditingController _firstName = TextEditingController();
@@ -36,6 +35,7 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   void initState() {
+    _userCubit = UserscreenCubit(context.read<RacegoApi>());
     if (widget._id == null) {
       _userCubit.loadAddScreen();
     } else {

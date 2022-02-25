@@ -6,7 +6,6 @@ import 'package:racego/business_logic/userlist_cubit/userlist_cubit.dart'
 import 'package:racego/business_logic/tracklist_cubit/tracklist_cubit.dart'
     as trackcubit;
 import 'package:racego/data/api/racego_api.dart';
-import 'package:racego/data/locator/locator.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/ui/widgets/user_list.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
@@ -26,10 +25,15 @@ class _HomePageState extends State<HomePage> {
   final ListToolbarCubit _userToolsCubit = ListToolbarCubit();
   final ListToolbarCubit _trackToolsCubit = ListToolbarCubit();
 
-  final listcubit.UserlistCubit _userlistCubit =
-      listcubit.UserlistCubit(locator<RacegoApi>());
-  final trackcubit.TracklistCubit _tracklistCubit =
-      trackcubit.TracklistCubit(locator<RacegoApi>());
+  late final listcubit.UserlistCubit _userlistCubit;
+  late final trackcubit.TracklistCubit _tracklistCubit;
+
+  @override
+  void initState() {
+    _userlistCubit = listcubit.UserlistCubit(context.read<RacegoApi>());
+    _tracklistCubit = trackcubit.TracklistCubit(context.read<RacegoApi>());
+    super.initState();
+  }
 
   bool _forcedLogout = false;
 
