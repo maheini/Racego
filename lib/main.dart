@@ -40,7 +40,7 @@ class Racego extends StatelessWidget {
       },
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
       title: 'Racego',
     );
   }
