@@ -149,7 +149,7 @@ class _UserScreenState extends State<UserScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  isDisabled: !enabled,
+                  isDisabled: !isLoading && !enabled,
                   isLoading: isLoading,
                   color: Colors.green,
                   onPressed: () {
