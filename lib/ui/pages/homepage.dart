@@ -85,8 +85,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _body() {
-    return Center(
-      child: Column(
+    return Column(
         children: [
           const SizedBox(height: 30),
           const Text(
@@ -110,7 +109,6 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 20),
         ],
-      ),
     );
   }
 
