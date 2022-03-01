@@ -28,11 +28,13 @@ class Loaded extends TracklistState {
 }
 
 class Error extends TracklistState {
-  Error(RacegoException exception, List<User> previousList)
+  Error(RacegoException exception, List<User> previousList, {bool? syncStopped})
       : _previousList = previousList,
-        _exception = exception;
+        _exception = exception,
+        syncStopped = syncStopped ?? false;
   final List<User> _previousList;
   final RacegoException _exception;
+  final bool syncStopped;
 
   RacegoException get exception => _exception;
   List<User> get previousList => _previousList;
