@@ -58,7 +58,34 @@ class _HomePageState extends State<HomePage> {
       ],
       child: Scaffold(
         appBar: _appBar(),
-        body: _body(),
+        body: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            _body(),
+            BlocBuilder<listcubit.UserlistCubit, listcubit.UserlistState>(
+              bloc: _userlistCubit,
+              builder: (context, state) {
+                if (state is listcubit.Error && state.syncStopped) {
+                  return _processHardError(
+                      'Fehler: Synchronisation unterbrochen!');
+                } else {
+                  return BlocBuilder<listcubit.UserlistCubit,
+                      listcubit.UserlistState>(
+                    bloc: _userlistCubit,
+                    builder: (context, state) {
+                      if (state is listcubit.Error && state.syncStopped) {
+                        return _processHardError(
+                            'Fehler: Synchronisation unterbrochen!');
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  );
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }
