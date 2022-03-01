@@ -67,13 +67,15 @@ class _SelectableListState extends State<SelectableList> {
         final List<String> items =
             state is ListItemChanged ? state.items : widget.items;
 
-        return ListView.separated(
-          controller: _scrollController,
-          itemBuilder: ((context, index) {
-            return _listTile(items[index]);
-          }),
-          separatorBuilder: (context, index) => const Divider(height: 2),
-          itemCount: items.length,
+        return Material(
+          child: ListView.separated(
+            controller: _scrollController,
+            itemBuilder: ((context, index) {
+              return _listTile(items[index]);
+            }),
+            separatorBuilder: (context, index) => const Divider(height: 2),
+            itemCount: items.length,
+          ),
         );
       },
     );

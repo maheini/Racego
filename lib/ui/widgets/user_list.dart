@@ -61,17 +61,19 @@ class _UserListState extends State<UserList> {
           const SizedBox(height: 3),
           const Divider(thickness: 2, height: 4),
           Expanded(
-            child: ListView.separated(
-              controller: _controller,
-              itemCount: widget._list.length,
-              itemBuilder: (context, index) {
-                return _userListTile(widget._list[index], index);
-              },
-              separatorBuilder: (context, index) {
-                return const Divider(
-                  height: 2,
-                );
-              },
+            child: Material(
+              child: ListView.separated(
+                controller: _controller,
+                itemCount: widget._list.length,
+                itemBuilder: (context, index) {
+                  return _userListTile(widget._list[index], index);
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider(
+                    height: 2,
+                  );
+                },
+              ),
             ),
           ),
         ],

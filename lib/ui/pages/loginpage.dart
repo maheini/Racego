@@ -15,51 +15,53 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-          if (state is RegeneratingSession) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is LoggedIn) {
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
-              Navigator.pushReplacementNamed(context, '/');
-            });
-            return const SizedBox(height: 20);
-          } else {
-            return Container(
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    const Text(
-                      'Racego Login',
-                      style: TextStyle(fontSize: 20),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _emailInput(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _passwordInput(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _loginBar(),
-                  ],
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+        child: BlocBuilder<LoginBloc, LoginState>(
+          builder: (context, state) {
+            if (state is RegeneratingSession) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is LoggedIn) {
+              WidgetsBinding.instance?.addPostFrameCallback((_) {
+                Navigator.pushReplacementNamed(context, '/');
+              });
+              return const SizedBox(height: 20);
+            } else {
+              return Container(
+                child: SizedBox(
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Racego Login',
+                        style: TextStyle(fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _emailInput(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _passwordInput(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _loginBar(),
+                    ],
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                  ),
+                  width: 300,
                 ),
-                width: 300,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
-                borderRadius: const BorderRadius.all(Radius.circular(4)),
-              ),
-              padding: const EdgeInsets.all(40),
-            );
-          }
-        }),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.1),
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                ),
+                padding: const EdgeInsets.all(40),
+              );
+            }
+          },
+        ),
       ),
     );
   }

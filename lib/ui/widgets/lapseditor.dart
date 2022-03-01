@@ -64,12 +64,14 @@ class _LapsEditorState extends State<LapsEditor> {
 
         if (state is LapsChanged) {
           final List<Time> laps = state.laps;
-          return ListView.separated(
-            itemBuilder: ((context, index) {
-              return _listTile(index, laps[index].toTimeString);
-            }),
-            separatorBuilder: (context, index) => const Divider(height: 2),
-            itemCount: laps.length,
+          return Material(
+            child: ListView.separated(
+              itemBuilder: ((context, index) {
+                return _listTile(index, laps[index].toTimeString);
+              }),
+              separatorBuilder: (context, index) => const Divider(height: 2),
+              itemCount: laps.length,
+            ),
           );
         } else {
           return const Text('Unbekannter Fehler');
