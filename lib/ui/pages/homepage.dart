@@ -6,6 +6,7 @@ import 'package:racego/business_logic/userlist_cubit/userlist_cubit.dart'
 import 'package:racego/business_logic/tracklist_cubit/tracklist_cubit.dart'
     as trackcubit;
 import 'package:racego/data/api/racego_api.dart';
+import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/ui/widgets/user_list.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
@@ -44,16 +45,32 @@ class _HomePageState extends State<HomePage> {
         BlocListener<LoginBloc, LoginState>(
           listenWhen: ((previous, current) =>
               current is LoggedOut || current is LoginError),
-      listener: ((context, state) async {
-          if (_forcedLogout) {
-            Navigator.pushReplacementNamed(context, '/');
-          } else {
-            await loggedOutDialog(context);
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
+          listener: ((context, state) async {
+            if (_forcedLogout) {
               Navigator.pushReplacementNamed(context, '/');
-            });
-          }
-      }),
+            } else {
+              await loggedOutDialog(context);
+              WidgetsBinding.instance?.addPostFrameCallback((_) {
+                Navigator.pushReplacementNamed(context, '/');
+              });
+            }
+          }),
+        ),
+        BlocListener<listcubit.UserlistCubit, listcubit.UserlistState>(
+          bloc: _userlistCubit,
+          listenWhen: ((previous, current) =>
+              current is listcubit.Error && !current.syncStopped),
+          listener: ((context, state) {
+            if (state is listcubit.Error) _processSoftError(state.exception);
+          }),
+        ),
+        BlocListener<trackcubit.TracklistCubit, trackcubit.TracklistState>(
+          bloc: _tracklistCubit,
+          listenWhen: ((previous, current) =>
+              current is trackcubit.Error && !current.syncStopped),
+          listener: ((context, state) {
+            if (state is trackcubit.Error) _processSoftError(state.exception);
+          }),
         ),
       ],
       child: Scaffold(
@@ -117,29 +134,29 @@ class _HomePageState extends State<HomePage> {
 
   Widget _body() {
     return Column(
-        children: [
-          const SizedBox(height: 30),
-          const Text(
-            'Willkommen zurück',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 50,
-            ),
+      children: [
+        const SizedBox(height: 30),
+        const Text(
+          'Willkommen zurück',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 50,
           ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: Row(
-              children: [
-                const SizedBox(width: 20),
-                Expanded(child: _userList()),
-                const SizedBox(width: 30),
-                Expanded(child: _trackList()),
-                const SizedBox(width: 20),
-              ],
-            ),
+        ),
+        const SizedBox(height: 20),
+        Expanded(
+          child: Row(
+            children: [
+              const SizedBox(width: 20),
+              Expanded(child: _userList()),
+              const SizedBox(width: 30),
+              Expanded(child: _trackList()),
+              const SizedBox(width: 20),
+            ],
           ),
-          const SizedBox(height: 20),
-        ],
+        ),
+        const SizedBox(height: 20),
+      ],
     );
   }
 
