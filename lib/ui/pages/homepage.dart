@@ -334,4 +334,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _processSoftError(RacegoException exception) {
+    if (exception is AuthException) {
+      context.read<LoginBloc>().add(Logout());
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 5),
+        content: Text(
+            exception != null ? exception.errorMessage : 'Unbekannter Fehler'),
+        action: SnackBarAction(
+          label: 'OK',
+          onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+        ),
+      ),
+    );
+  }
 }
