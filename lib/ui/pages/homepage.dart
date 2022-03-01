@@ -39,9 +39,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<LoginBloc, LoginState>(
+          listenWhen: ((previous, current) =>
+              current is LoggedOut || current is LoginError),
       listener: ((context, state) async {
-        if (state is LoggedOut || state is LoginError) {
           if (_forcedLogout) {
             Navigator.pushReplacementNamed(context, '/');
           } else {
@@ -50,8 +53,9 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushReplacementNamed(context, '/');
             });
           }
-        }
       }),
+        ),
+      ],
       child: Scaffold(
         appBar: _appBar(),
         body: _body(),
