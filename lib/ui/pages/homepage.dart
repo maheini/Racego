@@ -32,8 +32,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _userlistCubit = listcubit.UserlistCubit(context.read<RacegoApi>());
+    _userlistCubit.startSync();
     _tracklistCubit = trackcubit.TracklistCubit(context.read<RacegoApi>());
+    _tracklistCubit.startSync();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _userlistCubit.stopSync();
+    _tracklistCubit.stopSync();
+    super.dispose();
   }
 
   bool _forcedLogout = false;
