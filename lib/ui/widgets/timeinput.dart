@@ -18,15 +18,16 @@ class TimeInput extends StatefulWidget {
 class _TimeInputState extends State<TimeInput> {
   @override
   void didUpdateWidget(covariant TimeInput oldWidget) {
-    if (widget._reset) {
+    if (widget._reset && _duration.isValid) {
       _millisecondController.text = '000';
       _secondController.text = '00';
       _minuteController.text = '00';
+      _duration = Time();
     }
     super.didUpdateWidget(oldWidget);
   }
 
-  final Time _duration = Time();
+  Time _duration = Time();
 
   final TextEditingController _minuteController =
       TextEditingController(text: '00');
