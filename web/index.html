@@ -31,8 +31,31 @@
 
   <title>racego</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Loader -->
+  <style>
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex; /* Default Axis is X*/
+      justify-content: center; /* Main Axis */
+      align-items: center; /* Cross Axis */
+      background-color:#af0006;
+    }      
+    .indicator{
+      width: 15vw;
+    }
+  </style>
+  <!-- Loader -->
 </head>
-<body>
+<body style="overflow: hidden;">
+
+  <!-- Loader -->
+  <div id="loading_indicator" class="container">
+    <img class="indicator" src="./assets/loader.gif" />
+  </div>
+  <!-- Loader -->
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -100,5 +123,18 @@
       loadMainDartJs();
     }
   </script>
+
+  <!-- Loader -->
+  <script>
+    window.addEventListener("dart-app-ready",function(){
+      setTimeout(() => {
+        var loadingIndicator = document.getElementById("loading_indicator");
+        if(loadingIndicator){
+          loadingIndicator.remove();
+        }
+      }, 3000);
+    });
+  </script>
+  <!-- Loader -->
 </body>
 </html>
