@@ -192,7 +192,6 @@ class _HomePageState extends State<HomePage> {
                       Navigator.of(context).pushNamed('/user'),
                 );
               } else {
-                // TODO: implement error-message and reloading indicator
                 List<User> newList = [];
                 if (state is listcubit.Loading) {
                   newList = state.previousList;
@@ -248,8 +247,11 @@ class _HomePageState extends State<HomePage> {
                     child: ColoredButton(
                       const Icon(Icons.assistant_photo),
                       color: Colors.green,
-                      onPressed: () => _userlistCubit
-                          .addToTrack(_userToolsCubit.getSelectedId()),
+                      onPressed: () async {
+                        _userlistCubit
+                            .addToTrack(_userToolsCubit.getSelectedId())
+                            .then((_) => _tracklistCubit.reload());
+                      },
                       isDisabled: disabled,
                     ),
                   ),
@@ -284,7 +286,6 @@ class _HomePageState extends State<HomePage> {
                       .pushNamed('/user', arguments: userID),
                 );
               } else {
-                // TODO: implement error-message and reloading indicator
                 List<User> newList = [];
                 if (state is trackcubit.Loading) {
                   newList = state.previousList;
@@ -337,9 +338,12 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.green,
                       onPressed: !validTime
                           ? null
-                          : () => _tracklistCubit.finishLap(
-                              _trackToolsCubit.getSelectedId(),
-                              _trackToolsCubit.getCurrentTime()),
+                          : () async {
+                              _tracklistCubit
+                                  .finishLap(_trackToolsCubit.getSelectedId(),
+                                      _trackToolsCubit.getCurrentTime())
+                                  .then((_) => _userlistCubit.reload());
+                            },
                       isDisabled: disabled || !validTime,
                     ),
                   ),
@@ -347,8 +351,11 @@ class _HomePageState extends State<HomePage> {
                     child: ColoredButton(
                       const Icon(Icons.dangerous),
                       color: Colors.red,
-                      onPressed: () => _tracklistCubit
-                          .cancelLap(_trackToolsCubit.getSelectedId()),
+                      onPressed: () async {
+                        _tracklistCubit
+                            .cancelLap(_trackToolsCubit.getSelectedId())
+                            .then((_) => _userlistCubit.reload());
+                      },
                       isDisabled: disabled,
                     ),
                   ),
@@ -396,8 +403,7 @@ class _HomePageState extends State<HomePage> {
       SnackBar(
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 5),
-        content: Text(
-            exception != null ? exception.errorMessage : 'Unbekannter Fehler'),
+        content: Text(exception.errorMessage),
         action: SnackBarAction(
           label: 'OK',
           onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
