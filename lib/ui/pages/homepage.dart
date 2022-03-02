@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
         BlocListener<trackcubit.TracklistCubit, trackcubit.TracklistState>(
           bloc: _tracklistCubit,
           listenWhen: ((previous, current) =>
-              current is trackcubit.Error && !current.syncStopped),
+              current is trackcubit.Error && !current.syncError),
           listener: ((context, state) {
             if (state is trackcubit.Error) _processSoftError(state.exception);
           }),

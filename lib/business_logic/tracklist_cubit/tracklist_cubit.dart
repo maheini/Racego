@@ -17,6 +17,23 @@ class TracklistCubit extends Cubit<TracklistState> {
   final RacegoApi _api;
   String _filter = '';
   List<User> _newestList = [];
+  bool _syncEnabled = false;
+
+  /// scheduled reload
+  ///
+  void startSync() async {
+    if (_syncEnabled) {
+      return;
+    } else {
+      _syncEnabled = true;
+    }
+    while (_syncEnabled) {
+      reload();
+      await Future.delayed(const Duration(seconds: 1));
+    }
+  }
+
+  void stopSync() => _syncEnabled = false;
 
   /// reloads all user on track and emit a filtered List
   ///
@@ -29,18 +46,18 @@ class TracklistCubit extends Cubit<TracklistState> {
     } catch (e) {
       if (e is RacegoException) {
         emit(Error(
-            e,
-            _filter.isNotEmpty
-                ? _filterList(_newestList, _filter)
-                : _newestList));
+          e,
+          _filter.isNotEmpty ? _filterList(_newestList, _filter) : _newestList,
+          syncError: true,
+        ));
       } else {
         UnknownException error = UnknownException(
             'Unbekannter Fehler', e.toString(), e.runtimeType.toString());
         emit(Error(
-            error,
-            _filter.isNotEmpty
-                ? _filterList(_newestList, _filter)
-                : _newestList));
+          error,
+          _filter.isNotEmpty ? _filterList(_newestList, _filter) : _newestList,
+          syncError: true,
+        ));
       }
     }
   }
