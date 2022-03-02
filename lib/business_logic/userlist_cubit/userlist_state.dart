@@ -17,13 +17,13 @@ class Loaded extends UserlistState {
 }
 
 class Error extends UserlistState {
-  Error(RacegoException exception, List<User> previousList, {bool? syncStopped})
+  Error(RacegoException exception, List<User> previousList, {bool? syncError})
       : _previousList = previousList,
         _exception = exception,
-        syncStopped = syncStopped ?? false;
+        syncError = syncError ?? false;
   final List<User> _previousList;
   final RacegoException _exception;
-  final bool syncStopped;
+  final bool syncError;
 
   RacegoException get exception => _exception;
   List<User> get previousList => _previousList;

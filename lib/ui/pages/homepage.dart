@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
         BlocListener<listcubit.UserlistCubit, listcubit.UserlistState>(
           bloc: _userlistCubit,
           listenWhen: ((previous, current) =>
-              current is listcubit.Error && !current.syncStopped),
+              current is listcubit.Error && !current.syncError),
           listener: ((context, state) {
             if (state is listcubit.Error) _processSoftError(state.exception);
           }),
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
             BlocBuilder<listcubit.UserlistCubit, listcubit.UserlistState>(
               bloc: _userlistCubit,
               builder: (context, state) {
-                if (state is listcubit.Error && state.syncStopped) {
+                if (state is listcubit.Error && state.syncError) {
                   return _processHardError(
                       'Fehler: Synchronisation unterbrochen!');
                 } else {
