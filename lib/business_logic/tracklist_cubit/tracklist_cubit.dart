@@ -28,8 +28,8 @@ class TracklistCubit extends Cubit<TracklistState> {
       _syncEnabled = true;
     }
     while (_syncEnabled) {
-      reload();
-      await Future.delayed(const Duration(seconds: 1));
+      await reload();
+      await Future.delayed(const Duration(milliseconds: 500));
     }
   }
 

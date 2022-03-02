@@ -27,8 +27,8 @@ class UserlistCubit extends Cubit<UserlistState> {
       _syncEnabled = true;
     }
     while (_syncEnabled) {
-      reload();
-      await Future.delayed(const Duration(seconds: 1));
+      await reload();
+      await Future.delayed(const Duration(milliseconds: 500));
     }
   }
 
