@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
-import 'package:racego/ui/pages/homepage.dart';
+import 'package:racego/ui/pages/homescreen.dart';
 import 'package:racego/ui/pages/userscreen.dart';
-import 'ui/pages/loginpage.dart';
+import 'ui/pages/loginscreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/provider/provider.dart';
 
@@ -21,7 +21,7 @@ class Racego extends StatelessWidget {
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
           if (context.read<LoginBloc>().state is LoggedIn) {
-            return MaterialPageRoute(builder: (_) => const HomePage());
+            return MaterialPageRoute(builder: (_) => const HomeScreen());
           } else {
             return MaterialPageRoute(builder: (_) => const LoginPage());
           }
