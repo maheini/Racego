@@ -86,11 +86,11 @@ class _HomePageState extends State<HomePage> {
                   return _processHardError(
                       'Fehler: Synchronisation unterbrochen!');
                 } else {
-                  return BlocBuilder<listcubit.UserlistCubit,
-                      listcubit.UserlistState>(
-                    bloc: _userlistCubit,
+                  return BlocBuilder<trackcubit.TracklistCubit,
+                      trackcubit.TracklistState>(
+                    bloc: _tracklistCubit,
                     builder: (context, state) {
-                      if (state is listcubit.Error && state.syncStopped) {
+                      if (state is trackcubit.Error && state.syncError) {
                         return _processHardError(
                             'Fehler: Synchronisation unterbrochen!');
                       } else {
