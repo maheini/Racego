@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
-import 'package:racego/ui/pages/homescreen.dart';
-import 'package:racego/ui/pages/userscreen.dart';
-import 'ui/pages/loginscreen.dart';
+import 'package:racego/ui/screens/homescreen.dart';
+import 'package:racego/ui/screens/userscreen.dart';
+import 'ui/screens/loginscreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/provider/provider.dart';
 
