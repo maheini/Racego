@@ -1,19 +1,25 @@
 part of 'lapeditor_cubit.dart';
 
 @immutable
-abstract class LapeditorState {}
+abstract class LapeditorState {
+  const LapeditorState(this.selectedIndex, this.isValidTime);
+  final int selectedIndex;
+  final bool isValidTime;
+}
 
 class LapsChanged extends LapeditorState {
-  LapsChanged(this.laps);
+  const LapsChanged(this.laps, int selectedIntex, bool isValidTime)
+      : super(selectedIntex, isValidTime);
   final List<Time> laps;
 }
 
 class SelectionChanged extends LapeditorState {
-  SelectionChanged(this.currentSelection);
-  final int currentSelection;
+  const SelectionChanged(int selectedIntex, bool isValidTime)
+      : super(selectedIntex, isValidTime);
 }
 
 class TimeInputChanged extends LapeditorState {
-  TimeInputChanged(this.isValid);
+  const TimeInputChanged(this.isValid, int selectedIntex, bool isValidTime)
+      : super(selectedIntex, isValidTime);
   final bool isValid;
 }

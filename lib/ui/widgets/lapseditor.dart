@@ -117,16 +117,12 @@ class _LapsEditorState extends State<LapsEditor> {
   Widget _timeInput() {
     return Container(
       padding: const EdgeInsets.only(left: 15, right: 15),
-      child: BlocBuilder<LapeditorCubit, LapeditorState>(
+      child: BlocSelector<LapeditorCubit, LapeditorState, int>(
         bloc: _cubit,
-        buildWhen: (previous, state) => state is SelectionChanged,
+        selector: (state) => state.selectedIndex,
         builder: (context, state) {
-          // update state, because builder state isn't trustworthy
-          state = _cubit.state;
-
-          final bool reset = state is SelectionChanged;
           return TimeInput(
-            reset: reset,
+            reset: true,
             onChanged: (time) {
               _currentTime = time;
               _cubit.timeInputChanged(time);
@@ -138,19 +134,15 @@ class _LapsEditorState extends State<LapsEditor> {
   }
 
   Widget _addTimeButton() {
-    return BlocBuilder<LapeditorCubit, LapeditorState>(
+    return BlocSelector<LapeditorCubit, LapeditorState, bool>(
       bloc: _cubit,
-      buildWhen: (previous, state) => state is TimeInputChanged,
-      builder: (context, state) {
-        // update state, because builder state isn't trustworthy
-        state = _cubit.state;
-
-        final bool disabled = !(state is TimeInputChanged && state.isValid);
+      selector: (state) => state.isValidTime,
+      builder: (context, isValidTime) {
         return Expanded(
           child: ColoredButton(
             const Icon(Icons.access_alarm),
             color: Colors.green,
-            isDisabled: disabled,
+            isDisabled: !isValidTime,
             onPressed: () => _cubit.addLap(_currentTime ?? Time()),
           ),
         );
@@ -159,22 +151,17 @@ class _LapsEditorState extends State<LapsEditor> {
   }
 
   Widget _removeTimeButton() {
-    return BlocBuilder<LapeditorCubit, LapeditorState>(
+    return BlocSelector<LapeditorCubit, LapeditorState, int>(
       bloc: _cubit,
-      buildWhen: (previous, current) => current is SelectionChanged,
-      builder: (context, state) {
-        // update state, because builder state isn't trustworthy
-        state = _cubit.state;
-
-        final bool isDisabled =
-            !(state is SelectionChanged && state.currentSelection >= 0);
+      selector: (state) => state.selectedIndex,
+      builder: (context, currentSelection) {
         return Expanded(
           child: IgnorePointer(
-            ignoring: isDisabled,
+            ignoring: currentSelection < 0,
             child: ColoredButton(
               const Icon(Icons.dangerous),
               color: Colors.red,
-              isDisabled: isDisabled,
+              isDisabled: currentSelection < 0,
               onPressed: () => _cubit.removeLap(_cubit.currentSelection),
             ),
           ),
