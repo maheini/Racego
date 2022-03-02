@@ -20,7 +20,7 @@ class UserlistCubit extends Cubit<UserlistState> {
 
   /// scheduled reload
   ///
-  void startSync() async {
+  Future<void> startSync() async {
     if (_syncEnabled) {
       return;
     } else {
@@ -36,7 +36,7 @@ class UserlistCubit extends Cubit<UserlistState> {
 
   /// reloads all user and emit a filtered List
   ///
-  void reload() async {
+  Future<void> reload() async {
     try {
       _newestList = await _api.getUser();
       emit(Loaded(_filter.isNotEmpty
@@ -63,7 +63,7 @@ class UserlistCubit extends Cubit<UserlistState> {
 
   /// remove user
   ///
-  void removeUser(int userId) async {
+  Future<void> removeUser(int userId) async {
     try {
       bool successful = await _api.deleteUser(userId);
       if (!successful) {
@@ -92,7 +92,7 @@ class UserlistCubit extends Cubit<UserlistState> {
 
   /// adds user on track
   ///
-  void addToTrack(int userId) async {
+  Future<void> addToTrack(int userId) async {
     try {
       bool successful = await _api.addOnTrack(userId);
       if (!successful) {

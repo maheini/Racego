@@ -21,7 +21,7 @@ class TracklistCubit extends Cubit<TracklistState> {
 
   /// scheduled reload
   ///
-  void startSync() async {
+  Future<void> startSync() async {
     if (_syncEnabled) {
       return;
     } else {
@@ -37,7 +37,7 @@ class TracklistCubit extends Cubit<TracklistState> {
 
   /// reloads all user on track and emit a filtered List
   ///
-  void reload() async {
+  Future<void> reload() async {
     try {
       _newestList = await _api.getTrack();
       emit(Loaded(_filter.isNotEmpty
@@ -77,7 +77,7 @@ class TracklistCubit extends Cubit<TracklistState> {
 
   /// cancel lap and remove user from track
   ///
-  void cancelLap(int userId) async {
+  Future<void> cancelLap(int userId) async {
     try {
       bool successful = await _api.cancelLap(userId);
       if (!successful) {
@@ -106,7 +106,7 @@ class TracklistCubit extends Cubit<TracklistState> {
 
   /// submit lap and remove user from track
   ///
-  void finishLap(int userId, Time time) async {
+  Future<void> finishLap(int userId, Time time) async {
     try {
       bool successful = await _api.finishLap(userId, time);
       if (!successful) {
