@@ -5,10 +5,18 @@ import 'package:racego/ui/screens/userscreen.dart';
 import 'ui/screens/loginscreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/provider/provider.dart';
+import 'package:window_size/window_size.dart';
+import 'dart:io';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('Racego');
+    // setWindowMaxSize(const Size(max_width, max_height));
+    setWindowMinSize(const Size(950, 650));
+  }
   runApp(
-    setupProvider(child: const Racego()),
+    setupProvider(child: Racego()),
   );
 }
 
