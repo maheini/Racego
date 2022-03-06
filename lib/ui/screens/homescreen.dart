@@ -215,6 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
+        const SizedBox(height: 5),
         BlocBuilder<ListToolbarCubit, ListToolbarState>(
           bloc: _userToolsCubit,
           builder: (context, state) {
@@ -307,6 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
+        const SizedBox(height: 5),
         BlocBuilder<ListToolbarCubit, ListToolbarState>(
           bloc: _trackToolsCubit,
           builder: (context, state) {

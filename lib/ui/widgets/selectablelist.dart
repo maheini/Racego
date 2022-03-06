@@ -32,6 +32,7 @@ class _SelectableListState extends State<SelectableList> {
         _title(),
         const SizedBox(height: 5),
         Expanded(child: _list()),
+        const SizedBox(height: 5),
         _addBar(),
       ],
     );
@@ -134,6 +135,7 @@ class _SelectableListState extends State<SelectableList> {
   Widget _addBar() {
     return Container(
       height: 40,
+      margin: const EdgeInsets.only(top: 5, bottom: 5),
       padding: const EdgeInsets.only(bottom: 7),
       child: Row(
         children: [

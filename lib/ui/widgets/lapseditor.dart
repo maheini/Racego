@@ -28,6 +28,7 @@ class _LapsEditorState extends State<LapsEditor> {
         _title(),
         const SizedBox(height: 5),
         Expanded(child: _list()),
+        const SizedBox(height: 5),
         _toolButtons(),
       ],
     );
