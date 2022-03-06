@@ -1,14 +1,3 @@
-// part of 'tracklist_cubit.dart';
-
-// @immutable
-// abstract class TracklistState {}
-
-// class Loading extends TracklistState {}
-
-// class Loaded extends TracklistState {}
-
-// class Error extends TracklistState {}
-
 part of 'tracklist_cubit.dart';
 
 @immutable
