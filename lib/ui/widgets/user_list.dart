@@ -173,15 +173,12 @@ class _UserListState extends State<UserList> {
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(4),
                         bottomRight: Radius.circular(4)),
-                    // side: BorderSide(color: Colors.red))
                   )),
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
                 ),
                 onPressed: () =>
                     widget._onAddPressed?.call(_searchTextController.text),
                 child: const Icon(Icons.add),
-                // st
-                // color: Colors.blue,
               ),
             ),
         ],
@@ -192,17 +189,17 @@ class _UserListState extends State<UserList> {
   Widget _userListDecoration({required Widget child}) {
     if (widget._title == null) {
       return Container(
+        color: Theme.of(context).colorScheme.onBackground,
         child: child,
         padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
       );
     } else {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
+            color: Theme.of(context).colorScheme.onBackground,
             padding: const EdgeInsets.all(10),
-            color: Colors.grey.shade800.withOpacity(0.7),
             width: double.infinity,
             child: Text(
               widget._title!,
@@ -216,9 +213,9 @@ class _UserListState extends State<UserList> {
           const SizedBox(height: 5),
           Expanded(
             child: Container(
+              color: Theme.of(context).colorScheme.onBackground,
               child: child,
               padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
             ),
           ),
           // Expanded(child: child),
@@ -255,7 +252,7 @@ class _UserListState extends State<UserList> {
 
   Widget _userListTile(User user, int index) {
     return InkWell(
-      onTap: () => onTab(index, user.id), //() => onTab(index, user.id),
+      onTap: () => onTab(index, user.id),
       child: BlocBuilder<ListSelectionCubit, int>(
         buildWhen: (previousSelection, currentSelection) {
           if (user.id == currentSelection || user.id == previousSelection) {
@@ -267,8 +264,8 @@ class _UserListState extends State<UserList> {
         bloc: _listCubit,
         builder: (context, currentSelection) {
           return Container(
-            color: _listCubit.state == user.id
-                ? Colors.white.withOpacity(0.1)
+            color: currentSelection == user.id
+                ? Theme.of(context).selectedRowColor
                 : null,
             padding: const EdgeInsets.all(10),
             child: Row(

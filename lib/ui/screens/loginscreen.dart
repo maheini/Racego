@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: 300,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Theme.of(context).colorScheme.onBackground,
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
                 ),
                 padding: const EdgeInsets.all(40),

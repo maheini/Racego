@@ -26,6 +26,7 @@ class _LapsEditorState extends State<LapsEditor> {
     return Column(
       children: [
         _title(),
+        const SizedBox(height: 5),
         Expanded(child: _list()),
         _toolButtons(),
       ],
@@ -34,8 +35,8 @@ class _LapsEditorState extends State<LapsEditor> {
 
   Widget _title() {
     return Container(
+      color: Theme.of(context).colorScheme.onBackground,
       padding: const EdgeInsets.all(10),
-      color: Colors.grey.shade800.withOpacity(0.7),
       width: double.infinity,
       child: BlocBuilder<LapeditorCubit, LapeditorState>(
         bloc: _cubit,
@@ -92,8 +93,8 @@ class _LapsEditorState extends State<LapsEditor> {
           child: Container(
             height: 30,
             padding: const EdgeInsets.all(3),
-            color: selected ? Colors.white.withOpacity(0.1) : null,
             child: Text(itemName, textAlign: TextAlign.center),
+            color: selected ? Theme.of(context).selectedRowColor : null,
           ),
         );
       },

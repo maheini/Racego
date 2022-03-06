@@ -122,7 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(2),
         child: Image.asset('assets/racego_r.png', fit: BoxFit.cover),
       ),
-      backgroundColor: const Color.fromARGB(255, 175, 0, 6),
       title: const Text(
         'Racego',
       ),

@@ -24,7 +24,6 @@ class ColoredButton extends StatelessWidget {
     return Container(
       foregroundDecoration: isLoading
           ? BoxDecoration(
-              color: Colors.grey.withOpacity(0.2),
               backgroundBlendMode: BlendMode.saturation,
             )
           : null,

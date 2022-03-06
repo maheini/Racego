@@ -30,6 +30,7 @@ class _SelectableListState extends State<SelectableList> {
     return Column(
       children: [
         _title(),
+        const SizedBox(height: 5),
         Expanded(child: _list()),
         _addBar(),
       ],
@@ -38,8 +39,8 @@ class _SelectableListState extends State<SelectableList> {
 
   Widget _title() {
     return Container(
+        color: Theme.of(context).colorScheme.onBackground,
         padding: const EdgeInsets.all(10),
-        color: Colors.grey.shade800.withOpacity(0.7),
         width: double.infinity,
         child: BlocBuilder<SelectablelistCubit, SelectablelistState>(
           bloc: _cubit,
@@ -100,7 +101,6 @@ class _SelectableListState extends State<SelectableList> {
           child: Container(
             height: 30,
             padding: const EdgeInsets.all(3),
-            color: selected ? Colors.white.withOpacity(0.1) : null,
             child: Row(
               children: [
                 const SizedBox(width: 10),
@@ -112,6 +112,7 @@ class _SelectableListState extends State<SelectableList> {
                 Text(itemName),
               ],
             ),
+            color: selected ? Theme.of(context).selectedRowColor : null,
           ),
         );
       },
@@ -167,7 +168,6 @@ class _SelectableListState extends State<SelectableList> {
               controller: _textControlller,
             ),
           ),
-          // if (widget._onAddPressed != null)
           SizedBox(
             height: double.infinity,
             child: ElevatedButton(
@@ -177,14 +177,11 @@ class _SelectableListState extends State<SelectableList> {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(4),
                       bottomRight: Radius.circular(4)),
-                  // side: BorderSide(color: Colors.red))
                 )),
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
               ),
               onPressed: () => _addItem(_textControlller.text),
               child: const Icon(Icons.add),
-              // st
-              // color: Colors.blue,
             ),
           ),
         ],

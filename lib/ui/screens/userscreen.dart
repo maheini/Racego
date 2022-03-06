@@ -100,7 +100,6 @@ class _UserScreenState extends State<UserScreen> {
             child: Image.asset('assets/racego_r.png', fit: BoxFit.cover),
           ),
           automaticallyImplyLeading: false,
-          backgroundColor: const Color.fromARGB(255, 175, 0, 6),
           title: const Text(
             'Benutzer bearbeiten',
           ),
@@ -249,9 +248,8 @@ class _UserScreenState extends State<UserScreen> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 30),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.1),
-                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
                 ),
                 width: 300,
                 child: Column(
