@@ -36,7 +36,17 @@ class _LapsEditorState extends State<LapsEditor> {
 
   Widget _title() {
     return Container(
-      color: Theme.of(context).colorScheme.onBackground,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onBackground,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 5,
+            // offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
       padding: const EdgeInsets.all(10),
       width: double.infinity,
       child: BlocBuilder<LapeditorCubit, LapeditorState>(
@@ -66,13 +76,26 @@ class _LapsEditorState extends State<LapsEditor> {
 
         if (state is LapsChanged) {
           final List<Time> laps = state.laps;
-          return Material(
-            child: ListView.separated(
-              itemBuilder: ((context, index) {
-                return _listTile(index, laps[index].toTimeString);
-              }),
-              separatorBuilder: (context, index) => const Divider(height: 2),
-              itemCount: laps.length,
+          return Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onBackground,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  // offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Material(
+              child: ListView.separated(
+                itemBuilder: ((context, index) {
+                  return _listTile(index, laps[index].toTimeString);
+                }),
+                separatorBuilder: (context, index) => const Divider(height: 2),
+                itemCount: laps.length,
+              ),
             ),
           );
         } else {

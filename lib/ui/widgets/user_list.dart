@@ -189,7 +189,17 @@ class _UserListState extends State<UserList> {
   Widget _userListDecoration({required Widget child}) {
     if (widget._title == null) {
       return Container(
-        color: Theme.of(context).colorScheme.onBackground,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onBackground,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              // offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         child: child,
         padding: const EdgeInsets.all(10),
       );
@@ -198,7 +208,17 @@ class _UserListState extends State<UserList> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            color: Theme.of(context).colorScheme.onBackground,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onBackground,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  // offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
             padding: const EdgeInsets.all(10),
             width: double.infinity,
             child: Text(
@@ -213,7 +233,17 @@ class _UserListState extends State<UserList> {
           const SizedBox(height: 5),
           Expanded(
             child: Container(
-              color: Theme.of(context).colorScheme.onBackground,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onBackground,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    // offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
               child: child,
               padding: const EdgeInsets.all(10),
             ),

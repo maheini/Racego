@@ -40,7 +40,17 @@ class _SelectableListState extends State<SelectableList> {
 
   Widget _title() {
     return Container(
-        color: Theme.of(context).colorScheme.onBackground,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onBackground,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              // offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         padding: const EdgeInsets.all(10),
         width: double.infinity,
         child: BlocBuilder<SelectablelistCubit, SelectablelistState>(
@@ -69,14 +79,27 @@ class _SelectableListState extends State<SelectableList> {
         final List<String> items =
             state is ListItemChanged ? state.items : widget.items;
 
-        return Material(
-          child: ListView.separated(
-            controller: _scrollController,
-            itemBuilder: ((context, index) {
-              return _listTile(items[index]);
-            }),
-            separatorBuilder: (context, index) => const Divider(height: 2),
-            itemCount: items.length,
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onBackground,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 5,
+                // offset: const Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Material(
+            child: ListView.separated(
+              controller: _scrollController,
+              itemBuilder: ((context, index) {
+                return _listTile(items[index]);
+              }),
+              separatorBuilder: (context, index) => const Divider(height: 2),
+              itemCount: items.length,
+            ),
           ),
         );
       },
