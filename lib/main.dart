@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
+import 'package:racego/l10n/l10n.dart';
 import 'package:racego/ui/screens/homescreen.dart';
 import 'package:racego/ui/screens/userscreen.dart';
 import 'ui/screens/loginscreen.dart';
@@ -128,6 +129,8 @@ class Racego extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: L10n.delegates,
+      supportedLocales: L10n.supportedLanguages,
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
           if (context.read<LoginBloc>().state is LoggedIn) {
