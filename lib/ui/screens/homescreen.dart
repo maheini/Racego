@@ -12,6 +12,7 @@ import 'package:racego/ui/widgets/user_list.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
 import 'package:racego/business_logic/listtoolbar/listtoolbar_cubit.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/loggedoutdialog.dart';
 
@@ -144,9 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         const SizedBox(height: 30),
-        const Text(
-          'Willkommen zurück',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context).welcome,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 50,
           ),
@@ -179,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   state.list,
                   searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: 'Teilnehmer',
+                  title: AppLocalizations.of(context).participants,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _userToolsCubit.selectionChanged(userID)
@@ -200,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   newList,
                   searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: 'Teilnehmer',
+                  title: AppLocalizations.of(context).participants,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _userToolsCubit.selectionChanged(userID)
@@ -276,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   state.list,
                   searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: 'Rennstrecke',
+                  title: AppLocalizations.of(context).race_track,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _trackToolsCubit.selectionChanged(userID)
@@ -295,7 +296,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   newList,
                   searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: 'Rennstrecke',
+                  title: AppLocalizations.of(context).race_track,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _trackToolsCubit.selectionChanged(userID)

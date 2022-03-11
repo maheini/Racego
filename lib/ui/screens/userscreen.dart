@@ -9,6 +9,7 @@ import 'package:racego/data/models/userdetails.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/lapseditor.dart';
 import 'package:racego/ui/widgets/loggedoutdialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/selectablelist.dart';
 
@@ -100,8 +101,8 @@ class _UserScreenState extends State<UserScreen> {
             child: Image.asset('assets/racego_r.png', fit: BoxFit.cover),
           ),
           automaticallyImplyLeading: false,
-          title: const Text(
-            'Benutzer bearbeiten',
+          title: Text(
+            AppLocalizations.of(context).edit_user,
           ),
           centerTitle: true,
         ),
@@ -140,9 +141,9 @@ class _UserScreenState extends State<UserScreen> {
                     state is UserScreenEditSaving;
 
                 return ColoredButton(
-                  const Text(
-                    'Speichern',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context).save,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -167,9 +168,9 @@ class _UserScreenState extends State<UserScreen> {
             ),
             const SizedBox(width: 20),
             ColoredButton(
-              const Text(
-                'Zurück',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context).back,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -256,11 +257,13 @@ class _UserScreenState extends State<UserScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextField(
-                      decoration: const InputDecoration(hintText: 'Vorname'),
+                      decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context).first_name),
                       controller: _firstName,
                     ),
                     TextField(
-                      decoration: const InputDecoration(hintText: 'Nachname'),
+                      decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context).last_name),
                       controller: _lastName,
                     ),
                   ],

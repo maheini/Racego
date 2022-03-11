@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -29,9 +30,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: SizedBox(
                   child: Column(
                     children: [
-                      const Text(
-                        'Racego Login',
-                        style: TextStyle(fontSize: 20),
+                      Text(
+                        AppLocalizations.of(context).sign_in_title,
+                        style: const TextStyle(fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
@@ -92,10 +93,12 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       decoration: InputDecoration(
-        errorText: _showEmailEmptyMessage ? 'Email ist leer' : null,
+        errorText: _showEmailEmptyMessage
+            ? AppLocalizations.of(context).email_empty
+            : null,
         border: const OutlineInputBorder(),
-        hintText: 'Email',
-        labelText: 'Email',
+        hintText: AppLocalizations.of(context).email,
+        labelText: AppLocalizations.of(context).email,
       ),
     );
   }
@@ -127,10 +130,12 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       decoration: InputDecoration(
-        errorText: _showPasswordEmptyMessage ? 'Passwort ist leer' : null,
+        errorText: _showPasswordEmptyMessage
+            ? AppLocalizations.of(context).password_empty
+            : null,
         border: const OutlineInputBorder(),
-        hintText: 'Passwort',
-        labelText: 'Passwort',
+        hintText: AppLocalizations.of(context).password,
+        labelText: AppLocalizations.of(context).password,
       ),
     );
   }
@@ -145,9 +150,9 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               SizedBox(
                 child: ColoredButton(
-                  const Text(
-                    'Anmelden',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context).sign_in,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -178,9 +183,9 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ColoredButton(
-                    const Text(
-                      'Anmelden',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context).sign_in,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
