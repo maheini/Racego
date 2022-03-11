@@ -2,6 +2,8 @@
     "language": "Deutsch",
     "save": "Speichern",
     "cancel": "Abbrechen",
+    "retry": "Neu versuchen",
+    "ok_flat": "OK",
     "back": "Back",
     "sign_in_title": "Racego login",
     "sign_in": "Login",
@@ -21,5 +23,9 @@
     "laps": "Runden",
     "id": "ID",
     "first_name": "Vorname",
-    "last_name": "Nachname"
+    "last_name": "Nachname",
+
+    "sync_errormessage": "Error: Synchronization interrupted!",
+    "unknown_error": "Unbekannter Fehler",
+    "loading_user_error": "Fehler beim laden des Benutzers."
 }

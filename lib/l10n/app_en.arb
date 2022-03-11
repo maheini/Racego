@@ -11,6 +11,14 @@
     "@language":{
         "description": "Display text for cancelling changes"
     },
+    "retry": "Try again",
+    "@language":{
+        "description": "Try again text"
+    },
+    "ok_flat": "OK",
+    "@language":{
+        "description": "ok label for flat buttons"
+    },
     "back": "Back",
     "@language":{
         "description": "Display text for going back"
@@ -89,6 +97,20 @@
     },
     "last_name": "Last Name",
     "@language":{
-        "description": "How the first name is called"
+        "description": "How the last name is called"
+    },
+
+    
+    "sync_errormessage": "Error: Synchronization interrupted!",
+    "@language":{
+        "description": "Warning message if synchronization is interrupted"
+    },
+    "unknown_error": "Unbekannter Fehler",
+    "@language":{
+        "description": "Error message for unknown errors"
+    },
+    "loading_user_error": "Error loading the user.",
+    "@language":{
+        "description": "Error message if user couldn't be loaded"
     }
 }
