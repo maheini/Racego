@@ -11,9 +11,45 @@
     "@language":{
         "description": "Display text for cancelling changes"
     },
+    "back": "Back",
+    "@language":{
+        "description": "Display text for going back"
+    },
+    "sign_in_title": "Racego login",
+    "@language":{
+        "description": "Login title text"
+    },
+    "sign_in": "Login",
+    "@language":{
+        "description": "Login button text"
+    },
+    "email": "Email",
+    "@language":{
+        "description": "Email name"
+    },
+    "email_empty": "Email is empty",
+    "@language":{
+        "description": "Email is empty message"
+    },
+    "password": "Password",
+    "@language":{
+        "description": "Password name"
+    },
+    "password_empty": "Password is empty",
+    "@language":{
+        "description": "Password is empty message"
+    },
     "welcome": "Welcome back",
     "@language":{
         "description": "Welcome message"
+    },
+    "session_expired": "Session expired",
+    "@language":{
+        "description": "Message if session expires"
+    },
+    "session_expired_details": "Your session has expired. Please log in again.",
+    "@language":{
+        "description": "Detailed message if session expires"
     },
     "edit_user": "Edit User",
     "@language":{
