@@ -202,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           );
         } else {
-          return const Text('Unbekannter Fehler');
+          return Text(AppLocalizations.of(context).unknown_error);
         }
       },
     );

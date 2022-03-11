@@ -100,7 +100,7 @@ class _LapsEditorState extends State<LapsEditor> {
             ),
           );
         } else {
-          return const Text('Unbekannter Fehler');
+          return Text(AppLocalizations.of(context).unknown_error);
         }
       },
     );

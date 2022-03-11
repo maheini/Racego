@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, state) {
                 if (state is listcubit.Error && state.syncError) {
                   return _processHardError(
-                      'Fehler: Synchronisation unterbrochen!');
+                      AppLocalizations.of(context).sync_errormessage);
                 } else {
                   return BlocBuilder<trackcubit.TracklistCubit,
                       trackcubit.TracklistState>(
@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context, state) {
                       if (state is trackcubit.Error && state.syncError) {
                         return _processHardError(
-                            'Fehler: Synchronisation unterbrochen!');
+                            AppLocalizations.of(context).sync_errormessage);
                       } else {
                         return const SizedBox();
                       }
@@ -407,7 +407,7 @@ class _HomeScreenState extends State<HomeScreen> {
         duration: const Duration(seconds: 5),
         content: Text(exception.errorMessage),
         action: SnackBarAction(
-          label: 'OK',
+          label: AppLocalizations.of(context).ok_flat,
           onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
         ),
       ),

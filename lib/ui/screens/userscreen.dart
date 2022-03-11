@@ -82,9 +82,9 @@ class _UserScreenState extends State<UserScreen> {
                   duration: const Duration(seconds: 5),
                   content: Text(exception != null
                       ? exception.errorMessage
-                      : 'Unbekannter Fehler'),
+                      : AppLocalizations.of(context).unknown_error),
                   action: SnackBarAction(
-                    label: 'OK',
+                    label: AppLocalizations.of(context).ok_flat,
                     onPressed: () =>
                         ScaffoldMessenger.of(context).hideCurrentSnackBar(),
                   ),
@@ -213,12 +213,12 @@ class _UserScreenState extends State<UserScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Fehler beim Laden des Benutzers. Neu versuchen?'),
+                Text(AppLocalizations.of(context).loading_user_error),
                 const SizedBox(height: 20),
                 ColoredButton(
-                  const Text(
-                    'Neu versuchen',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context).retry,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
