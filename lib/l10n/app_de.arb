@@ -1,3 +1,16 @@
 {
-    "language": "Deutsch"
+    "language": "Deutsch",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "welcome": "Willkommen zurück",
+    "edit_user": "Benutzer bearbeiten",
+    "search_hint": "Suchen...",
+    "create_class_hint": "Klasse erstellen...",
+    "race_track": "Rennstrecke",
+    "participants": "Teilnehmer",
+    "race_classes": "Rennklassen",
+    "laps": "Runden",
+    "id": "ID",
+    "first_name": "Vorname",
+    "last_name": "Nachname"
 }
