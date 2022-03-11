@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
-import 'package:racego/l10n/l10n.dart';
 import 'package:racego/ui/screens/homescreen.dart';
 import 'package:racego/ui/screens/userscreen.dart';
 import 'ui/screens/loginscreen.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/provider/provider.dart';
 import 'package:window_size/window_size.dart';
 import 'dart:io';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ class Racego extends StatelessWidget {
   Racego({Key? key}) : super(key: key);
 
   final ThemeData _darkMode = ThemeData(
-    iconTheme: IconThemeData(color: Colors.white),
+    iconTheme: const IconThemeData(color: Colors.white),
     // background color
     scaffoldBackgroundColor: Colors.grey.shade900,
     // background for all material widgets
@@ -129,8 +129,8 @@ class Racego extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: L10n.delegates,
-      supportedLocales: L10n.supportedLanguages,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
           if (context.read<LoginBloc>().state is LoggedIn) {
