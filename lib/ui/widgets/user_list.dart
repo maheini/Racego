@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/models/user.dart';
 import '../../business_logic/widgets/list_selection_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserList extends StatefulWidget {
   const UserList(List<User> userList,
@@ -85,40 +86,40 @@ class _UserListState extends State<UserList> {
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: Row(
-        children: const [
+        children: [
           Expanded(
             flex: 1,
             child: Text(
-              'ID',
+              AppLocalizations.of(context).id,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Expanded(
             flex: 3,
             child: Text(
-              'Vorname',
+              AppLocalizations.of(context).first_name,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Expanded(
             flex: 3,
             child: Text(
-              'Nachname',
+              AppLocalizations.of(context).last_name,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Expanded(
             flex: 1,
             child: Text(
-              'Runden',
+              AppLocalizations.of(context).laps,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -137,7 +138,7 @@ class _UserListState extends State<UserList> {
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 15),
               decoration: InputDecoration(
-                hintText: 'Suchen...',
+                hintText: AppLocalizations.of(context).search_hint,
                 suffix: IconButton(
                   icon: const Icon(
                     Icons.clear,

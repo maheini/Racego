@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/selectablelist_cubit/selectablelist_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectableList extends StatefulWidget {
   const SelectableList(
@@ -57,7 +58,8 @@ class _SelectableListState extends State<SelectableList> {
           bloc: _cubit,
           builder: (index, state) {
             return Text(
-              'Rennklassen: ${_cubit.selection.length}',
+              AppLocalizations.of(context).race_classes +
+                  ': ${_cubit.selection.length}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 20,
@@ -166,7 +168,7 @@ class _SelectableListState extends State<SelectableList> {
             child: TextField(
               style: const TextStyle(fontSize: 15),
               decoration: InputDecoration(
-                hintText: 'Klassen erstellen...',
+                hintText: AppLocalizations.of(context).create_class_hint,
                 suffix: IconButton(
                   icon: const Icon(
                     Icons.clear,

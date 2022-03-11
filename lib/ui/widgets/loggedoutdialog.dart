@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> loggedOutDialog(BuildContext context) async {
   return showDialog<void>(
@@ -6,17 +7,17 @@ Future<void> loggedOutDialog(BuildContext context) async {
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Sitzung abgelaufen'),
+        title: Text(AppLocalizations.of(context).session_expired),
         content: SingleChildScrollView(
           child: ListBody(
-            children: const <Widget>[
-              Text('Ihre Sitzung ist abgelaufen. Bitte melden Sie sich neu an.')
+            children: <Widget>[
+              Text(AppLocalizations.of(context).session_expired_details)
             ],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('Anmelden'),
+            child: Text(AppLocalizations.of(context).sign_in),
             onPressed: () {
               Navigator.of(context).pop();
             },
