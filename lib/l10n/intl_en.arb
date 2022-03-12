@@ -4,113 +4,113 @@
         "description": "The current language"
     },
     "save": "Save",
-    "@language":{
+    "@save":{
         "description": "Display text for storing changes"
     },
     "cancel": "Cancel",
-    "@language":{
+    "@cancel":{
         "description": "Display text for cancelling changes"
     },
     "retry": "Try again",
-    "@language":{
+    "@retry":{
         "description": "Try again text"
     },
     "ok_flat": "OK",
-    "@language":{
+    "@ok_flat":{
         "description": "ok label for flat buttons"
     },
     "back": "Back",
-    "@language":{
+    "@back":{
         "description": "Display text for going back"
     },
     "sign_in_title": "Racego login",
-    "@language":{
+    "@sign_in_title":{
         "description": "Login title text"
     },
     "sign_in": "Login",
-    "@language":{
+    "@sign_in":{
         "description": "Login button text"
     },
     "email": "Email",
-    "@language":{
+    "@email":{
         "description": "Email name"
     },
     "email_empty": "Email is empty",
-    "@language":{
+    "@email_empty":{
         "description": "Email is empty message"
     },
     "password": "Password",
-    "@language":{
+    "@password":{
         "description": "Password name"
     },
     "password_empty": "Password is empty",
-    "@language":{
+    "@password_empty":{
         "description": "Password is empty message"
     },
     "welcome": "Welcome back",
-    "@language":{
+    "@welcome":{
         "description": "Welcome message"
     },
     "session_expired": "Session expired",
-    "@language":{
+    "@session_expired":{
         "description": "Message if session expires"
     },
     "session_expired_details": "Your session has expired. Please log in again.",
-    "@language":{
+    "@session_expired_details":{
         "description": "Detailed message if session expires"
     },
     "edit_user": "Edit User",
-    "@language":{
+    "@edit_user":{
         "description": "Edit user title"
     },
     "search_hint": "Search...",
-    "@language":{
+    "@search_hint":{
         "description": "Hint text which is displayed for search bars"
     },
     "create_class_hint": "Create Class...",
-    "@language":{
+    "@create_class_hint":{
         "description": "Hint text which is displayed for create class bars"
     },
     "race_track": "Race Track",
-    "@language":{
+    "@race_track":{
         "description": "How a race track is called"
     },
     "participants": "Participants",
-    "@language":{
+    "@participants":{
         "description": "How the participants are beeing called"
     },
     "race_classes": "Race Classes",
-    "@language":{
+    "@race_classes":{
         "description": "How race classes are called"
     },
     "laps": "Laps",
-    "@language":{
+    "@laps":{
         "description": "How laps are called"
     },
     "id": "ID",
-    "@language":{
+    "@id":{
         "description": "Name of an ID"
     },
     "first_name": "First Name",
-    "@language":{
+    "@first_name":{
         "description": "How the first name is called"
     },
     "last_name": "Last Name",
-    "@language":{
+    "@last_name":{
         "description": "How the last name is called"
     },
 
     
     "sync_errormessage": "Error: Synchronization interrupted!",
-    "@language":{
+    "@sync_errormessage":{
         "description": "Warning message if synchronization is interrupted"
     },
     "unknown_error": "Unbekannter Fehler",
-    "@language":{
+    "@unknown_error":{
         "description": "Error message for unknown errors"
     },
     "loading_user_error": "Error loading the user.",
-    "@language":{
+    "@loading_user_error":{
         "description": "Error message if user couldn't be loaded"
     }
 }

@@ -55,7 +55,7 @@ class S {
     return Intl.message(
       'English',
       name: 'language',
-      desc: 'Error message if user couldn\'t be loaded',
+      desc: 'The current language',
       args: [],
     );
   }
@@ -65,7 +65,7 @@ class S {
     return Intl.message(
       'Save',
       name: 'save',
-      desc: '',
+      desc: 'Display text for storing changes',
       args: [],
     );
   }
@@ -75,7 +75,7 @@ class S {
     return Intl.message(
       'Cancel',
       name: 'cancel',
-      desc: '',
+      desc: 'Display text for cancelling changes',
       args: [],
     );
   }
@@ -85,7 +85,7 @@ class S {
     return Intl.message(
       'Try again',
       name: 'retry',
-      desc: '',
+      desc: 'Try again text',
       args: [],
     );
   }
@@ -95,7 +95,7 @@ class S {
     return Intl.message(
       'OK',
       name: 'ok_flat',
-      desc: '',
+      desc: 'ok label for flat buttons',
       args: [],
     );
   }
@@ -105,7 +105,7 @@ class S {
     return Intl.message(
       'Back',
       name: 'back',
-      desc: '',
+      desc: 'Display text for going back',
       args: [],
     );
   }
@@ -115,7 +115,7 @@ class S {
     return Intl.message(
       'Racego login',
       name: 'sign_in_title',
-      desc: '',
+      desc: 'Login title text',
       args: [],
     );
   }
@@ -125,7 +125,7 @@ class S {
     return Intl.message(
       'Login',
       name: 'sign_in',
-      desc: '',
+      desc: 'Login button text',
       args: [],
     );
   }
@@ -135,7 +135,7 @@ class S {
     return Intl.message(
       'Email',
       name: 'email',
-      desc: '',
+      desc: 'Email name',
       args: [],
     );
   }
@@ -145,7 +145,7 @@ class S {
     return Intl.message(
       'Email is empty',
       name: 'email_empty',
-      desc: '',
+      desc: 'Email is empty message',
       args: [],
     );
   }
@@ -155,7 +155,7 @@ class S {
     return Intl.message(
       'Password',
       name: 'password',
-      desc: '',
+      desc: 'Password name',
       args: [],
     );
   }
@@ -165,7 +165,7 @@ class S {
     return Intl.message(
       'Password is empty',
       name: 'password_empty',
-      desc: '',
+      desc: 'Password is empty message',
       args: [],
     );
   }
@@ -175,7 +175,7 @@ class S {
     return Intl.message(
       'Welcome back',
       name: 'welcome',
-      desc: '',
+      desc: 'Welcome message',
       args: [],
     );
   }
@@ -185,7 +185,7 @@ class S {
     return Intl.message(
       'Session expired',
       name: 'session_expired',
-      desc: '',
+      desc: 'Message if session expires',
       args: [],
     );
   }
@@ -195,7 +195,7 @@ class S {
     return Intl.message(
       'Your session has expired. Please log in again.',
       name: 'session_expired_details',
-      desc: '',
+      desc: 'Detailed message if session expires',
       args: [],
     );
   }
@@ -205,7 +205,7 @@ class S {
     return Intl.message(
       'Edit User',
       name: 'edit_user',
-      desc: '',
+      desc: 'Edit user title',
       args: [],
     );
   }
@@ -215,7 +215,7 @@ class S {
     return Intl.message(
       'Search...',
       name: 'search_hint',
-      desc: '',
+      desc: 'Hint text which is displayed for search bars',
       args: [],
     );
   }
@@ -225,7 +225,7 @@ class S {
     return Intl.message(
       'Create Class...',
       name: 'create_class_hint',
-      desc: '',
+      desc: 'Hint text which is displayed for create class bars',
       args: [],
     );
   }
@@ -235,7 +235,7 @@ class S {
     return Intl.message(
       'Race Track',
       name: 'race_track',
-      desc: '',
+      desc: 'How a race track is called',
       args: [],
     );
   }
@@ -245,7 +245,7 @@ class S {
     return Intl.message(
       'Participants',
       name: 'participants',
-      desc: '',
+      desc: 'How the participants are beeing called',
       args: [],
     );
   }
@@ -255,7 +255,7 @@ class S {
     return Intl.message(
       'Race Classes',
       name: 'race_classes',
-      desc: '',
+      desc: 'How race classes are called',
       args: [],
     );
   }
@@ -265,7 +265,7 @@ class S {
     return Intl.message(
       'Laps',
       name: 'laps',
-      desc: '',
+      desc: 'How laps are called',
       args: [],
     );
   }
@@ -275,7 +275,7 @@ class S {
     return Intl.message(
       'ID',
       name: 'id',
-      desc: '',
+      desc: 'Name of an ID',
       args: [],
     );
   }
@@ -285,7 +285,7 @@ class S {
     return Intl.message(
       'First Name',
       name: 'first_name',
-      desc: '',
+      desc: 'How the first name is called',
       args: [],
     );
   }
@@ -295,7 +295,7 @@ class S {
     return Intl.message(
       'Last Name',
       name: 'last_name',
-      desc: '',
+      desc: 'How the last name is called',
       args: [],
     );
   }
@@ -305,7 +305,7 @@ class S {
     return Intl.message(
       'Error: Synchronization interrupted!',
       name: 'sync_errormessage',
-      desc: '',
+      desc: 'Warning message if synchronization is interrupted',
       args: [],
     );
   }
@@ -315,7 +315,7 @@ class S {
     return Intl.message(
       'Unbekannter Fehler',
       name: 'unknown_error',
-      desc: '',
+      desc: 'Error message for unknown errors',
       args: [],
     );
   }
@@ -325,7 +325,7 @@ class S {
     return Intl.message(
       'Error loading the user.',
       name: 'loading_user_error',
-      desc: '',
+      desc: 'Error message if user couldn\'t be loaded',
       args: [],
     );
   }
