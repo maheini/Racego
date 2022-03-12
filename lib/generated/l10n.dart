@@ -130,6 +130,16 @@ class S {
     );
   }
 
+  /// `Please login again`
+  String get retry_login {
+    return Intl.message(
+      'Please login again',
+      name: 'retry_login',
+      desc: 'Try login again text',
+      args: [],
+    );
+  }
+
   /// `Email`
   String get email {
     return Intl.message(
@@ -166,6 +176,16 @@ class S {
       'Password is empty',
       name: 'password_empty',
       desc: 'Password is empty message',
+      args: [],
+    );
+  }
+
+  /// `Incorrect username or password.`
+  String get login_invalid {
+    return Intl.message(
+      'Incorrect username or password.',
+      name: 'login_invalid',
+      desc: 'Email or Password is incorrrect',
       args: [],
     );
   }

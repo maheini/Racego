@@ -36,6 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
         "loading_user_error":
             MessageLookupByLibrary.simpleMessage("Error loading the user."),
+        "login_invalid": MessageLookupByLibrary.simpleMessage(
+            "Incorrect username or password."),
         "ok_flat": MessageLookupByLibrary.simpleMessage("OK"),
         "participants": MessageLookupByLibrary.simpleMessage("Participants"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -44,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "race_classes": MessageLookupByLibrary.simpleMessage("Race Classes"),
         "race_track": MessageLookupByLibrary.simpleMessage("Race Track"),
         "retry": MessageLookupByLibrary.simpleMessage("Try again"),
+        "retry_login":
+            MessageLookupByLibrary.simpleMessage("Please login again"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search_hint": MessageLookupByLibrary.simpleMessage("Search..."),
         "session_expired":

@@ -1,4 +1,5 @@
 {
+    "@@locale": "de",
     "language": "Deutsch",
     "save": "Speichern",
     "cancel": "Abbrechen",
@@ -7,10 +8,12 @@
     "back": "Zurück",
     "sign_in_title": "Racego login",
     "sign_in": "Login",
+    "retry_login": "Bitte melden Sie sich erneut an.",
     "email": "Email",
     "email_empty": "Email is empty",
     "password": "Password",
     "password_empty": "Password is empty",
+    "login_invalid": "Ungültiger Benutzername oder Passwort.",
     "welcome": "Willkommen zurück",
     "session_expired": "Sitzung abgelaufen",
     "session_expired_details": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich neu an.",

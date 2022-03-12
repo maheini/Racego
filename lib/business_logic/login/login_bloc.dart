@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/exceptions/racego_exception.dart';
+import 'package:racego/generated/l10n.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -24,7 +25,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoggedOut());
       }
     } on RacegoException catch (_) {
-      emit(LoginError('Melden Sie sich erneut an'));
+      emit(LoginError(S.current.retry_login));
     }
   }
 
@@ -35,7 +36,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (isLoggedIn) {
         emit(LoggedIn(username: _api.username));
       } else {
-        emit(LoginError('Email oder Passwort ist ungültig'));
+        emit(LoginError(S.current.login_invalid));
       }
     } on RacegoException catch (racegoException) {
       emit(LoginError(racegoException.errorMessage));

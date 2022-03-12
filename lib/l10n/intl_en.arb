@@ -1,4 +1,5 @@
 {
+    "@@locale": "en",
     "language": "English",
     "@language":{
         "description": "The current language"
@@ -31,6 +32,10 @@
     "@sign_in":{
         "description": "Login button text"
     },
+    "retry_login": "Please login again",
+    "@retry_login":{
+        "description": "Try login again text"
+    },
     "email": "Email",
     "@email":{
         "description": "Email name"
@@ -46,6 +51,10 @@
     "password_empty": "Password is empty",
     "@password_empty":{
         "description": "Password is empty message"
+    },
+    "login_invalid": "Incorrect username or password.",
+    "@login_invalid":{
+        "description": "Email or Password is incorrrect"
     },
     "welcome": "Welcome back",
     "@welcome":{
