@@ -1,6 +1,6 @@
 {
     "@@locale": "en",
-    "________GENERAL________":{},
+    "@________GENERAL________":{},
     "language": "English",
     "@language":{
         "description": "The current language"
@@ -25,7 +25,7 @@
     "@back":{
         "description": "Display text for going back"
     },
-    "________RACEGO_SPECIFIC________":{},
+    "@________RACEGO_SPECIFIC________":{},
     "race_track": "Race Track",
     "@race_track":{
         "description": "How a race track is called"
@@ -54,7 +54,7 @@
     "@last_name":{
         "description": "How the last name is called"
     },
-    "________LOGIN_SCREEN________":{},
+    "@________LOGIN_SCREEN________":{},
     "sign_in_title": "Racego login",
     "@sign_in_title":{
         "description": "Login title text"
@@ -99,12 +99,12 @@
     "@session_expired_details":{
         "description": "Detailed message if session expires"
     },
-    "________HOME_SCREEN________":{},
+    "@________HOME_SCREEN________":{},
     "search_hint": "Search...",
     "@search_hint":{
         "description": "Hint text which is displayed for search bars"
     },
-    "________USER_SCREEN________":{},
+    "@________USER_SCREEN________":{},
     "edit_user": "Edit User",
     "@edit_user":{
         "description": "Edit user title"
@@ -113,7 +113,7 @@
     "@create_class_hint":{
         "description": "Hint text which is displayed for create class bars"
     },
-    "________ERROR_MESSAGES________":{},
+    "@________ERROR_MESSAGES________":{},
     "sync_errormessage": "Error: Synchronization interrupted!",
     "@sync_errormessage":{
         "description": "Warning message if synchronization is interrupted"
@@ -125,5 +125,5 @@
     "loading_user_error": "Error loading the user.",
     "@loading_user_error":{
         "description": "Error message if user couldn't be loaded"
-    }    
+    }
 }

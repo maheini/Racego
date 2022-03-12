@@ -5,6 +5,8 @@ import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/user.dart';
 
+import '../../generated/l10n.dart';
+
 part 'tracklist_state.dart';
 
 class TracklistCubit extends Cubit<TracklistState> {
@@ -52,7 +54,7 @@ class TracklistCubit extends Cubit<TracklistState> {
         ));
       } else {
         UnknownException error = UnknownException(
-            'Unbekannter Fehler', e.toString(), e.runtimeType.toString());
+            S.current.unknown_error, e.toString(), e.runtimeType.toString());
         emit(Error(
           error,
           _filter.isNotEmpty ? _filterList(_newestList, _filter) : _newestList,
@@ -81,8 +83,7 @@ class TracklistCubit extends Cubit<TracklistState> {
     try {
       bool successful = await _api.cancelLap(userId);
       if (!successful) {
-        throw DataException(
-            'Benutzer konnte nicht von der Rennstrecke entfernt werden: Id ungültig.');
+        throw DataException(S.current.failed_removing_user_invalid_id);
       }
       reload();
     } catch (e) {

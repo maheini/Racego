@@ -110,6 +110,76 @@ class S {
     );
   }
 
+  /// `Race Track`
+  String get race_track {
+    return Intl.message(
+      'Race Track',
+      name: 'race_track',
+      desc: 'How a race track is called',
+      args: [],
+    );
+  }
+
+  /// `Participants`
+  String get participants {
+    return Intl.message(
+      'Participants',
+      name: 'participants',
+      desc: 'How the participants are beeing called',
+      args: [],
+    );
+  }
+
+  /// `Race Classes`
+  String get race_classes {
+    return Intl.message(
+      'Race Classes',
+      name: 'race_classes',
+      desc: 'How race classes are called',
+      args: [],
+    );
+  }
+
+  /// `Laps`
+  String get laps {
+    return Intl.message(
+      'Laps',
+      name: 'laps',
+      desc: 'How laps are called',
+      args: [],
+    );
+  }
+
+  /// `ID`
+  String get id {
+    return Intl.message(
+      'ID',
+      name: 'id',
+      desc: 'Name of an ID',
+      args: [],
+    );
+  }
+
+  /// `First Name`
+  String get first_name {
+    return Intl.message(
+      'First Name',
+      name: 'first_name',
+      desc: 'How the first name is called',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get last_name {
+    return Intl.message(
+      'Last Name',
+      name: 'last_name',
+      desc: 'How the last name is called',
+      args: [],
+    );
+  }
+
   /// `Racego login`
   String get sign_in_title {
     return Intl.message(
@@ -220,16 +290,6 @@ class S {
     );
   }
 
-  /// `Edit User`
-  String get edit_user {
-    return Intl.message(
-      'Edit User',
-      name: 'edit_user',
-      desc: 'Edit user title',
-      args: [],
-    );
-  }
-
   /// `Search...`
   String get search_hint {
     return Intl.message(
@@ -240,82 +300,22 @@ class S {
     );
   }
 
+  /// `Edit User`
+  String get edit_user {
+    return Intl.message(
+      'Edit User',
+      name: 'edit_user',
+      desc: 'Edit user title',
+      args: [],
+    );
+  }
+
   /// `Create Class...`
   String get create_class_hint {
     return Intl.message(
       'Create Class...',
       name: 'create_class_hint',
       desc: 'Hint text which is displayed for create class bars',
-      args: [],
-    );
-  }
-
-  /// `Race Track`
-  String get race_track {
-    return Intl.message(
-      'Race Track',
-      name: 'race_track',
-      desc: 'How a race track is called',
-      args: [],
-    );
-  }
-
-  /// `Participants`
-  String get participants {
-    return Intl.message(
-      'Participants',
-      name: 'participants',
-      desc: 'How the participants are beeing called',
-      args: [],
-    );
-  }
-
-  /// `Race Classes`
-  String get race_classes {
-    return Intl.message(
-      'Race Classes',
-      name: 'race_classes',
-      desc: 'How race classes are called',
-      args: [],
-    );
-  }
-
-  /// `Laps`
-  String get laps {
-    return Intl.message(
-      'Laps',
-      name: 'laps',
-      desc: 'How laps are called',
-      args: [],
-    );
-  }
-
-  /// `ID`
-  String get id {
-    return Intl.message(
-      'ID',
-      name: 'id',
-      desc: 'Name of an ID',
-      args: [],
-    );
-  }
-
-  /// `First Name`
-  String get first_name {
-    return Intl.message(
-      'First Name',
-      name: 'first_name',
-      desc: 'How the first name is called',
-      args: [],
-    );
-  }
-
-  /// `Last Name`
-  String get last_name {
-    return Intl.message(
-      'Last Name',
-      name: 'last_name',
-      desc: 'How the last name is called',
       args: [],
     );
   }
