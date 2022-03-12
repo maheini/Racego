@@ -4,63 +4,63 @@
         "description": "The current language"
     },
     "save": "Save",
-    "@language":{
+    "@save":{
         "description": "Display text for storing changes"
     },
     "cancel": "Cancel",
-    "@language":{
+    "@cancel":{
         "description": "Display text for cancelling changes"
     },
     "retry": "Try again",
-    "@language":{
+    "@retry":{
         "description": "Try again text"
     },
     "ok_flat": "OK",
-    "@language":{
+    "@ok_flat":{
         "description": "ok label for flat buttons"
     },
     "back": "Back",
-    "@language":{
+    "@back":{
         "description": "Display text for going back"
     },
     "sign_in_title": "Racego login",
-    "@language":{
+    "@sign_in_title":{
         "description": "Login title text"
     },
     "sign_in": "Login",
-    "@language":{
+    "@sign_in":{
         "description": "Login button text"
     },
     "email": "Email",
-    "@language":{
+    "@email":{
         "description": "Email name"
     },
     "email_empty": "Email is empty",
-    "@language":{
+    "@email_empty":{
         "description": "Email is empty message"
     },
     "password": "Password",
-    "@language":{
+    "@password":{
         "description": "Password name"
     },
     "password_empty": "Password is empty",
-    "@language":{
+    "@password_empty":{
         "description": "Password is empty message"
     },
     "welcome": "Welcome back",
-    "@language":{
+    "@welcome":{
         "description": "Welcome message"
     },
     "session_expired": "Session expired",
-    "@language":{
+    "@session_expired":{
         "description": "Message if session expires"
     },
     "session_expired_details": "Your session has expired. Please log in again.",
-    "@language":{
+    "@session_expired_details":{
         "description": "Detailed message if session expires"
     },
     "edit_user": "Edit User",
-    "@language":{
+    "@edit_user":{
         "description": "Edit user title"
     },
     "search_hint": "Search...",
