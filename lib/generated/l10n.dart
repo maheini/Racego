@@ -351,10 +351,10 @@ class S {
   }
 
   /// `User could not be removed from the race track: ID invalid.`
-  String get failed_removing_user_invalid_id {
+  String get failed_cancelling_lap_invalid_id {
     return Intl.message(
       'User could not be removed from the race track: ID invalid.',
-      name: 'failed_removing_user_invalid_id',
+      name: 'failed_cancelling_lap_invalid_id',
       desc:
           'Error message if user couldn\'t be removed from track, because of invalid ID',
       args: [],
@@ -368,6 +368,27 @@ class S {
       name: 'failed_finishing_lap_invalid_id',
       desc:
           'Error message if lap could not be stored, because of invalid ID or lap-time',
+      args: [],
+    );
+  }
+
+  /// `User could not be removed: ID invalid.`
+  String get failed_removing_user_invalid_id {
+    return Intl.message(
+      'User could not be removed: ID invalid.',
+      name: 'failed_removing_user_invalid_id',
+      desc:
+          'Error message if user couldn\'t be removed -> because ID is invalid',
+      args: [],
+    );
+  }
+
+  /// `User could not be placed on the race track: ID invalid.`
+  String get failed_adding_user_on_track_invalid_id {
+    return Intl.message(
+      'User could not be placed on the race track: ID invalid.',
+      name: 'failed_adding_user_on_track_invalid_id',
+      desc: 'Error message if user couldn\'t be placed on the track',
       args: [],
     );
   }

@@ -4,6 +4,8 @@ import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:racego/data/models/user.dart';
 
+import '../../generated/l10n.dart';
+
 part 'userlist_state.dart';
 
 class UserlistCubit extends Cubit<UserlistState> {
@@ -51,7 +53,7 @@ class UserlistCubit extends Cubit<UserlistState> {
         ));
       } else {
         UnknownException error = UnknownException(
-            'Unbekannter Fehler', e.toString(), e.runtimeType.toString());
+            S.current.unknown_error, e.toString(), e.runtimeType.toString());
         emit(Error(
           error,
           _filter.isNotEmpty ? _filterList(_newestList, _filter) : _newestList,
@@ -67,8 +69,7 @@ class UserlistCubit extends Cubit<UserlistState> {
     try {
       bool successful = await _api.deleteUser(userId);
       if (!successful) {
-        throw DataException(
-            'Benutzer konnte nicht entfernt werden: Id ungültig.');
+        throw DataException(S.current.failed_removing_user_invalid_id);
       }
       reload();
     } catch (e) {
@@ -80,7 +81,7 @@ class UserlistCubit extends Cubit<UserlistState> {
                 : _newestList));
       } else {
         UnknownException error = UnknownException(
-            'Unbekannter Fehler', e.toString(), e.runtimeType.toString());
+            S.current.unknown_error, e.toString(), e.runtimeType.toString());
         emit(Error(
             error,
             _filter.isNotEmpty
@@ -96,8 +97,7 @@ class UserlistCubit extends Cubit<UserlistState> {
     try {
       bool successful = await _api.addOnTrack(userId);
       if (!successful) {
-        throw DataException(
-            'Benutzer konnte nicht auf die Rennstrecke gestellt werden: Id ungültig.');
+        throw DataException(S.current.failed_adding_user_on_track_invalid_id);
       }
       reload();
     } catch (e) {
@@ -109,7 +109,7 @@ class UserlistCubit extends Cubit<UserlistState> {
                 : _newestList));
       } else {
         UnknownException error = UnknownException(
-            'Unbekannter Fehler', e.toString(), e.runtimeType.toString());
+            S.current.unknown_error, e.toString(), e.runtimeType.toString());
         emit(Error(
             error,
             _filter.isNotEmpty

@@ -126,12 +126,21 @@
     "@loading_user_error":{
         "description": "Error message if user couldn't be loaded"
     },
-    "failed_removing_user_invalid_id": "User could not be removed from the race track: ID invalid.",
-    "@failed_removing_user_invalid_id":{
+    "failed_cancelling_lap_invalid_id": "User could not be removed from the race track: ID invalid.",
+    "@failed_cancelling_lap_invalid_id":{
         "description": "Error message if user couldn't be removed from track, because of invalid ID"
     },
     "failed_finishing_lap_invalid_id": "Lap time could not be recorded: ID or time invalid.",
     "@failed_finishing_lap_invalid_id":{
         "description": "Error message if lap could not be stored, because of invalid ID or lap-time"
+    },
+    "failed_removing_user_invalid_id": "User could not be removed: ID invalid.",
+    "@failed_removing_user_invalid_id":{
+        "description": "Error message if user couldn't be removed -> because ID is invalid"
+    },
+    "failed_adding_user_on_track_invalid_id": "User could not be placed on the race track: ID invalid.",
+    "@failed_adding_user_on_track_invalid_id":{
+        "description": "Error message if user couldn't be placed on the track"
     }
 }
+

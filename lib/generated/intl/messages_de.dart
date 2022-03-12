@@ -30,10 +30,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Benutzer bearbeiten"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_empty": MessageLookupByLibrary.simpleMessage("Email is empty"),
+        "failed_adding_user_on_track_invalid_id":
+            MessageLookupByLibrary.simpleMessage(
+                "Benutzer konnte nicht auf die Rennstrecke gestellt werden: ID ungültig."),
+        "failed_cancelling_lap_invalid_id": MessageLookupByLibrary.simpleMessage(
+            "Benutzer konnte nicht von der Rennstrecke entfernt werden: ID ungültig."),
         "failed_finishing_lap_invalid_id": MessageLookupByLibrary.simpleMessage(
             "Rundenzeit konnte nicht erfasst werden: Id oder Zeit ungültig."),
         "failed_removing_user_invalid_id": MessageLookupByLibrary.simpleMessage(
-            "Benutzer konnte nicht von der Rennstrecke entfernt werden: ID ungültig."),
+            "Benutzer konnte nicht entfernt werden: Id ungültig."),
         "first_name": MessageLookupByLibrary.simpleMessage("Vorname"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "language": MessageLookupByLibrary.simpleMessage("Deutsch"),

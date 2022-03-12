@@ -36,7 +36,8 @@
     "sync_errormessage": "Error: Synchronization interrupted!",
     "unknown_error": "Unbekannter Fehler",
     "loading_user_error": "Fehler beim laden des Benutzers.",
-    "failed_removing_user_invalid_id": "Benutzer konnte nicht von der Rennstrecke entfernt werden: ID ungültig.",
-    "failed_finishing_lap_invalid_id": "Rundenzeit konnte nicht erfasst werden: Id oder Zeit ungültig."
-
+    "failed_cancelling_lap_invalid_id": "Benutzer konnte nicht von der Rennstrecke entfernt werden: ID ungültig.",
+    "failed_finishing_lap_invalid_id": "Rundenzeit konnte nicht erfasst werden: Id oder Zeit ungültig.",
+    "failed_removing_user_invalid_id": "Benutzer konnte nicht entfernt werden: Id ungültig.",
+    "failed_adding_user_on_track_invalid_id": "Benutzer konnte nicht auf die Rennstrecke gestellt werden: ID ungültig."
 }
