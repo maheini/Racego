@@ -83,7 +83,7 @@ class TracklistCubit extends Cubit<TracklistState> {
     try {
       bool successful = await _api.cancelLap(userId);
       if (!successful) {
-        throw DataException(S.current.failed_removing_user_invalid_id);
+        throw DataException(S.current.failed_cancelling_lap_invalid_id);
       }
       reload();
     } catch (e) {
