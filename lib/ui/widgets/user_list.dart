@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/models/user.dart';
 import '../../business_logic/widgets/list_selection_cubit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:racego/generated/l10n.dart';
 
 class UserList extends StatefulWidget {
   const UserList(List<User> userList,
@@ -90,7 +90,7 @@ class _UserListState extends State<UserList> {
           Expanded(
             flex: 1,
             child: Text(
-              AppLocalizations.of(context).id,
+              S.current.id,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -99,7 +99,7 @@ class _UserListState extends State<UserList> {
           Expanded(
             flex: 3,
             child: Text(
-              AppLocalizations.of(context).first_name,
+              S.current.first_name,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -108,7 +108,7 @@ class _UserListState extends State<UserList> {
           Expanded(
             flex: 3,
             child: Text(
-              AppLocalizations.of(context).last_name,
+              S.current.last_name,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -117,7 +117,7 @@ class _UserListState extends State<UserList> {
           Expanded(
             flex: 1,
             child: Text(
-              AppLocalizations.of(context).laps,
+              S.current.laps,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -138,7 +138,7 @@ class _UserListState extends State<UserList> {
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 15),
               decoration: InputDecoration(
-                hintText: AppLocalizations.of(context).search_hint,
+                hintText: S.current.search_hint,
                 suffix: IconButton(
                   icon: const Icon(
                     Icons.clear,

@@ -4,7 +4,7 @@ import 'package:racego/business_logic/lapeditor_cubit/lapeditor_cubit.dart';
 import 'package:racego/data/models/time.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:racego/generated/l10n.dart';
 
 class LapsEditor extends StatefulWidget {
   const LapsEditor(this.laps, {Key? key}) : super(key: key);
@@ -55,7 +55,7 @@ class _LapsEditorState extends State<LapsEditor> {
         buildWhen: (previous, current) => current is LapsChanged,
         builder: (index, state) {
           return Text(
-            AppLocalizations.of(context).laps + ': ${_cubit.laps.length}',
+            S.current.laps + ': ${_cubit.laps.length}',
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 20,
@@ -100,7 +100,7 @@ class _LapsEditorState extends State<LapsEditor> {
             ),
           );
         } else {
-          return Text(AppLocalizations.of(context).unknown_error);
+          return Text(S.current.unknown_error);
         }
       },
     );

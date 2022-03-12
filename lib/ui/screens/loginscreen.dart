@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:racego/generated/l10n.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       Text(
-                        AppLocalizations.of(context).sign_in_title,
+                        S.current.sign_in_title,
                         style: const TextStyle(fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
@@ -93,12 +93,10 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       decoration: InputDecoration(
-        errorText: _showEmailEmptyMessage
-            ? AppLocalizations.of(context).email_empty
-            : null,
+        errorText: _showEmailEmptyMessage ? S.current.email_empty : null,
         border: const OutlineInputBorder(),
-        hintText: AppLocalizations.of(context).email,
-        labelText: AppLocalizations.of(context).email,
+        hintText: S.current.email,
+        labelText: S.current.email,
       ),
     );
   }
@@ -130,12 +128,10 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       decoration: InputDecoration(
-        errorText: _showPasswordEmptyMessage
-            ? AppLocalizations.of(context).password_empty
-            : null,
+        errorText: _showPasswordEmptyMessage ? S.current.password_empty : null,
         border: const OutlineInputBorder(),
-        hintText: AppLocalizations.of(context).password,
-        labelText: AppLocalizations.of(context).password,
+        hintText: S.current.password,
+        labelText: S.current.password,
       ),
     );
   }
@@ -151,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 child: ColoredButton(
                   Text(
-                    AppLocalizations.of(context).sign_in,
+                    S.current.sign_in,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
@@ -184,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   ColoredButton(
                     Text(
-                      AppLocalizations.of(context).sign_in,
+                      S.current.sign_in,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
@@ -202,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           );
         } else {
-          return Text(AppLocalizations.of(context).unknown_error);
+          return Text(S.current.unknown_error);
         }
       },
     );

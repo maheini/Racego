@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/ui/screens/homescreen.dart';
 import 'package:racego/ui/screens/userscreen.dart';
@@ -7,15 +8,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/provider/provider.dart';
 import 'package:window_size/window_size.dart';
 import 'dart:io';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:racego/generated/l10n.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('Racego');
-    // setWindowMaxSize(const Size(max_width, max_height));
-    setWindowMinSize(const Size(950, 650));
-  }
+  // if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+  //   setWindowTitle('Racego');
+  //   // setWindowMaxSize(const Size(max_width, max_height));
+  //   setWindowMinSize(const Size(950, 650));
+  // }
   runApp(
     setupProvider(child: Racego()),
   );
@@ -129,8 +130,13 @@ class Racego extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       onGenerateRoute: (settings) {
         if (settings.name == '/') {
           if (context.read<LoginBloc>().state is LoggedIn) {
@@ -150,6 +156,9 @@ class Racego extends StatelessWidget {
           }
         }
         return null; // Let `onUnknownRoute` handle this behavior.
+      },
+      builder: (context, child) {
+        return child!;
       },
       theme: _lightMode,
       darkTheme: _darkMode,
