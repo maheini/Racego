@@ -349,6 +349,28 @@ class S {
       args: [],
     );
   }
+
+  /// `User could not be removed from the race track: ID invalid.`
+  String get failed_removing_user_invalid_id {
+    return Intl.message(
+      'User could not be removed from the race track: ID invalid.',
+      name: 'failed_removing_user_invalid_id',
+      desc:
+          'Error message if user couldn\'t be removed from track, because of invalid ID',
+      args: [],
+    );
+  }
+
+  /// `Lap time could not be recorded: ID or time invalid.`
+  String get failed_finishing_lap_invalid_id {
+    return Intl.message(
+      'Lap time could not be recorded: ID or time invalid.',
+      name: 'failed_finishing_lap_invalid_id',
+      desc:
+          'Error message if lap could not be stored, because of invalid ID or lap-time',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

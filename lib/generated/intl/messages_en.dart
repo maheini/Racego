@@ -29,6 +29,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_user": MessageLookupByLibrary.simpleMessage("Edit User"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_empty": MessageLookupByLibrary.simpleMessage("Email is empty"),
+        "failed_finishing_lap_invalid_id": MessageLookupByLibrary.simpleMessage(
+            "Lap time could not be recorded: ID or time invalid."),
+        "failed_removing_user_invalid_id": MessageLookupByLibrary.simpleMessage(
+            "User could not be removed from the race track: ID invalid."),
         "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "language": MessageLookupByLibrary.simpleMessage("English"),
