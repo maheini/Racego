@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/provider/provider.dart';
 import 'package:window_size/window_size.dart';
 import 'dart:io';
+<<<<<<< HEAD
 import 'package:racego/generated/l10n.dart';
 
 void main() {
@@ -17,6 +18,18 @@ void main() {
   //   // setWindowMaxSize(const Size(max_width, max_height));
   //   setWindowMinSize(const Size(950, 650));
   // }
+=======
+import 'package:flutter/foundation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
+    setWindowTitle('Racego');
+    // setWindowMaxSize(const Size(max_width, max_height));
+    setWindowMinSize(const Size(950, 650));
+  }
+>>>>>>> dev
   runApp(
     setupProvider(child: Racego()),
   );
