@@ -9,7 +9,7 @@ import 'package:racego/data/models/userdetails.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/lapseditor.dart';
 import 'package:racego/ui/widgets/loggedoutdialog.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:racego/generated/l10n.dart';
 
 import '../widgets/selectablelist.dart';
 
@@ -82,9 +82,9 @@ class _UserScreenState extends State<UserScreen> {
                   duration: const Duration(seconds: 5),
                   content: Text(exception != null
                       ? exception.errorMessage
-                      : AppLocalizations.of(context).unknown_error),
+                      : S.current.unknown_error),
                   action: SnackBarAction(
-                    label: AppLocalizations.of(context).ok_flat,
+                    label: S.current.ok_flat,
                     onPressed: () =>
                         ScaffoldMessenger.of(context).hideCurrentSnackBar(),
                   ),
@@ -102,7 +102,7 @@ class _UserScreenState extends State<UserScreen> {
           ),
           automaticallyImplyLeading: false,
           title: Text(
-            AppLocalizations.of(context).edit_user,
+            S.current.edit_user,
           ),
           centerTitle: true,
         ),
@@ -142,7 +142,7 @@ class _UserScreenState extends State<UserScreen> {
 
                 return ColoredButton(
                   Text(
-                    AppLocalizations.of(context).save,
+                    S.current.save,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
@@ -169,7 +169,7 @@ class _UserScreenState extends State<UserScreen> {
             const SizedBox(width: 20),
             ColoredButton(
               Text(
-                AppLocalizations.of(context).back,
+                S.current.back,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 17,
@@ -213,11 +213,11 @@ class _UserScreenState extends State<UserScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(AppLocalizations.of(context).loading_user_error),
+                Text(S.current.loading_user_error),
                 const SizedBox(height: 20),
                 ColoredButton(
                   Text(
-                    AppLocalizations.of(context).retry,
+                    S.current.retry,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
@@ -257,13 +257,13 @@ class _UserScreenState extends State<UserScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextField(
-                      decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context).first_name),
+                      decoration:
+                          InputDecoration(hintText: S.current.first_name),
                       controller: _firstName,
                     ),
                     TextField(
-                      decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context).last_name),
+                      decoration:
+                          InputDecoration(hintText: S.current.last_name),
                       controller: _lastName,
                     ),
                   ],

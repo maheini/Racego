@@ -12,7 +12,7 @@ import 'package:racego/ui/widgets/user_list.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
 import 'package:racego/business_logic/listtoolbar/listtoolbar_cubit.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:racego/generated/l10n.dart';
 
 import '../widgets/loggedoutdialog.dart';
 
@@ -93,16 +93,14 @@ class _HomeScreenState extends State<HomeScreen> {
               bloc: _userlistCubit,
               builder: (context, state) {
                 if (state is listcubit.Error && state.syncError) {
-                  return _processHardError(
-                      AppLocalizations.of(context).sync_errormessage);
+                  return _processHardError(S.current.sync_errormessage);
                 } else {
                   return BlocBuilder<trackcubit.TracklistCubit,
                       trackcubit.TracklistState>(
                     bloc: _tracklistCubit,
                     builder: (context, state) {
                       if (state is trackcubit.Error && state.syncError) {
-                        return _processHardError(
-                            AppLocalizations.of(context).sync_errormessage);
+                        return _processHardError(S.current.sync_errormessage);
                       } else {
                         return const SizedBox();
                       }
@@ -146,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         const SizedBox(height: 30),
         Text(
-          AppLocalizations.of(context).welcome,
+          S.current.welcome,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 50,
@@ -180,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   state.list,
                   searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: AppLocalizations.of(context).participants,
+                  title: S.current.participants,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _userToolsCubit.selectionChanged(userID)
@@ -201,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   newList,
                   searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: AppLocalizations.of(context).participants,
+                  title: S.current.participants,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _userToolsCubit.selectionChanged(userID)
@@ -277,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   state.list,
                   searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: AppLocalizations.of(context).race_track,
+                  title: S.current.race_track,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _trackToolsCubit.selectionChanged(userID)
@@ -296,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   newList,
                   searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: AppLocalizations.of(context).race_track,
+                  title: S.current.race_track,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _trackToolsCubit.selectionChanged(userID)
@@ -407,7 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
         duration: const Duration(seconds: 5),
         content: Text(exception.errorMessage),
         action: SnackBarAction(
-          label: AppLocalizations.of(context).ok_flat,
+          label: S.current.ok_flat,
           onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
         ),
       ),
