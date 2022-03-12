@@ -392,6 +392,27 @@ class S {
       args: [],
     );
   }
+
+  /// `User could not be created: Database ID is invalid.`
+  String get failed_adding_user_invalid_id {
+    return Intl.message(
+      'User could not be created: Database ID is invalid.',
+      name: 'failed_adding_user_invalid_id',
+      desc: 'Error message if user couldn\'t be created',
+      args: [],
+    );
+  }
+
+  /// `User could not be updated: Unexpected server response.`
+  String get failed_updating_user_unexpected_response {
+    return Intl.message(
+      'User could not be updated: Unexpected server response.',
+      name: 'failed_updating_user_unexpected_response',
+      desc:
+          'Error message if user couldn\'t be updated because of a unexpected server response',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

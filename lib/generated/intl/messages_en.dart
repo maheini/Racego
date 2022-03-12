@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_user": MessageLookupByLibrary.simpleMessage("Edit User"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_empty": MessageLookupByLibrary.simpleMessage("Email is empty"),
+        "failed_adding_user_invalid_id": MessageLookupByLibrary.simpleMessage(
+            "User could not be created: Database ID is invalid."),
         "failed_adding_user_on_track_invalid_id":
             MessageLookupByLibrary.simpleMessage(
                 "User could not be placed on the race track: ID invalid."),
@@ -39,6 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lap time could not be recorded: ID or time invalid."),
         "failed_removing_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "User could not be removed: ID invalid."),
+        "failed_updating_user_unexpected_response":
+            MessageLookupByLibrary.simpleMessage(
+                "User could not be updated: Unexpected server response."),
         "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "language": MessageLookupByLibrary.simpleMessage("English"),

@@ -141,6 +141,14 @@
     "failed_adding_user_on_track_invalid_id": "User could not be placed on the race track: ID invalid.",
     "@failed_adding_user_on_track_invalid_id":{
         "description": "Error message if user couldn't be placed on the track"
+    },
+    "failed_adding_user_invalid_id": "User could not be created: Database ID is invalid.",
+    "@failed_adding_user_invalid_id":{
+        "description": "Error message if user couldn't be created"
+    },
+    "failed_updating_user_unexpected_response": "User could not be updated: Unexpected server response.",
+    "@failed_updating_user_unexpected_response":{
+        "description": "Error message if user couldn't be updated because of a unexpected server response"
     }
 }
 

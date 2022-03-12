@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Benutzer bearbeiten"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_empty": MessageLookupByLibrary.simpleMessage("Email is empty"),
+        "failed_adding_user_invalid_id": MessageLookupByLibrary.simpleMessage(
+            "Benutzer konnte nicht erstellt werden: Datenbank ID ist ungültig."),
         "failed_adding_user_on_track_invalid_id":
             MessageLookupByLibrary.simpleMessage(
                 "Benutzer konnte nicht auf die Rennstrecke gestellt werden: ID ungültig."),
@@ -39,6 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Rundenzeit konnte nicht erfasst werden: Id oder Zeit ungültig."),
         "failed_removing_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "Benutzer konnte nicht entfernt werden: Id ungültig."),
+        "failed_updating_user_unexpected_response":
+            MessageLookupByLibrary.simpleMessage(
+                "Benutzer konnte nicht aktualisiert werden: Unerwartete Serverantwort."),
         "first_name": MessageLookupByLibrary.simpleMessage("Vorname"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "language": MessageLookupByLibrary.simpleMessage("Deutsch"),

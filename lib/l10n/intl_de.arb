@@ -39,5 +39,7 @@
     "failed_cancelling_lap_invalid_id": "Benutzer konnte nicht von der Rennstrecke entfernt werden: ID ungültig.",
     "failed_finishing_lap_invalid_id": "Rundenzeit konnte nicht erfasst werden: Id oder Zeit ungültig.",
     "failed_removing_user_invalid_id": "Benutzer konnte nicht entfernt werden: Id ungültig.",
-    "failed_adding_user_on_track_invalid_id": "Benutzer konnte nicht auf die Rennstrecke gestellt werden: ID ungültig."
+    "failed_adding_user_on_track_invalid_id": "Benutzer konnte nicht auf die Rennstrecke gestellt werden: ID ungültig.",
+    "failed_adding_user_invalid_id": "Benutzer konnte nicht erstellt werden: Datenbank ID ist ungültig.",
+    "failed_updating_user_unexpected_response": "Benutzer konnte nicht aktualisiert werden: Unerwartete Serverantwort."
 }
