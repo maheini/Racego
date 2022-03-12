@@ -9,7 +9,7 @@ import 'package:racego/data/provider/provider.dart';
 import 'package:window_size/window_size.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:racego/generated/l10n.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
