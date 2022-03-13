@@ -10,7 +10,7 @@ A cross-platform race-management tool.
 
 ## Languages
 
-Currently English and German is supported.
+English and German languages are supported.
 
 ## Supported Platforms
 
