@@ -256,26 +256,32 @@ class _UserListState extends State<UserList> {
   }
 
   int _pendingTabs = 0;
-  int _currentID = -1;
+  int _lastID = -1;
   void onTab(int index, int id) async {
     // is new item selected? ->remove all pending items and update current item
-    if (_currentID != id) {
+    if (_lastID != id) {
       _pendingTabs = 0;
-      _currentID = id;
+      _lastID = id;
     }
     // if there are waiting tabs, then send doubletab and reset waiting tabs
     if (_pendingTabs > 0) {
+      // If Item got unselected with the first click, then re-select the item
+      if (_listCubit.state != id) {
+        _listCubit.itemPressed(id);
+        widget._onSelectionChanged?.call(index, id, _listCubit.state == id);
+      }
+      // Send doubleTap and reset pendingTabs
       widget._onDoubleTap?.call(index, id);
       _pendingTabs = 0;
     }
     // else send tab and start waiting for doubletab
     else {
-      widget._onSelectionChanged?.call(index, id, _listCubit.state != id);
       _listCubit.itemPressed(id);
+      widget._onSelectionChanged?.call(index, id, _listCubit.state == id);
       _pendingTabs++;
       await Future.delayed(const Duration(milliseconds: 300));
       // if there are pending tabs and still the same id, then reset
-      if (_pendingTabs > 0 && _currentID == id) {
+      if (_pendingTabs > 0 && _lastID == id) {
         _pendingTabs--;
       }
     }
