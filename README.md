@@ -8,6 +8,10 @@
 
 A cross-platform race-management tool.
 
+## Languages
+
+Currently English and German is supported.
+
 ## Supported Platforms
 
 Currently, Racego is supported as a Windows and Web app. In the future, Racego will also gain support for Linux and Mac. Racego uses the [Racego api](https://github.com/maheini/Racego-api) as backend.
@@ -21,5 +25,5 @@ Every idea is welcome. Feel free to contribute via pull request or opening a iss
 Racego was first released as a native Windows application in 2020. Later on, Neofix further increased the capabilities and refactored everythin up to a new release in 2021. Racego did served well on it's first tests and as it grows in popularity, Neofix decided to bring Racego to cross-platform with further possibilities of extensions.
 
 ## License & copyright
- 
+
 Licensed under the [GPLv3 License](LICENSE).
