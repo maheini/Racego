@@ -413,6 +413,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Error parsing the server response.`
+  String get failed_parsing_response {
+    return Intl.message(
+      'Error parsing the server response.',
+      name: 'failed_parsing_response',
+      desc: 'Error message if server response couldn\'t be parsed.',
+      args: [],
+    );
+  }
+
+  /// `Login failed.`
+  String get failed_login {
+    return Intl.message(
+      'Login failed.',
+      name: 'failed_login',
+      desc: 'Error message if login wasn\'t successful.',
+      args: [],
+    );
+  }
+
+  /// `The user details are insufficient.`
+  String get failed_updating_user_invalid_data {
+    return Intl.message(
+      'The user details are insufficient.',
+      name: 'failed_updating_user_invalid_data',
+      desc: 'Error message if user couldn\'t be updated',
+      args: [],
+    );
+  }
+
+  /// `No authorization.`
+  String get no_permission {
+    return Intl.message(
+      'No authorization.',
+      name: 'no_permission',
+      desc: 'Error message if user has no permission',
+      args: [],
+    );
+  }
+
+  /// `Requested entity was not found..`
+  String get requestet_entity_not_found {
+    return Intl.message(
+      'Requested entity was not found..',
+      name: 'requestet_entity_not_found',
+      desc: 'Error message if entity couldn\'t be found',
+      args: [],
+    );
+  }
+
+  /// `Conflict in the sent data.`
+  String get failed_send_conflicting_data {
+    return Intl.message(
+      'Conflict in the sent data.',
+      name: 'failed_send_conflicting_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Couldn't process the request.`
+  String get unprocessable_entity {
+    return Intl.message(
+      'Couldn\'t process the request.',
+      name: 'unprocessable_entity',
+      desc: 'Error message if send data couldn\'t be processed',
+      args: [],
+    );
+  }
+
+  /// `Invalid server response: Errorcode: {errorCode}`
+  String invalid_server_response(Object errorCode) {
+    return Intl.message(
+      'Invalid server response: Errorcode: $errorCode',
+      name: 'invalid_server_response',
+      desc: 'Error message if the server response is invalid',
+      args: [errorCode],
+    );
+  }
+
+  /// `The server cannot be reached: Timeout.`
+  String get failed_server_timeout {
+    return Intl.message(
+      'The server cannot be reached: Timeout.',
+      name: 'failed_server_timeout',
+      desc: 'Error message if the server cannot be reached',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
