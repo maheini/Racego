@@ -149,6 +149,43 @@
     "failed_updating_user_unexpected_response": "User could not be updated: Unexpected server response.",
     "@failed_updating_user_unexpected_response":{
         "description": "Error message if user couldn't be updated because of a unexpected server response"
+    },
+    "@________API_ERROR_MESSAGES________":{},
+    "failed_parsing_response": "Error parsing the server response.",
+    "@failed_parsing_response":{
+        "description": "Error message if server response couldn't be parsed."
+    },
+    "failed_login": "Login failed.",
+    "@failed_login":{
+        "description": "Error message if login wasn't successful."
+    },
+    "failed_updating_user_invalid_data": "The user details are insufficient.",
+    "@failed_updating_user_invalid_data":{
+        "description": "Error message if user couldn't be updated"
+    },
+    "no_permission": "No authorization.",
+    "@no_permission":{
+        "description": "Error message if user has no permission"
+    },
+    "requestet_entity_not_found": "Requested entity was not found..",
+    "@requestet_entity_not_found":{
+        "description": "Error message if entity couldn't be found"
+    },
+    "failed_send_conflicting_data": "Conflict in the sent data.",
+    "@failed_conflicting_data":{
+        "description": "Error message if send data produces conflict"
+    },
+    "unprocessable_entity": "Couldn't process the request.",
+    "@unprocessable_entity":{
+        "description": "Error message if send data couldn't be processed"
+    },
+    "invalid_server_response": "Invalid server response: Errorcode: {errorCode}",
+    "@invalid_server_response":{
+        "description": "Error message if the server response is invalid"
+    },
+    "failed_server_timeout": "The server cannot be reached: Timeout.",
+    "@failed_server_timeout":{
+        "description": "Error message if the server cannot be reached"
     }
 }
 
