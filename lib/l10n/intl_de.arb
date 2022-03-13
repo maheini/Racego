@@ -41,5 +41,15 @@
     "failed_removing_user_invalid_id": "Benutzer konnte nicht entfernt werden: Id ungültig.",
     "failed_adding_user_on_track_invalid_id": "Benutzer konnte nicht auf die Rennstrecke gestellt werden: ID ungültig.",
     "failed_adding_user_invalid_id": "Benutzer konnte nicht erstellt werden: Datenbank ID ist ungültig.",
-    "failed_updating_user_unexpected_response": "Benutzer konnte nicht aktualisiert werden: Unerwartete Serverantwort."
+    "failed_updating_user_unexpected_response": "Benutzer konnte nicht aktualisiert werden: Unerwartete Serverantwort.",
+    "@________API_ERROR_MESSAGES________":{},
+    "failed_parsing_response": "Fehler beim Parsen der Serverantwort.",
+    "failed_login": "Login fehlgeschlagen.",
+    "failed_updating_user_invalid_data": "Die Benutzerangaben sind unzureichend.",
+    "no_permission": "Fehlende Berechtigung.",
+    "requestet_entity_not_found": "Die Angeforderten Daten wurden nicht gefunden..",
+    "failed_send_conflicting_data": "Konflikt in den gesendeten Daten.",
+    "unprocessable_entity": "Die Anfrage konnte nicht bearbeitet werden.",
+    "invalid_server_response": "Ungültige Serverantwort: Fehlercode: {errorCode}",
+    "failed_server_timeout": "Der Server kann nicht erreicht werden: Zeitüberschreitung."
 }

@@ -20,6 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'de';
 
+  static String m0(errorCode) =>
+      "Ungültige Serverantwort: Fehlercode: ${errorCode}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "back": MessageLookupByLibrary.simpleMessage("Zurück"),
@@ -39,13 +42,25 @@ class MessageLookup extends MessageLookupByLibrary {
             "Benutzer konnte nicht von der Rennstrecke entfernt werden: ID ungültig."),
         "failed_finishing_lap_invalid_id": MessageLookupByLibrary.simpleMessage(
             "Rundenzeit konnte nicht erfasst werden: Id oder Zeit ungültig."),
+        "failed_login":
+            MessageLookupByLibrary.simpleMessage("Login fehlgeschlagen."),
+        "failed_parsing_response": MessageLookupByLibrary.simpleMessage(
+            "Fehler beim Parsen der Serverantwort."),
         "failed_removing_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "Benutzer konnte nicht entfernt werden: Id ungültig."),
+        "failed_send_conflicting_data": MessageLookupByLibrary.simpleMessage(
+            "Konflikt in den gesendeten Daten."),
+        "failed_server_timeout": MessageLookupByLibrary.simpleMessage(
+            "Der Server kann nicht erreicht werden: Zeitüberschreitung."),
+        "failed_updating_user_invalid_data":
+            MessageLookupByLibrary.simpleMessage(
+                "Die Benutzerangaben sind unzureichend."),
         "failed_updating_user_unexpected_response":
             MessageLookupByLibrary.simpleMessage(
                 "Benutzer konnte nicht aktualisiert werden: Unerwartete Serverantwort."),
         "first_name": MessageLookupByLibrary.simpleMessage("Vorname"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
+        "invalid_server_response": m0,
         "language": MessageLookupByLibrary.simpleMessage("Deutsch"),
         "laps": MessageLookupByLibrary.simpleMessage("Runden"),
         "last_name": MessageLookupByLibrary.simpleMessage("Nachname"),
@@ -53,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fehler beim laden des Benutzers."),
         "login_invalid": MessageLookupByLibrary.simpleMessage(
             "Ungültiger Benutzername oder Passwort."),
+        "no_permission":
+            MessageLookupByLibrary.simpleMessage("Fehlende Berechtigung."),
         "ok_flat": MessageLookupByLibrary.simpleMessage("OK"),
         "participants": MessageLookupByLibrary.simpleMessage("Teilnehmer"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -60,6 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Password is empty"),
         "race_classes": MessageLookupByLibrary.simpleMessage("Rennklassen"),
         "race_track": MessageLookupByLibrary.simpleMessage("Rennstrecke"),
+        "requestet_entity_not_found": MessageLookupByLibrary.simpleMessage(
+            "Die Angeforderten Daten wurden nicht gefunden.."),
         "retry": MessageLookupByLibrary.simpleMessage("Neu versuchen"),
         "retry_login": MessageLookupByLibrary.simpleMessage(
             "Bitte melden Sie sich erneut an."),
@@ -75,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error: Synchronization interrupted!"),
         "unknown_error":
             MessageLookupByLibrary.simpleMessage("Unbekannter Fehler"),
+        "unprocessable_entity": MessageLookupByLibrary.simpleMessage(
+            "Die Anfrage konnte nicht bearbeitet werden."),
         "welcome": MessageLookupByLibrary.simpleMessage("Willkommen zurück")
       };
 }
