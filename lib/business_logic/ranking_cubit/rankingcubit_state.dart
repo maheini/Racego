@@ -15,7 +15,15 @@ class RankingLoading extends RankingcubitState {
 }
 
 class RankingLoaded extends RankingcubitState {
-  const RankingLoaded(
+  const RankingLoaded(this.ranking,
       {required String currentClass, required List<String> classList})
       : super(currentClass: currentClass, classList: classList);
+  final RankingList ranking;
+}
+
+class RankingError extends RankingcubitState {
+  const RankingError(this.exception,
+      {required String currentClass, required List<String> classList})
+      : super(currentClass: currentClass, classList: classList);
+  final RacegoException exception;
 }
