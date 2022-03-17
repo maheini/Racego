@@ -13,7 +13,7 @@ class RankingList {
     }
   }
 
-  RankingList fromJson(List<dynamic> json) {
+  static RankingList fromJson(List<dynamic> json) {
     List<Map<String, String>> ranking =
         json.map((e) => {e['name'].toString(): e['time'].toString()}).toList();
 
