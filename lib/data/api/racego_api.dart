@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:racego/data/models/rankinglist.dart';
 import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/data/models/userdetails.dart';
@@ -346,6 +347,32 @@ class RacegoApi {
       String response = await _getRequest(_apiBaseUrl + 'v1/categories');
       List<dynamic> users = jsonDecode(response);
       return users.map((e) => e as String).toList();
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<RankingList> getRankig(String? className) async {
+    try {
+      String response = '';
+      if (className != null && className.isNotEmpty) {
+        // escape space to generate api url
+        className.replaceAll(' ', '%');
+        response = await _getRequest(_apiBaseUrl + 'v1/ranking/' + className);
+      } else {
+        response = await _getRequest(_apiBaseUrl + 'v1/ranking/all');
+      }
+      List<dynamic> ranks = jsonDecode(response);
+      return RankingList.fromJson(ranks);
     } on AuthException catch (_) {
       rethrow;
     } on RacegoException catch (_) {
