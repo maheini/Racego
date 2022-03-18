@@ -10,123 +10,22 @@ import 'package:window_size/window_size.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:racego/generated/l10n.dart';
+import 'package:racego/ui/themes/darktheme.dart';
+import 'package:racego/ui/themes/lighttheme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
     setWindowTitle('Racego');
-    // setWindowMaxSize(const Size(max_width, max_height));
     setWindowMinSize(const Size(950, 650));
   }
   runApp(
-    setupProvider(child: Racego()),
+    setupProvider(child: const Racego()),
   );
 }
 
 class Racego extends StatelessWidget {
-  Racego({Key? key}) : super(key: key);
-
-  final ThemeData _darkMode = ThemeData(
-    iconTheme: const IconThemeData(color: Colors.white),
-    // background color
-    scaffoldBackgroundColor: Colors.grey.shade900,
-    // background for all material widgets
-    canvasColor: Colors.grey[850]!,
-    colorScheme: ColorScheme(
-      brightness: Brightness.dark,
-      background: Colors.grey.shade900,
-      onBackground: Colors.grey[850]!,
-      primary: Colors.grey.shade700,
-      onPrimary: Colors.white,
-      secondary: Colors.grey.shade700,
-      onSecondary: Colors.white,
-      error: Colors.red,
-      onError: Colors.white,
-      surface: Colors.grey.shade800,
-      onSurface: Colors.white,
-    ),
-    // default hover color (for appbar icons)
-    hoverColor: Colors.black.withOpacity(0.1),
-    // row selection color
-    selectedRowColor: Colors.grey.shade700,
-    // text-color for hint-texts
-    hintColor: Colors.white,
-    // default text sizes and styles
-    textTheme: const TextTheme(
-      // body text style
-      bodyText2: TextStyle(color: Colors.white),
-      // title text style
-      headline6: TextStyle(
-          fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-      // textfield text-color
-      subtitle1: TextStyle(color: Colors.white),
-    ),
-    // text selection style
-    textSelectionTheme: TextSelectionThemeData(
-      cursorColor: Colors.white,
-      selectionColor: Colors.blue.shade800,
-    ),
-    appBarTheme: const AppBarTheme(
-      color: Color.fromARGB(255, 175, 0, 6),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      fillColor: Colors.grey.shade800,
-      filled: true,
-      hoverColor: Colors.grey.shade700,
-      labelStyle: const TextStyle(color: Colors.white),
-    ),
-  );
-
-  final ThemeData _lightMode = ThemeData(
-    iconTheme: IconThemeData(color: Colors.grey.shade900),
-    // background color
-    scaffoldBackgroundColor: Colors.white,
-    // background for all material widgets
-    canvasColor: Colors.white,
-    colorScheme: ColorScheme(
-      brightness: Brightness.dark,
-      background: Colors.white,
-      onBackground: Colors.white,
-      primary: Colors.grey.shade700,
-      onPrimary: Colors.white,
-      secondary: Colors.grey.shade700,
-      onSecondary: Colors.white,
-      error: Colors.red,
-      onError: Colors.white,
-      surface: Colors.grey.shade800,
-      onSurface: Colors.white,
-    ),
-    // default hover color (for appbar icons)
-    hoverColor: Colors.black.withOpacity(0.1),
-    // row selection color
-    selectedRowColor: Colors.grey.shade300,
-    // text-color for hint-texts
-    hintColor: Colors.black,
-    // default text sizes and styles
-    textTheme: const TextTheme(
-      // body text style
-      bodyText2: TextStyle(color: Colors.black),
-      // title text style
-      headline6: TextStyle(
-          fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
-      // textfield text-color
-      subtitle1: TextStyle(color: Colors.black),
-    ),
-    // text selection style
-    textSelectionTheme: TextSelectionThemeData(
-      cursorColor: Colors.black,
-      selectionColor: Colors.blue.shade800,
-    ),
-    appBarTheme: const AppBarTheme(
-      color: Color.fromARGB(255, 175, 0, 6),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      fillColor: Colors.grey.shade400,
-      filled: true,
-      hoverColor: Colors.grey.shade500,
-      labelStyle: const TextStyle(color: Colors.white),
-    ),
-  );
+  const Racego({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -161,8 +60,8 @@ class Racego extends StatelessWidget {
       builder: (context, child) {
         return child!;
       },
-      theme: _lightMode,
-      darkTheme: _darkMode,
+      theme: lightTheme,
+      darkTheme: darkTheme,
       themeMode: ThemeMode.system,
       title: 'Racego',
     );
