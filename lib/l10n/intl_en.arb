@@ -113,6 +113,27 @@
     "@create_class_hint":{
         "description": "Hint text which is displayed for create class bars"
     },
+    "@________RANKING_SCREEN________":{},
+    "ranking": "Ranking",
+    "@ranking":{
+        "description": "Text translation for ranking"
+    },
+    "all_classes": "All classes",
+    "@all_classes":{
+        "description": "Text translation for 'all classes'"
+    },
+    "lap_time": "Time",
+    "@time":{
+        "description": "Name of a single lap time'"
+    },
+    "name": "Name",
+    "@name":{
+        "description": "Name of a 'name' (independent of first or last name)'"
+    },
+    "rank": "Rank",
+    "@rank":{
+        "description": "Name of a rank"
+    },
     "@________ERROR_MESSAGES________":{},
     "sync_errormessage": "Error: Synchronization interrupted!",
     "@sync_errormessage":{
