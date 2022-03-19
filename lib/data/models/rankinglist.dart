@@ -1,17 +1,17 @@
-import 'package:racego/data/models/user.dart';
-
 class RankingList {
   RankingList(List<Map<String, String>>? ranks) : _ranks = ranks ?? [];
 
   final List<Map<String, String>> _ranks;
 
-  Map<String, String> getRank(int rank) {
-    if (rank >= _ranks.length) {
+  Map<String, String> getValue(int index) {
+    if (index >= _ranks.length || index < 0) {
       return {'dsf': 'sdf'};
     } else {
-      return _ranks[rank - 1];
+      return _ranks[index];
     }
   }
+
+  int get length => _ranks.length;
 
   static RankingList fromJson(List<dynamic> json) {
     List<Map<String, String>> ranking =
