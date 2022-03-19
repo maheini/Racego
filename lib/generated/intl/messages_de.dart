@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "all_classes": MessageLookupByLibrary.simpleMessage("Alle Klassen"),
         "back": MessageLookupByLibrary.simpleMessage("Zurück"),
         "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
         "create_class_hint":
@@ -62,12 +63,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "invalid_server_response": m0,
         "language": MessageLookupByLibrary.simpleMessage("Deutsch"),
+        "lap_time": MessageLookupByLibrary.simpleMessage("Zeit"),
         "laps": MessageLookupByLibrary.simpleMessage("Runden"),
         "last_name": MessageLookupByLibrary.simpleMessage("Nachname"),
         "loading_user_error": MessageLookupByLibrary.simpleMessage(
             "Fehler beim laden des Benutzers."),
         "login_invalid": MessageLookupByLibrary.simpleMessage(
             "Ungültiger Benutzername oder Passwort."),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "no_permission":
             MessageLookupByLibrary.simpleMessage("Fehlende Berechtigung."),
         "ok_flat": MessageLookupByLibrary.simpleMessage("OK"),
@@ -77,6 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Password is empty"),
         "race_classes": MessageLookupByLibrary.simpleMessage("Rennklassen"),
         "race_track": MessageLookupByLibrary.simpleMessage("Rennstrecke"),
+        "rank": MessageLookupByLibrary.simpleMessage("Rang"),
+        "ranking": MessageLookupByLibrary.simpleMessage("Rangliste"),
         "requestet_entity_not_found": MessageLookupByLibrary.simpleMessage(
             "Die Angeforderten Daten wurden nicht gefunden.."),
         "retry": MessageLookupByLibrary.simpleMessage("Neu versuchen"),
@@ -91,7 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in": MessageLookupByLibrary.simpleMessage("Login"),
         "sign_in_title": MessageLookupByLibrary.simpleMessage("Racego login"),
         "sync_errormessage": MessageLookupByLibrary.simpleMessage(
-            "Error: Synchronization interrupted!"),
+            "Fehler: Synchronisation unterbrochen!"),
         "unknown_error":
             MessageLookupByLibrary.simpleMessage("Unbekannter Fehler"),
         "unprocessable_entity": MessageLookupByLibrary.simpleMessage(

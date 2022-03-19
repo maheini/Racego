@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "all_classes": MessageLookupByLibrary.simpleMessage("All classes"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "create_class_hint":
@@ -61,12 +62,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "invalid_server_response": m0,
         "language": MessageLookupByLibrary.simpleMessage("English"),
+        "lap_time": MessageLookupByLibrary.simpleMessage("Time"),
         "laps": MessageLookupByLibrary.simpleMessage("Laps"),
         "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
         "loading_user_error":
             MessageLookupByLibrary.simpleMessage("Error loading the user."),
         "login_invalid": MessageLookupByLibrary.simpleMessage(
             "Incorrect username or password."),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "no_permission":
             MessageLookupByLibrary.simpleMessage("No authorization."),
         "ok_flat": MessageLookupByLibrary.simpleMessage("OK"),
@@ -76,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Password is empty"),
         "race_classes": MessageLookupByLibrary.simpleMessage("Race Classes"),
         "race_track": MessageLookupByLibrary.simpleMessage("Race Track"),
+        "rank": MessageLookupByLibrary.simpleMessage("Rank"),
+        "ranking": MessageLookupByLibrary.simpleMessage("Ranking"),
         "requestet_entity_not_found": MessageLookupByLibrary.simpleMessage(
             "Requested entity was not found.."),
         "retry": MessageLookupByLibrary.simpleMessage("Try again"),
