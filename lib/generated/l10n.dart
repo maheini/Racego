@@ -320,6 +320,56 @@ class S {
     );
   }
 
+  /// `Ranking`
+  String get ranking {
+    return Intl.message(
+      'Ranking',
+      name: 'ranking',
+      desc: 'Text translation for ranking',
+      args: [],
+    );
+  }
+
+  /// `All classes`
+  String get all_classes {
+    return Intl.message(
+      'All classes',
+      name: 'all_classes',
+      desc: 'Text translation for \'all classes\'',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get lap_time {
+    return Intl.message(
+      'Time',
+      name: 'lap_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: 'Name of a \'name\' (independent of first or last name)\'',
+      args: [],
+    );
+  }
+
+  /// `Rank`
+  String get rank {
+    return Intl.message(
+      'Rank',
+      name: 'rank',
+      desc: 'Name of a rank',
+      args: [],
+    );
+  }
+
   /// `Error: Synchronization interrupted!`
   String get sync_errormessage {
     return Intl.message(
