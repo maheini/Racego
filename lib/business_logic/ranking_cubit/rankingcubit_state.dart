@@ -1,4 +1,4 @@
-part of 'rankingcubit_cubit.dart';
+part of 'ranking_cubit.dart';
 
 @immutable
 abstract class RankingcubitState {
