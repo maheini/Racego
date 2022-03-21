@@ -134,7 +134,12 @@ class _HomeScreenState extends State<HomeScreen> {
             _forcedLogout = true;
             context.read<LoginBloc>().add(Logout());
           },
-        )
+        ),
+        const SizedBox(width: 5),
+        IconButton(
+          icon: const Icon(Icons.emoji_events_rounded),
+          onPressed: () => Navigator.of(context).pushNamed('/ranking'),
+        ),
       ],
     );
   }
