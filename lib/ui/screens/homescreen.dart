@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
@@ -404,16 +405,27 @@ class _HomeScreenState extends State<HomeScreen> {
       context.read<LoginBloc>().add(Logout());
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 5),
-        content: Text(exception.errorMessage),
-        action: SnackBarAction(
-          label: S.current.ok_flat,
-          onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+
+    Flushbar(
+      animationDuration: const Duration(milliseconds: 500),
+      margin: const EdgeInsets.all(8),
+      borderRadius: BorderRadius.circular(8),
+      message: exception.errorMessage,
+      duration: const Duration(seconds: 5),
+      flushbarPosition: FlushbarPosition.TOP,
+      isDismissible: true,
+      icon: const Icon(
+        Icons.warning_amber_rounded,
+        size: 28.0,
+        color: Colors.red,
+      ),
+      mainButton: TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: Text(
+          S.of(context).ok_flat,
+          style: const TextStyle(color: Colors.blue),
         ),
       ),
-    );
+    ).show(context);
   }
 }
