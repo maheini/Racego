@@ -7,6 +7,10 @@
 # Racego
 
 A cross-platform race-management tool for Desktop and web.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/65506676/162324108-207cc035-1e04-45c3-9d93-313787e18d29.png">
+</p>
+<p align="center">Home screen with dark an light theme: quick access to user-management and ranking list</p>
 
 ## Languages
 
@@ -22,8 +26,19 @@ Every idea is welcome. Feel free to contribute via pull request or opening a iss
 
 ## Some backgrounds about Racego
 
-Racego was first released as a native Windows application in 2020. Later on, Neofix further increased the capabilities and refactored everythin up to a new release in 2021. Racego did served well on it's first tests and as it grows in popularity, Neofix decided to bring Racego to cross-platform with further possibilities of extensions.
+Racego was first released as a native Windows application in 2020. Later on, Neofix further increased the capabilities and refactored everything up to a new release in 2021. Racego did served well on it's first tests and as it grows in popularity, Neofix decided to bring Racego to cross-platform with further possibilities of extensions.
 
 ## License & copyright
 
 Licensed under the [GPLv3 License](LICENSE).
+
+## Screenshots
+
+<p align="center">Edit profile of every participant</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/65506676/162325732-c28291fd-01e4-476f-a1ca-7390f989ca38.png">
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/65506676/162321999-5379aad1-7b96-496b-863c-c12323403bb7.jpg">
+</p>
