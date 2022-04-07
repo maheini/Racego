@@ -4,6 +4,7 @@ import 'package:racego/business_logic/lapeditor_cubit/lapeditor_cubit.dart';
 import 'package:racego/data/models/time.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
+import 'package:racego/generated/l10n.dart';
 
 class LapsEditor extends StatefulWidget {
   const LapsEditor(this.laps, {Key? key}) : super(key: key);
@@ -26,7 +27,9 @@ class _LapsEditorState extends State<LapsEditor> {
     return Column(
       children: [
         _title(),
+        const SizedBox(height: 5),
         Expanded(child: _list()),
+        const SizedBox(height: 5),
         _toolButtons(),
       ],
     );
@@ -34,15 +37,25 @@ class _LapsEditorState extends State<LapsEditor> {
 
   Widget _title() {
     return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onBackground,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 5,
+            // offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
       padding: const EdgeInsets.all(10),
-      color: Colors.grey.shade800.withOpacity(0.7),
       width: double.infinity,
       child: BlocBuilder<LapeditorCubit, LapeditorState>(
         bloc: _cubit,
         buildWhen: (previous, current) => current is LapsChanged,
         builder: (index, state) {
           return Text(
-            'Runden: ${_cubit.laps.length}',
+            S.current.laps + ': ${_cubit.laps.length}',
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 20,
@@ -64,17 +77,30 @@ class _LapsEditorState extends State<LapsEditor> {
 
         if (state is LapsChanged) {
           final List<Time> laps = state.laps;
-          return Material(
-            child: ListView.separated(
-              itemBuilder: ((context, index) {
-                return _listTile(index, laps[index].toTimeString);
-              }),
-              separatorBuilder: (context, index) => const Divider(height: 2),
-              itemCount: laps.length,
+          return Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onBackground,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  // offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Material(
+              child: ListView.separated(
+                itemBuilder: ((context, index) {
+                  return _listTile(index, laps[index].toTimeString);
+                }),
+                separatorBuilder: (context, index) => const Divider(height: 2),
+                itemCount: laps.length,
+              ),
             ),
           );
         } else {
-          return const Text('Unbekannter Fehler');
+          return Text(S.current.unknown_error);
         }
       },
     );
@@ -92,8 +118,8 @@ class _LapsEditorState extends State<LapsEditor> {
           child: Container(
             height: 30,
             padding: const EdgeInsets.all(3),
-            color: selected ? Colors.white.withOpacity(0.1) : null,
             child: Text(itemName, textAlign: TextAlign.center),
+            color: selected ? Theme.of(context).selectedRowColor : null,
           ),
         );
       },

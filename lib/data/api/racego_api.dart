@@ -5,9 +5,12 @@ import 'package:http/http.dart' as http;
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:racego/data/models/rankinglist.dart';
 import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/data/models/userdetails.dart';
+
+import '../../generated/l10n.dart';
 
 class RacegoApi {
   String? _username;
@@ -43,12 +46,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -67,7 +70,7 @@ class RacegoApi {
       }
       return false;
     } on AuthException catch (authError) {
-      if (authError.errorMessage.contains('Login fehlgeschlagen')) {
+      if (authError.errorMessage.contains(S.current.failed_login)) {
         return false;
       } else {
         rethrow;
@@ -75,12 +78,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -99,12 +102,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -119,12 +122,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -139,12 +142,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
       throw UnknownException(
-        'Unbekannter Fehler',
+        S.current.unknown_error,
         error.toString(),
         error.runtimeType.toString(),
       );
@@ -161,19 +164,19 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
   Future<bool> setUserDetails(UserDetails user) async {
     try {
       if (user.id <= 0 || user.firstName.isEmpty || user.lastName.isEmpty) {
-        throw DataException('Die Benutzerangaben sind ungenügend');
+        throw DataException(S.current.failed_updating_user_invalid_data);
       }
 
       String response = await _putRequest(
@@ -189,19 +192,19 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
   Future<int> addUser(UserDetails user) async {
     try {
       if (user.firstName.isEmpty || user.lastName.isEmpty) {
-        throw DataException('Die Benutzerangaben sind ungenügend');
+        throw DataException(S.current.failed_updating_user_invalid_data);
       }
 
       String response = await _postRequest(
@@ -216,12 +219,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -242,12 +245,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
       throw UnknownException(
-        'Unbekannter Fehler',
+        S.current.unknown_error,
         error.toString(),
         error.runtimeType.toString(),
       );
@@ -270,12 +273,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
       throw UnknownException(
-        'Unbekannter Fehler',
+        S.current.unknown_error,
         error.toString(),
         error.runtimeType.toString(),
       );
@@ -298,12 +301,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
       throw UnknownException(
-        'Unbekannter Fehler',
+        S.current.unknown_error,
         error.toString(),
         error.runtimeType.toString(),
       );
@@ -327,12 +330,12 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
       throw UnknownException(
-        'Unbekannter Fehler',
+        S.current.unknown_error,
         error.toString(),
         error.runtimeType.toString(),
       );
@@ -349,12 +352,38 @@ class RacegoApi {
     } on RacegoException catch (_) {
       rethrow;
     } on TypeError catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } on FormatException catch (_) {
-      throw DataException('Fehler beim Parsen der Serverantwort');
+      throw DataException(S.current.failed_parsing_response);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<RankingList> getRankig(String? className) async {
+    try {
+      String response = '';
+      if (className != null && className.isNotEmpty) {
+        // escape space to generate api url
+        className.replaceAll(' ', '%');
+        response = await _getRequest(_apiBaseUrl + 'v1/ranking/' + className);
+      } else {
+        response = await _getRequest(_apiBaseUrl + 'v1/ranking/all');
+      }
+      List<dynamic> ranks = jsonDecode(response);
+      return RankingList.fromJson(ranks);
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -370,32 +399,30 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
-          throw AuthException('Keine Berechtigung');
+          throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
-          throw AuthException('Login Fehlgeschlagen');
+          throw AuthException(S.current.failed_login);
         case 404:
-          throw ServerException(
-              'Fehler: Fehlerhafte Quelle für den Datenaustausch.');
+          throw ServerException(S.current.requestet_entity_not_found);
         case 409:
-          throw DataException('Konflikt bei den gesendeten Daten');
+          throw DataException(S.current.failed_send_conflicting_data);
         case 422:
-          throw DataException('Eingabe konnte nicht verarbeitet werden');
+          throw DataException(S.current.unprocessable_entity);
         default:
           throw ServerException(
-              'Serverantwort ungültig. Statuscode ${response.statusCode}');
+              S.current.invalid_server_response(response.statusCode));
       }
     } on RacegoException catch (_) {
       rethrow;
     } on SocketException catch (_) {
-      throw InternetException('Der Server kann nicht erreicht werden.');
+      throw InternetException(S.current.failed_server_timeout);
     } on TimeoutException catch (_) {
-      throw InternetException(
-          'Der Server kann nicht erreicht werden: Timeout.');
+      throw InternetException(S.current.failed_server_timeout);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -411,32 +438,30 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
-          throw AuthException('Keine Berechtigung');
+          throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
-          throw AuthException('Login fehlgeschlagen');
+          throw AuthException(S.current.failed_login);
         case 404:
-          throw ServerException(
-              'Fehler: Fehlerhafte Quelle für den Datenaustausch.');
+          throw ServerException(S.current.requestet_entity_not_found);
         case 409:
-          throw DataException('Konflikt bei den gesendeten Daten');
+          throw DataException(S.current.failed_send_conflicting_data);
         case 422:
-          throw DataException('Eingabe konnte nicht verarbeitet werden');
+          throw DataException(S.current.unprocessable_entity);
         default:
           throw ServerException(
-              'Serverantwort ungültig. Statuscode ${response.statusCode}');
+              S.current.invalid_server_response(response.statusCode));
       }
     } on RacegoException catch (_) {
       rethrow;
     } on SocketException catch (_) {
-      throw InternetException('Der Server kann nicht erreicht werden.');
+      throw InternetException(S.current.failed_server_timeout);
     } on TimeoutException catch (_) {
-      throw InternetException(
-          'Der Server kann nicht erreicht werden: Timeout.');
+      throw InternetException(S.current.failed_server_timeout);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -452,32 +477,30 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
-          throw AuthException('Keine Berechtigung');
+          throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
-          throw AuthException('Login fehlgeschlagen');
+          throw AuthException(S.current.failed_login);
         case 404:
-          throw ServerException(
-              'Fehler: Fehlerhafte Quelle für den Datenaustausch.');
+          throw ServerException(S.current.requestet_entity_not_found);
         case 409:
-          throw DataException('Konflikt bei den gesendeten Daten');
+          throw DataException(S.current.failed_send_conflicting_data);
         case 422:
-          throw DataException('Eingabe konnte nicht verarbeitet werden');
+          throw DataException(S.current.unprocessable_entity);
         default:
           throw ServerException(
-              'Serverantwort ungültig. Statuscode ${response.statusCode}');
+              S.current.invalid_server_response(response.statusCode));
       }
     } on RacegoException catch (_) {
       rethrow;
     } on SocketException catch (_) {
-      throw InternetException('Der Server kann nicht erreicht werden.');
+      throw InternetException(S.current.failed_server_timeout);
     } on TimeoutException catch (_) {
-      throw InternetException(
-          'Der Server kann nicht erreicht werden: Timeout.');
+      throw InternetException(S.current.failed_server_timeout);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 
@@ -493,32 +516,30 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
-          throw AuthException('Keine Berechtigung');
+          throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
-          throw AuthException('Login fehlgeschlagen');
+          throw AuthException(S.current.failed_login);
         case 404:
-          throw ServerException(
-              'Fehler: Fehlerhafte Quelle für den Datenaustausch.');
+          throw ServerException(S.current.requestet_entity_not_found);
         case 409:
-          throw DataException('Konflikt bei den gesendeten Daten');
+          throw DataException(S.current.failed_send_conflicting_data);
         case 422:
-          throw DataException('Eingabe konnte nicht verarbeitet werden');
+          throw DataException(S.current.unprocessable_entity);
         default:
           throw ServerException(
-              'Serverantwort ungültig. Statuscode ${response.statusCode}');
+              S.current.invalid_server_response(response.statusCode));
       }
     } on RacegoException catch (_) {
       rethrow;
     } on SocketException catch (_) {
-      throw InternetException('Der Server kann nicht erreicht werden.');
+      throw InternetException(S.current.failed_server_timeout);
     } on TimeoutException catch (_) {
-      throw InternetException(
-          'Der Server kann nicht erreicht werden: Timeout.');
+      throw InternetException(S.current.failed_server_timeout);
     } catch (error) {
-      throw UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
     }
   }
 

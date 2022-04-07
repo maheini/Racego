@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/selectablelist_cubit/selectablelist_cubit.dart';
+import 'package:racego/generated/l10n.dart';
 
 class SelectableList extends StatefulWidget {
   const SelectableList(
@@ -30,7 +31,9 @@ class _SelectableListState extends State<SelectableList> {
     return Column(
       children: [
         _title(),
+        const SizedBox(height: 5),
         Expanded(child: _list()),
+        const SizedBox(height: 5),
         _addBar(),
       ],
     );
@@ -38,14 +41,24 @@ class _SelectableListState extends State<SelectableList> {
 
   Widget _title() {
     return Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onBackground,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              // offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         padding: const EdgeInsets.all(10),
-        color: Colors.grey.shade800.withOpacity(0.7),
         width: double.infinity,
         child: BlocBuilder<SelectablelistCubit, SelectablelistState>(
           bloc: _cubit,
           builder: (index, state) {
             return Text(
-              'Rennklassen: ${_cubit.selection.length}',
+              S.current.race_classes + ': ${_cubit.selection.length}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 20,
@@ -67,14 +80,27 @@ class _SelectableListState extends State<SelectableList> {
         final List<String> items =
             state is ListItemChanged ? state.items : widget.items;
 
-        return Material(
-          child: ListView.separated(
-            controller: _scrollController,
-            itemBuilder: ((context, index) {
-              return _listTile(items[index]);
-            }),
-            separatorBuilder: (context, index) => const Divider(height: 2),
-            itemCount: items.length,
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onBackground,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 5,
+                // offset: const Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Material(
+            child: ListView.separated(
+              controller: _scrollController,
+              itemBuilder: ((context, index) {
+                return _listTile(items[index]);
+              }),
+              separatorBuilder: (context, index) => const Divider(height: 2),
+              itemCount: items.length,
+            ),
           ),
         );
       },
@@ -100,7 +126,6 @@ class _SelectableListState extends State<SelectableList> {
           child: Container(
             height: 30,
             padding: const EdgeInsets.all(3),
-            color: selected ? Colors.white.withOpacity(0.1) : null,
             child: Row(
               children: [
                 const SizedBox(width: 10),
@@ -112,6 +137,7 @@ class _SelectableListState extends State<SelectableList> {
                 Text(itemName),
               ],
             ),
+            color: selected ? Theme.of(context).selectedRowColor : null,
           ),
         );
       },
@@ -133,6 +159,7 @@ class _SelectableListState extends State<SelectableList> {
   Widget _addBar() {
     return Container(
       height: 40,
+      margin: const EdgeInsets.only(top: 5, bottom: 5),
       padding: const EdgeInsets.only(bottom: 7),
       child: Row(
         children: [
@@ -140,7 +167,7 @@ class _SelectableListState extends State<SelectableList> {
             child: TextField(
               style: const TextStyle(fontSize: 15),
               decoration: InputDecoration(
-                hintText: 'Klassen erstellen...',
+                hintText: S.current.create_class_hint,
                 suffix: IconButton(
                   icon: const Icon(
                     Icons.clear,
@@ -167,7 +194,6 @@ class _SelectableListState extends State<SelectableList> {
               controller: _textControlller,
             ),
           ),
-          // if (widget._onAddPressed != null)
           SizedBox(
             height: double.infinity,
             child: ElevatedButton(
@@ -177,14 +203,11 @@ class _SelectableListState extends State<SelectableList> {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(4),
                       bottomRight: Radius.circular(4)),
-                  // side: BorderSide(color: Colors.red))
                 )),
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
               ),
               onPressed: () => _addItem(_textControlller.text),
               child: const Icon(Icons.add),
-              // st
-              // color: Colors.blue,
             ),
           ),
         ],

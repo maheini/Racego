@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:racego/ui/widgets/user_list.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
 import 'package:racego/business_logic/listtoolbar/listtoolbar_cubit.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
+import 'package:racego/generated/l10n.dart';
 
 import '../widgets/loggedoutdialog.dart';
 
@@ -92,16 +94,14 @@ class _HomeScreenState extends State<HomeScreen> {
               bloc: _userlistCubit,
               builder: (context, state) {
                 if (state is listcubit.Error && state.syncError) {
-                  return _processHardError(
-                      'Fehler: Synchronisation unterbrochen!');
+                  return _processHardError(S.current.sync_errormessage);
                 } else {
                   return BlocBuilder<trackcubit.TracklistCubit,
                       trackcubit.TracklistState>(
                     bloc: _tracklistCubit,
                     builder: (context, state) {
                       if (state is trackcubit.Error && state.syncError) {
-                        return _processHardError(
-                            'Fehler: Synchronisation unterbrochen!');
+                        return _processHardError(S.current.sync_errormessage);
                       } else {
                         return const SizedBox();
                       }
@@ -122,7 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(2),
         child: Image.asset('assets/racego_r.png', fit: BoxFit.cover),
       ),
-      backgroundColor: const Color.fromARGB(255, 175, 0, 6),
       title: const Text(
         'Racego',
       ),
@@ -136,7 +135,12 @@ class _HomeScreenState extends State<HomeScreen> {
             _forcedLogout = true;
             context.read<LoginBloc>().add(Logout());
           },
-        )
+        ),
+        const SizedBox(width: 5),
+        IconButton(
+          icon: const Icon(Icons.emoji_events_rounded),
+          onPressed: () => Navigator.of(context).pushNamed('/ranking'),
+        ),
       ],
     );
   }
@@ -145,9 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         const SizedBox(height: 30),
-        const Text(
-          'Willkommen zurück',
-          style: TextStyle(
+        Text(
+          S.current.welcome,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 50,
           ),
@@ -180,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   state.list,
                   searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: 'Teilnehmer',
+                  title: S.current.participants,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _userToolsCubit.selectionChanged(userID)
@@ -201,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   newList,
                   searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: 'Teilnehmer',
+                  title: S.current.participants,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _userToolsCubit.selectionChanged(userID)
@@ -216,6 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
+        const SizedBox(height: 5),
         BlocBuilder<ListToolbarCubit, ListToolbarState>(
           bloc: _userToolsCubit,
           builder: (context, state) {
@@ -276,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   state.list,
                   searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: 'Rennstrecke',
+                  title: S.current.race_track,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _trackToolsCubit.selectionChanged(userID)
@@ -295,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return UserList(
                   newList,
                   searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: 'Rennstrecke',
+                  title: S.current.race_track,
                   onSelectionChanged: (index, userID, isSelected) {
                     isSelected
                         ? _trackToolsCubit.selectionChanged(userID)
@@ -308,6 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
+        const SizedBox(height: 5),
         BlocBuilder<ListToolbarCubit, ListToolbarState>(
           bloc: _trackToolsCubit,
           builder: (context, state) {
@@ -399,16 +405,27 @@ class _HomeScreenState extends State<HomeScreen> {
       context.read<LoginBloc>().add(Logout());
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 5),
-        content: Text(exception.errorMessage),
-        action: SnackBarAction(
-          label: 'OK',
-          onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+
+    Flushbar(
+      animationDuration: const Duration(milliseconds: 500),
+      margin: const EdgeInsets.all(8),
+      borderRadius: BorderRadius.circular(8),
+      message: exception.errorMessage,
+      duration: const Duration(seconds: 5),
+      flushbarPosition: FlushbarPosition.TOP,
+      isDismissible: true,
+      icon: const Icon(
+        Icons.warning_amber_rounded,
+        size: 28.0,
+        color: Colors.red,
+      ),
+      mainButton: TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: Text(
+          S.of(context).ok_flat,
+          style: const TextStyle(color: Colors.blue),
         ),
       ),
-    );
+    ).show(context);
   }
 }

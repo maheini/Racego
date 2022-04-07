@@ -4,6 +4,8 @@ import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:racego/data/models/userdetails.dart';
 
+import '../../generated/l10n.dart';
+
 part 'userscreen_state.dart';
 
 class UserscreenCubit extends Cubit<UserscreenState> {
@@ -27,14 +29,13 @@ class UserscreenCubit extends Cubit<UserscreenState> {
       if (id > 0) {
         loadEditUser(id);
       } else {
-        throw UnknownException(
-            'Benutzer konnte nicht erstellt werden: Datenbank Id ist ungültig');
+        throw UnknownException(S.current.failed_adding_user_invalid_id);
       }
     } on RacegoException catch (e) {
       emit(UserScreenAddError(e));
     } catch (error) {
-      UnknownException e = UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      UnknownException e = UnknownException(S.current.unknown_error,
+          error.toString(), error.runtimeType.toString());
       emit(UserScreenAddError(e));
     }
   }
@@ -51,8 +52,8 @@ class UserscreenCubit extends Cubit<UserscreenState> {
     } on RacegoException catch (e) {
       emit(UserScreenEditError(e));
     } catch (error) {
-      UnknownException e = UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      UnknownException e = UnknownException(S.current.unknown_error,
+          error.toString(), error.runtimeType.toString());
       emit(UserScreenEditError(e));
     }
   }
@@ -68,13 +69,13 @@ class UserscreenCubit extends Cubit<UserscreenState> {
         emit(UserScreenStored());
       } else {
         throw UnknownException(
-            'Benutzer konnte nicht aktualisiert werden: Unerwartete Serverantwort');
+            S.current.failed_updating_user_unexpected_response);
       }
     } on RacegoException catch (e) {
       emit(UserScreenEditError(e));
     } catch (error) {
-      UnknownException e = UnknownException(
-          'Unbekannter Fehler', error.toString(), error.runtimeType.toString());
+      UnknownException e = UnknownException(S.current.unknown_error,
+          error.toString(), error.runtimeType.toString());
       emit(UserScreenEditError(e));
     }
   }

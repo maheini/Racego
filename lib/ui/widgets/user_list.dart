@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/models/user.dart';
 import '../../business_logic/widgets/list_selection_cubit.dart';
+import 'package:racego/generated/l10n.dart';
 
 class UserList extends StatefulWidget {
   const UserList(List<User> userList,
@@ -85,40 +86,40 @@ class _UserListState extends State<UserList> {
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: Row(
-        children: const [
+        children: [
           Expanded(
             flex: 1,
             child: Text(
-              'ID',
+              S.current.id,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Expanded(
             flex: 3,
             child: Text(
-              'Vorname',
+              S.current.first_name,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Expanded(
             flex: 3,
             child: Text(
-              'Nachname',
+              S.current.last_name,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Expanded(
             flex: 1,
             child: Text(
-              'Runden',
+              S.current.laps,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -137,7 +138,7 @@ class _UserListState extends State<UserList> {
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 15),
               decoration: InputDecoration(
-                hintText: 'Suchen...',
+                hintText: S.current.search_hint,
                 suffix: IconButton(
                   icon: const Icon(
                     Icons.clear,
@@ -173,15 +174,12 @@ class _UserListState extends State<UserList> {
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(4),
                         bottomRight: Radius.circular(4)),
-                    // side: BorderSide(color: Colors.red))
                   )),
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
                 ),
                 onPressed: () =>
                     widget._onAddPressed?.call(_searchTextController.text),
                 child: const Icon(Icons.add),
-                // st
-                // color: Colors.blue,
               ),
             ),
         ],
@@ -192,17 +190,37 @@ class _UserListState extends State<UserList> {
   Widget _userListDecoration({required Widget child}) {
     if (widget._title == null) {
       return Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onBackground,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              // offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         child: child,
         padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
       );
     } else {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onBackground,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  // offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
             padding: const EdgeInsets.all(10),
-            color: Colors.grey.shade800.withOpacity(0.7),
             width: double.infinity,
             child: Text(
               widget._title!,
@@ -216,9 +234,19 @@ class _UserListState extends State<UserList> {
           const SizedBox(height: 5),
           Expanded(
             child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onBackground,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    // offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
               child: child,
               padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
             ),
           ),
           // Expanded(child: child),
@@ -228,26 +256,32 @@ class _UserListState extends State<UserList> {
   }
 
   int _pendingTabs = 0;
-  int _currentID = -1;
+  int _lastID = -1;
   void onTab(int index, int id) async {
     // is new item selected? ->remove all pending items and update current item
-    if (_currentID != id) {
+    if (_lastID != id) {
       _pendingTabs = 0;
-      _currentID = id;
+      _lastID = id;
     }
     // if there are waiting tabs, then send doubletab and reset waiting tabs
     if (_pendingTabs > 0) {
+      // If Item got unselected with the first click, then re-select the item
+      if (_listCubit.state != id) {
+        _listCubit.itemPressed(id);
+        widget._onSelectionChanged?.call(index, id, _listCubit.state == id);
+      }
+      // Send doubleTap and reset pendingTabs
       widget._onDoubleTap?.call(index, id);
       _pendingTabs = 0;
     }
     // else send tab and start waiting for doubletab
     else {
-      widget._onSelectionChanged?.call(index, id, _listCubit.state != id);
       _listCubit.itemPressed(id);
+      widget._onSelectionChanged?.call(index, id, _listCubit.state == id);
       _pendingTabs++;
       await Future.delayed(const Duration(milliseconds: 300));
       // if there are pending tabs and still the same id, then reset
-      if (_pendingTabs > 0 && _currentID == id) {
+      if (_pendingTabs > 0 && _lastID == id) {
         _pendingTabs--;
       }
     }
@@ -255,7 +289,7 @@ class _UserListState extends State<UserList> {
 
   Widget _userListTile(User user, int index) {
     return InkWell(
-      onTap: () => onTab(index, user.id), //() => onTab(index, user.id),
+      onTap: () => onTab(index, user.id),
       child: BlocBuilder<ListSelectionCubit, int>(
         buildWhen: (previousSelection, currentSelection) {
           if (user.id == currentSelection || user.id == previousSelection) {
@@ -267,8 +301,8 @@ class _UserListState extends State<UserList> {
         bloc: _listCubit,
         builder: (context, currentSelection) {
           return Container(
-            color: _listCubit.state == user.id
-                ? Colors.white.withOpacity(0.1)
+            color: currentSelection == user.id
+                ? Theme.of(context).selectedRowColor
                 : null,
             padding: const EdgeInsets.all(10),
             child: Row(

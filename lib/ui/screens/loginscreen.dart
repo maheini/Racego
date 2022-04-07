@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
+import 'package:racego/generated/l10n.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -29,9 +30,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: SizedBox(
                   child: Column(
                     children: [
-                      const Text(
-                        'Racego Login',
-                        style: TextStyle(fontSize: 20),
+                      Text(
+                        S.current.sign_in_title,
+                        style: const TextStyle(fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
@@ -54,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: 300,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Theme.of(context).colorScheme.onBackground,
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
                 ),
                 padding: const EdgeInsets.all(40),
@@ -92,10 +93,10 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       decoration: InputDecoration(
-        errorText: _showEmailEmptyMessage ? 'Email ist leer' : null,
+        errorText: _showEmailEmptyMessage ? S.current.email_empty : null,
         border: const OutlineInputBorder(),
-        hintText: 'Email',
-        labelText: 'Email',
+        hintText: S.current.email,
+        labelText: S.current.email,
       ),
     );
   }
@@ -127,10 +128,10 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       decoration: InputDecoration(
-        errorText: _showPasswordEmptyMessage ? 'Passwort ist leer' : null,
+        errorText: _showPasswordEmptyMessage ? S.current.password_empty : null,
         border: const OutlineInputBorder(),
-        hintText: 'Passwort',
-        labelText: 'Passwort',
+        hintText: S.current.password,
+        labelText: S.current.password,
       ),
     );
   }
@@ -145,9 +146,9 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               SizedBox(
                 child: ColoredButton(
-                  const Text(
-                    'Anmelden',
-                    style: TextStyle(
+                  Text(
+                    S.current.sign_in,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -178,9 +179,9 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ColoredButton(
-                    const Text(
-                      'Anmelden',
-                      style: TextStyle(
+                    Text(
+                      S.current.sign_in,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
@@ -197,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           );
         } else {
-          return const Text('Unbekannter Fehler');
+          return Text(S.current.unknown_error);
         }
       },
     );

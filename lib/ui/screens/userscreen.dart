@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:racego/data/models/userdetails.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/lapseditor.dart';
 import 'package:racego/ui/widgets/loggedoutdialog.dart';
+import 'package:racego/generated/l10n.dart';
 
 import '../widgets/selectablelist.dart';
 
@@ -75,20 +77,29 @@ class _UserScreenState extends State<UserScreen> {
                 context.read<LoginBloc>().add(Logout());
                 return;
               }
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  duration: const Duration(seconds: 5),
-                  content: Text(exception != null
-                      ? exception.errorMessage
-                      : 'Unbekannter Fehler'),
-                  action: SnackBarAction(
-                    label: 'OK',
-                    onPressed: () =>
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+              Flushbar(
+                animationDuration: const Duration(milliseconds: 500),
+                margin: const EdgeInsets.all(8),
+                borderRadius: BorderRadius.circular(8),
+                message: exception != null
+                    ? exception.errorMessage
+                    : S.current.unknown_error,
+                duration: const Duration(seconds: 5),
+                flushbarPosition: FlushbarPosition.TOP,
+                isDismissible: true,
+                icon: const Icon(
+                  Icons.warning_amber_rounded,
+                  size: 28.0,
+                  color: Colors.red,
+                ),
+                mainButton: TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    S.of(context).ok_flat,
+                    style: const TextStyle(color: Colors.blue),
                   ),
                 ),
-              );
+              ).show(context);
             }
           },
         ),
@@ -100,9 +111,8 @@ class _UserScreenState extends State<UserScreen> {
             child: Image.asset('assets/racego_r.png', fit: BoxFit.cover),
           ),
           automaticallyImplyLeading: false,
-          backgroundColor: const Color.fromARGB(255, 175, 0, 6),
-          title: const Text(
-            'Benutzer bearbeiten',
+          title: Text(
+            S.current.edit_user,
           ),
           centerTitle: true,
         ),
@@ -141,9 +151,9 @@ class _UserScreenState extends State<UserScreen> {
                     state is UserScreenEditSaving;
 
                 return ColoredButton(
-                  const Text(
-                    'Speichern',
-                    style: TextStyle(
+                  Text(
+                    S.current.save,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -168,9 +178,9 @@ class _UserScreenState extends State<UserScreen> {
             ),
             const SizedBox(width: 20),
             ColoredButton(
-              const Text(
-                'Zurück',
-                style: TextStyle(
+              Text(
+                S.current.back,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -213,12 +223,12 @@ class _UserScreenState extends State<UserScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Fehler beim Laden des Benutzers. Neu versuchen?'),
+                Text(S.current.loading_user_error),
                 const SizedBox(height: 20),
                 ColoredButton(
-                  const Text(
-                    'Neu versuchen',
-                    style: TextStyle(
+                  Text(
+                    S.current.retry,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -249,20 +259,21 @@ class _UserScreenState extends State<UserScreen> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 30),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.1),
-                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
                 ),
                 width: 300,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextField(
-                      decoration: const InputDecoration(hintText: 'Vorname'),
+                      decoration:
+                          InputDecoration(hintText: S.current.first_name),
                       controller: _firstName,
                     ),
                     TextField(
-                      decoration: const InputDecoration(hintText: 'Nachname'),
+                      decoration:
+                          InputDecoration(hintText: S.current.last_name),
                       controller: _lastName,
                     ),
                   ],
