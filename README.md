@@ -6,7 +6,7 @@
 
 # Racego
 
-A cross-platform race-management tool.
+A cross-platform race-management tool for Desktop and web.
 
 ## Languages
 
