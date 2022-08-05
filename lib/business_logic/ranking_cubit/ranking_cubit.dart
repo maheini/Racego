@@ -23,10 +23,9 @@ class RankingCubit extends Cubit<RankingcubitState> {
   Future<void> loadClasses() async {
     try {
       _classes = await _api.getCategories();
-      // if (!_classes.contains(_currentClass)) {
-      //   _currentClass = '';
-      //   _classes.clear();
-      // }
+      if (!_classes.contains(_currentClass)) {
+        _currentClass = '';
+      }
       emit(RankingLoaded(_currentRanking,
           currentClass: _currentClass, classList: _classes));
     } catch (e) {
@@ -44,6 +43,7 @@ class RankingCubit extends Cubit<RankingcubitState> {
   Future<void> loadRanking(String? raceClass) async {
     try {
       _currentRanking = await _api.getRankig(raceClass);
+      _currentClass = raceClass ?? '';
       emit(RankingLoaded(_currentRanking,
           currentClass: _currentClass, classList: _classes));
     } catch (e) {
