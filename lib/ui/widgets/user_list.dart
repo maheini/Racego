@@ -135,7 +135,6 @@ class _UserListState extends State<UserList> {
         children: [
           Expanded(
             child: TextField(
-              textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 15),
               decoration: InputDecoration(
                 hintText: S.current.search_hint,
