@@ -27,7 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  another_flushbar: ^1.10.28
+  another_flushbar: ^1.10.29
   http: ^0.13.4
   flutter_secure_storage: ^5.0.2
   flutter_bloc: ^8.0.1
