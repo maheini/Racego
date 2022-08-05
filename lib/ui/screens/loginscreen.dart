@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
             if (state is RegeneratingSession) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is LoggedIn) {
-              WidgetsBinding.instance?.addPostFrameCallback((_) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacementNamed(context, '/');
               });
               return const SizedBox(height: 20);
