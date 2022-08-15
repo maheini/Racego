@@ -328,7 +328,7 @@ class RacegoApi {
   Future<bool> finishLap(int userId, Time time) async {
     try {
       if (!time.isValid) return false;
-      Map<String, dynamic> bodyMap = {'id': userId, 'time': time.toTimeString};
+      Map<String, dynamic> bodyMap = {'id': userId, 'time': time.isoTime};
       String body = jsonEncode(bodyMap);
       String response = await _putRequest(_apiBaseUrl + 'v1/ontrack', body);
       Map<String, dynamic> map = jsonDecode(response);
