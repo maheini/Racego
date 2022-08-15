@@ -5,12 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:racego/data/models/racedetails.dart';
 import 'package:racego/data/models/rankinglist.dart';
 import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/data/models/userdetails.dart';
 
 import '../../generated/l10n.dart';
+import '../models/race.dart';
 
 class RacegoApi {
   String? _username;
@@ -22,8 +24,15 @@ class RacegoApi {
 
   final http.Client _client;
 
+  String _currentRaceId = '';
   bool get isLoggedIn => _isLoggedIn;
   String get username => _username ?? '';
+
+  Future<void> updateRaceId(int raceId) async {
+    _currentRaceId = raceId.toString();
+    headers['raceid'] = _currentRaceId;
+    await secureStorage.write(key: 'racego_raceid', value: _currentRaceId);
+  }
 
   Future<bool> regenerateSession() async {
     try {
@@ -32,6 +41,9 @@ class RacegoApi {
         String? cookie = await secureStorage.read(key: 'racego_cookie');
         if (cookie != null) setCookie(cookie);
       }
+
+      _currentRaceId = await secureStorage.read(key: 'racego_raceid') ?? '';
+      headers['raceid'] = _currentRaceId;
 
       Map<String, dynamic> status =
           jsonDecode(await _getRequest(_apiBaseUrl + 'me'));
