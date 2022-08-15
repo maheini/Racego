@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/selectablelist_cubit/selectablelist_cubit.dart';
 import 'package:racego/generated/l10n.dart';
+import 'package:racego/ui/widgets/titlebar.dart';
 
 class SelectableList extends StatefulWidget {
   const SelectableList(
@@ -30,43 +31,21 @@ class _SelectableListState extends State<SelectableList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _title(),
+        BlocBuilder<SelectablelistCubit, SelectablelistState>(
+          bloc: _cubit,
+          builder: (index, state) {
+            return TitleBar(
+              S.current.race_classes + ': ${_cubit.selection.length}',
+              fontSize: 20,
+            );
+          },
+        ),
         const SizedBox(height: 5),
         Expanded(child: _list()),
         const SizedBox(height: 5),
         _addBar(),
       ],
     );
-  }
-
-  Widget _title() {
-    return Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onBackground,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 5,
-              // offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.all(10),
-        width: double.infinity,
-        child: BlocBuilder<SelectablelistCubit, SelectablelistState>(
-          bloc: _cubit,
-          builder: (index, state) {
-            return Text(
-              S.current.race_classes + ': ${_cubit.selection.length}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            );
-          },
-        ));
   }
 
   Widget _list() {
