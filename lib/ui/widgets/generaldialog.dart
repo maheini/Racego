@@ -27,7 +27,7 @@ Future<bool> generalDialog(
                 style: TextButton.styleFrom(
                   primary: Colors.white,
                 ),
-                child: Text(S.current.cancel),
+                child: Text(S.current.cancel_flat),
                 onPressed: () {
                   Navigator.of(context).pop(false);
                 },
