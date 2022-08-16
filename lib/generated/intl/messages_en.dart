@@ -25,9 +25,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add_race_failed_invalid_input_data":
+            MessageLookupByLibrary.simpleMessage(
+                "Error while creating the race: Incorrect input data"),
+        "add_ranking_hint":
+            MessageLookupByLibrary.simpleMessage("Add ranking..."),
+        "add_username": MessageLookupByLibrary.simpleMessage("Add username"),
         "all_classes": MessageLookupByLibrary.simpleMessage("All classes"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cancel_flat": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "create_class_hint":
             MessageLookupByLibrary.simpleMessage("Create Class..."),
         "edit_user": MessageLookupByLibrary.simpleMessage("Edit User"),
@@ -67,9 +74,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
         "loading_user_error":
             MessageLookupByLibrary.simpleMessage("Error loading the user."),
+        "log_out": MessageLookupByLibrary.simpleMessage("Logout"),
         "login_invalid": MessageLookupByLibrary.simpleMessage(
             "Incorrect username or password."),
+        "manage_your_races": MessageLookupByLibrary.simpleMessage("Your races"),
+        "management": MessageLookupByLibrary.simpleMessage("Verwaltung"),
+        "manager": MessageLookupByLibrary.simpleMessage("Manager"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "name_empty": MessageLookupByLibrary.simpleMessage("Name is empty"),
         "no_permission":
             MessageLookupByLibrary.simpleMessage("No authorization."),
         "ok_flat": MessageLookupByLibrary.simpleMessage("OK"),
@@ -81,11 +93,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "race_track": MessageLookupByLibrary.simpleMessage("Race Track"),
         "rank": MessageLookupByLibrary.simpleMessage("Rank"),
         "ranking": MessageLookupByLibrary.simpleMessage("Ranking"),
+        "remove_race_warning": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this race?"),
+        "remove_title": MessageLookupByLibrary.simpleMessage("Remove"),
         "requestet_entity_not_found": MessageLookupByLibrary.simpleMessage(
             "Requested entity was not found.."),
         "retry": MessageLookupByLibrary.simpleMessage("Try again"),
         "retry_login":
             MessageLookupByLibrary.simpleMessage("Please login again"),
+        "role": MessageLookupByLibrary.simpleMessage("Role"),
+        "role_administrator": MessageLookupByLibrary.simpleMessage("Admin"),
+        "role_manager": MessageLookupByLibrary.simpleMessage("User"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search_hint": MessageLookupByLibrary.simpleMessage("Search..."),
         "session_expired":
@@ -94,12 +112,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your session has expired. Please log in again."),
         "sign_in": MessageLookupByLibrary.simpleMessage("Login"),
         "sign_in_title": MessageLookupByLibrary.simpleMessage("Racego login"),
+        "switch_role": MessageLookupByLibrary.simpleMessage("Switch role"),
         "sync_errormessage": MessageLookupByLibrary.simpleMessage(
             "Error: Synchronization interrupted!"),
         "unknown_error":
             MessageLookupByLibrary.simpleMessage("Unbekannter Fehler"),
         "unprocessable_entity": MessageLookupByLibrary.simpleMessage(
             "Couldn\'t process the request."),
+        "username": MessageLookupByLibrary.simpleMessage("Username"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome back")
       };
 }

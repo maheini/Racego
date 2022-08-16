@@ -100,12 +100,42 @@ class S {
     );
   }
 
+  /// `CANCEL`
+  String get cancel_flat {
+    return Intl.message(
+      'CANCEL',
+      name: 'cancel_flat',
+      desc: 'Cancel label for flat buttons',
+      args: [],
+    );
+  }
+
   /// `Back`
   String get back {
     return Intl.message(
       'Back',
       name: 'back',
       desc: 'Display text for going back',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name is empty`
+  String get name_empty {
+    return Intl.message(
+      'Name is empty',
+      name: 'name_empty',
+      desc: '',
       args: [],
     );
   }
@@ -200,12 +230,32 @@ class S {
     );
   }
 
+  /// `Logout`
+  String get log_out {
+    return Intl.message(
+      'Logout',
+      name: 'log_out',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please login again`
   String get retry_login {
     return Intl.message(
       'Please login again',
       name: 'retry_login',
       desc: 'Try login again text',
+      args: [],
+    );
+  }
+
+  /// `Username`
+  String get username {
+    return Intl.message(
+      'Username',
+      name: 'username',
+      desc: '',
       args: [],
     );
   }
@@ -350,22 +400,132 @@ class S {
     );
   }
 
-  /// `Name`
-  String get name {
-    return Intl.message(
-      'Name',
-      name: 'name',
-      desc: 'Name of a \'name\' (independent of first or last name)\'',
-      args: [],
-    );
-  }
-
   /// `Rank`
   String get rank {
     return Intl.message(
       'Rank',
       name: 'rank',
       desc: 'Name of a rank',
+      args: [],
+    );
+  }
+
+  /// `Verwaltung`
+  String get management {
+    return Intl.message(
+      'Verwaltung',
+      name: 'management',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your races`
+  String get manage_your_races {
+    return Intl.message(
+      'Your races',
+      name: 'manage_your_races',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manager`
+  String get manager {
+    return Intl.message(
+      'Manager',
+      name: 'manager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add ranking...`
+  String get add_ranking_hint {
+    return Intl.message(
+      'Add ranking...',
+      name: 'add_ranking_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role`
+  String get role {
+    return Intl.message(
+      'Role',
+      name: 'role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User`
+  String get role_manager {
+    return Intl.message(
+      'User',
+      name: 'role_manager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin`
+  String get role_administrator {
+    return Intl.message(
+      'Admin',
+      name: 'role_administrator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove`
+  String get remove_title {
+    return Intl.message(
+      'Remove',
+      name: 'remove_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this race?`
+  String get remove_race_warning {
+    return Intl.message(
+      'Are you sure you want to delete this race?',
+      name: 'remove_race_warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error while creating the race: Incorrect input data`
+  String get add_race_failed_invalid_input_data {
+    return Intl.message(
+      'Error while creating the race: Incorrect input data',
+      name: 'add_race_failed_invalid_input_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add username`
+  String get add_username {
+    return Intl.message(
+      'Add username',
+      name: 'add_username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch role`
+  String get switch_role {
+    return Intl.message(
+      'Switch role',
+      name: 'switch_role',
+      desc: '',
       args: [],
     );
   }

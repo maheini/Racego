@@ -25,9 +25,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add_race_failed_invalid_input_data":
+            MessageLookupByLibrary.simpleMessage(
+                "Fehler beim erstellen des Rennens: Fehlerhafte Eingabedaten"),
+        "add_ranking_hint":
+            MessageLookupByLibrary.simpleMessage("Rennen hinzufügen..."),
+        "add_username":
+            MessageLookupByLibrary.simpleMessage("Benutzername hinzufügen"),
         "all_classes": MessageLookupByLibrary.simpleMessage("Alle Klassen"),
         "back": MessageLookupByLibrary.simpleMessage("Zurück"),
         "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
+        "cancel_flat": MessageLookupByLibrary.simpleMessage("ABBRECHEN"),
         "create_class_hint":
             MessageLookupByLibrary.simpleMessage("Klasse erstellen..."),
         "edit_user":
@@ -68,9 +76,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_name": MessageLookupByLibrary.simpleMessage("Nachname"),
         "loading_user_error": MessageLookupByLibrary.simpleMessage(
             "Fehler beim laden des Benutzers."),
+        "log_out": MessageLookupByLibrary.simpleMessage("Abmelden"),
         "login_invalid": MessageLookupByLibrary.simpleMessage(
             "Ungültiger Benutzername oder Passwort."),
+        "manage_your_races":
+            MessageLookupByLibrary.simpleMessage("Deine Rennen"),
+        "management": MessageLookupByLibrary.simpleMessage("Verwaltung"),
+        "manager": MessageLookupByLibrary.simpleMessage("Verwalter"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "name_empty": MessageLookupByLibrary.simpleMessage("Name ist leer"),
         "no_permission":
             MessageLookupByLibrary.simpleMessage("Fehlende Berechtigung."),
         "ok_flat": MessageLookupByLibrary.simpleMessage("OK"),
@@ -82,11 +96,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "race_track": MessageLookupByLibrary.simpleMessage("Rennstrecke"),
         "rank": MessageLookupByLibrary.simpleMessage("Rang"),
         "ranking": MessageLookupByLibrary.simpleMessage("Rangliste"),
+        "remove_race_warning": MessageLookupByLibrary.simpleMessage(
+            "Wollen Sie dieses Rennen wirklich entfernen?"),
+        "remove_title": MessageLookupByLibrary.simpleMessage("Entfernen"),
         "requestet_entity_not_found": MessageLookupByLibrary.simpleMessage(
             "Die Angeforderten Daten wurden nicht gefunden.."),
         "retry": MessageLookupByLibrary.simpleMessage("Neu versuchen"),
         "retry_login": MessageLookupByLibrary.simpleMessage(
             "Bitte melden Sie sich erneut an."),
+        "role": MessageLookupByLibrary.simpleMessage("Rolle"),
+        "role_administrator": MessageLookupByLibrary.simpleMessage("Admin"),
+        "role_manager": MessageLookupByLibrary.simpleMessage("Nutzer"),
         "save": MessageLookupByLibrary.simpleMessage("Speichern"),
         "search_hint": MessageLookupByLibrary.simpleMessage("Suchen..."),
         "session_expired":
@@ -95,12 +115,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich neu an."),
         "sign_in": MessageLookupByLibrary.simpleMessage("Login"),
         "sign_in_title": MessageLookupByLibrary.simpleMessage("Racego login"),
+        "switch_role": MessageLookupByLibrary.simpleMessage("Rolle ändern"),
         "sync_errormessage": MessageLookupByLibrary.simpleMessage(
             "Fehler: Synchronisation unterbrochen!"),
         "unknown_error":
             MessageLookupByLibrary.simpleMessage("Unbekannter Fehler"),
         "unprocessable_entity": MessageLookupByLibrary.simpleMessage(
             "Die Anfrage konnte nicht bearbeitet werden."),
+        "username": MessageLookupByLibrary.simpleMessage("Benutzername"),
         "welcome": MessageLookupByLibrary.simpleMessage("Willkommen zurück")
       };
 }
