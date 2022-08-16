@@ -100,6 +100,7 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
           } else if (state is RaceManageLoaded) {
             return RaceList(
               races: state.races,
+              selection: _listToolbarCubit.getSelectedId(),
               selectionChanged: (int selection, bool isSelected) {
                 isSelected
                     ? _listToolbarCubit.selectionChanged(selection)
@@ -177,9 +178,12 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
                       const Icon(Icons.remove_circle),
                       color: Colors.red,
                       onPressed: () async {
-                        // TODO: Add removing function and translation
                         if (await generalDialog(
-                            context, 'Wirklich entfernen?', 'jallo')) {
+                            context,
+                            S.of(context).remove_title,
+                            S.of(context).remove_race_warning)) {
+                          _cubit.removeRace(_listToolbarCubit.getSelectedId());
+                        } else {
                           return;
                         }
                       },
