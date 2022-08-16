@@ -399,6 +399,135 @@ class RacegoApi {
     }
   }
 
+  Future<List<Race>> getRaces() async {
+    try {
+      String response = '';
+      response = await _getRequest(_apiBaseUrl + 'v1/races/');
+
+      final parsed = jsonDecode(response).cast<Map<String, dynamic>>();
+      return parsed.map<Race>((json) => Race.fromJson(json)).toList();
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<int> addRace(String name) async {
+    try {
+      if (name.isEmpty) {
+        throw DataException(S.current.add_race_failed_invalid_input_data);
+      }
+      Map<String, String> bodyMap = {'name': name};
+      String body = jsonEncode(bodyMap);
+      String response = await _postRequest(_apiBaseUrl + 'v1/race/', body);
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('race_id') && map['race_id'] > 0) {
+        return map['race_id'];
+      }
+      return 0;
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<bool> deleteRace(int raceID) async {
+    try {
+      Map<String, int> bodyMap = {'id': raceID};
+      String body = jsonEncode(bodyMap);
+      String response = await _deleteRequest(_apiBaseUrl + 'v1/race/', body);
+      Map<String, dynamic> map = jsonDecode(response);
+
+      if (map.keys.contains('affected_rows') &&
+          map['affected_rows'] is int &&
+          map['affected_rows'] >= 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(
+        S.current.unknown_error,
+        error.toString(),
+        error.runtimeType.toString(),
+      );
+    }
+  }
+
+  Future<RaceDetails> getRaceDetails(int raceId) async {
+    try {
+      String response = '';
+      response =
+          await _getRequest(_apiBaseUrl + 'v1/race/' + raceId.toString());
+      return RaceDetails.fromJson(jsonDecode(response));
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<bool> setRaceDetails(RaceDetails raceDetails) async {
+    try {
+      if (raceDetails.id <= 0 ||
+          raceDetails.name.isEmpty ||
+          raceDetails.managers.isEmpty) {
+        throw DataException(S.current.failed_updating_user_invalid_data);
+      }
+
+      String response = await _postRequest(
+          _apiBaseUrl + 'v1/race/' + raceDetails.id.toString(),
+          jsonEncode(raceDetails.toJson()));
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('result') && map['result'] == 'successful') {
+        return true;
+      }
+      return false;
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
   Future<String> _getRequest(String url) async {
     try {
       http.Response response =
