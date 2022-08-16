@@ -8,6 +8,7 @@ import '../../generated/l10n.dart';
 class RaceList extends StatefulWidget {
   const RaceList(
       {required this.races,
+      this.selection,
       this.selectionChanged,
       this.onDoubleTap,
       this.onAddPressed,
@@ -15,6 +16,7 @@ class RaceList extends StatefulWidget {
       : super(key: key);
 
   final List<Race> races;
+  final int? selection;
 
   final void Function(int id, bool isSelected)? selectionChanged;
   final void Function(int selection)? onDoubleTap;
@@ -39,6 +41,15 @@ class _RaceListState extends State<RaceList> {
       _listCubit.itemPressed(-1);
       widget.selectionChanged?.call(-1, false);
     }
+  }
+
+  @override
+  void initState() {
+    int selection = widget.selection ?? -1;
+    if (selection != -1) {
+      _listCubit.itemPressed(selection);
+    }
+    super.initState();
   }
 
   int _pendingTabs = 0;
