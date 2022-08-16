@@ -21,10 +21,16 @@
     "@ok_flat":{
         "description": "ok label for flat buttons"
     },
+    "cancel_flat": "CANCEL",
+    "@cancel_flat":{
+        "description": "Cancel label for flat buttons"
+    },
     "back": "Back",
     "@back":{
         "description": "Display text for going back"
     },
+    "name": "Name",
+    "name_empty": "Name is empty",
     "@________RACEGO_SPECIFIC________":{},
     "race_track": "Race Track",
     "@race_track":{
@@ -63,10 +69,12 @@
     "@sign_in":{
         "description": "Login button text"
     },
+    "log_out": "Logout",
     "retry_login": "Please login again",
     "@retry_login":{
         "description": "Try login again text"
     },
+    "username": "Username",
     "email": "Email",
     "@email":{
         "description": "Email name"
@@ -125,10 +133,6 @@
     "lap_time": "Time",
     "@time":{
         "description": "Name of a single lap time'"
-    },
-    "name": "Name",
-    "@name":{
-        "description": "Name of a 'name' (independent of first or last name)'"
     },
     "rank": "Rank",
     "@rank":{
