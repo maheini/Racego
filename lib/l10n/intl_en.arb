@@ -134,6 +134,19 @@
     "@rank":{
         "description": "Name of a rank"
     },
+    "@________MANAGEMENT_SCREEN________":{},
+    "management": "Verwaltung",
+    "manage_your_races": "Your races",
+    "manager": "Manager",
+    "add_ranking_hint": "Add ranking...",
+    "role": "Role",
+    "role_manager": "User",
+    "role_administrator": "Admin",
+    "remove_title": "Remove",
+    "remove_race_warning": "Are you sure you want to delete this race?",
+    "add_race_failed_invalid_input_data": "Error while creating the race: Incorrect input data",
+    "add_username": "Add username",
+    "switch_role": "Switch role",
     "@________ERROR_MESSAGES________":{},
     "sync_errormessage": "Error: Synchronization interrupted!",
     "@sync_errormessage":{
