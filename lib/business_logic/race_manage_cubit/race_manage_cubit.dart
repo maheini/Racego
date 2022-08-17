@@ -31,6 +31,38 @@ class RaceManageCubit extends Cubit<RaceManageState> {
     }
   }
 
+  Future<void> addRace(String name) async {
+    try {
+      emit(const RaceManageLoading());
+      await _api.addRace(name);
+      loadRaces();
+    } catch (e) {
+      if (e is RacegoException) {
+        emit(RaceManageError(e));
+      } else {
+        UnknownException error = UnknownException(
+            S.current.unknown_error, e.toString(), e.runtimeType.toString());
+        emit(RaceManageError(error));
+      }
+    }
+  }
+
+  Future<void> removeRace(int raceID) async {
+    try {
+      emit(const RaceManageLoading());
+      await _api.deleteRace(raceID);
+      loadRaces();
+    } catch (e) {
+      if (e is RacegoException) {
+        emit(RaceManageError(e));
+      } else {
+        UnknownException error = UnknownException(
+            S.current.unknown_error, e.toString(), e.runtimeType.toString());
+        emit(RaceManageError(error));
+      }
+    }
+  }
+
   Future<void> setRaceId(int id) async {
     await _api.updateRaceId(id);
     return;
