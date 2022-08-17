@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         const SizedBox(height: 30),
         Text(
-          S.current.welcome,
+          S.current.welcome + ", " + context.read<RacegoApi>().username,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 50,
