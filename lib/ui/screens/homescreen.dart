@@ -127,20 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       centerTitle: true,
       actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            Icons.logout,
-          ),
-          onPressed: () async {
-            _forcedLogout = true;
-            context.read<LoginBloc>().add(Logout());
-          },
-        ),
-        const SizedBox(width: 5),
-        IconButton(
-          icon: const Icon(Icons.emoji_events_rounded),
-          onPressed: () => Navigator.of(context).pushNamed('/ranking'),
-        ),
+        _popupMenu(context),
       ],
     );
   }
@@ -427,5 +414,50 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     ).show(context);
+  }
+
+  Widget _popupMenu(BuildContext context) {
+    return PopupMenuButton(
+      onSelected: (result) async {
+        if (result == 1) {
+          Navigator.of(context).pushNamed('/ranking');
+        } else if (result == 2) {
+          Navigator.of(context).pushNamed('/management');
+        } else if (result == 3) {
+          _forcedLogout = true;
+          context.read<LoginBloc>().add(Logout());
+        }
+      },
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: _buildPopupItem(
+              Icons.emoji_events_rounded, S.of(context).ranking),
+          value: 1,
+        ),
+        PopupMenuItem(
+          child: _buildPopupItem(Icons.settings, S.of(context).management),
+          value: 2,
+        ),
+        PopupMenuItem(
+          child: _buildPopupItem(Icons.logout, S.of(context).log_out),
+          value: 3,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupItem(IconData icon, String name) {
+    return Row(
+      children: <Widget>[
+        Icon(
+          icon,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black,
+        ),
+        const SizedBox(width: 10),
+        Flexible(child: Text(name)),
+      ],
+    );
   }
 }
