@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/exceptions/racego_exception.dart';
@@ -11,6 +12,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(this._api) : super(RegeneratingSession()) {
     on<RegenerateSession>(_regenerateSession);
     on<Login>(_login);
+    on<SwitchLogin>(_gotoRegister);
+    on<Register>(_register);
     on<Logout>(_logout);
   }
   final RacegoApi _api;
@@ -50,5 +53,27 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoggedOut());
     }
     emit(LoggedOut());
+  }
+
+  void _gotoRegister(SwitchLogin event, Emitter<LoginState> emit) {
+    emit(LoggedOut(registerPage: event.register));
+  }
+
+  void _register(Register event, Emitter<LoginState> emit) async {
+    emit(Loading());
+    if (event._password.length < 8) {
+      emit(LoginError(S.current.password_too_short));
+      return;
+    }
+    try {
+      bool isLoggedIn = await _api.register(event._username, event._password);
+      if (isLoggedIn) {
+        emit(LoggedIn(username: _api.username));
+      } else {
+        emit(LoginError(S.current.login_invalid));
+      }
+    } on RacegoException catch (racegoException) {
+      emit(LoginError(racegoException.errorMessage));
+    }
   }
 }
