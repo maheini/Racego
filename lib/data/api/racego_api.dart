@@ -24,14 +24,15 @@ class RacegoApi {
 
   final http.Client _client;
 
-  String _currentRaceId = '';
+  int currentRaceId = 0;
   bool get isLoggedIn => _isLoggedIn;
   String get username => _username ?? '';
 
   Future<void> updateRaceId(int raceId) async {
-    _currentRaceId = raceId.toString();
-    headers['raceid'] = _currentRaceId;
-    await secureStorage.write(key: 'racego_raceid', value: _currentRaceId);
+    currentRaceId = raceId;
+    headers['raceid'] = currentRaceId.toString();
+    await secureStorage.write(
+        key: 'racego_raceid_' + username, value: currentRaceId.toString());
   }
 
   Future<bool> regenerateSession() async {
@@ -42,14 +43,17 @@ class RacegoApi {
         if (cookie != null) setCookie(cookie);
       }
 
-      _currentRaceId = await secureStorage.read(key: 'racego_raceid') ?? '';
-      headers['raceid'] = _currentRaceId;
-
       Map<String, dynamic> status =
           jsonDecode(await _getRequest(_apiBaseUrl + 'me'));
       if (status.containsKey('username')) {
         _username = status['username'];
         _isLoggedIn = true;
+
+        // retrieve last raceid for the current user from secure storage
+        currentRaceId = await secureStorage.read(
+                key: 'racego_raceid_' + username) as int? ??
+            0;
+        headers['raceid'] = currentRaceId.toString();
         return true;
       }
       return false;
@@ -78,6 +82,11 @@ class RacegoApi {
       if (data.containsKey('username')) {
         _username = data['username'];
         _isLoggedIn = true;
+
+        // retrieve last raceid for the current user from secure storage
+        currentRaceId = int.parse(
+            await secureStorage.read(key: 'racego_raceid_' + username) ?? '0');
+        headers['raceid'] = currentRaceId.toString();
         return true;
       }
       return false;
@@ -142,6 +151,10 @@ class RacegoApi {
       if (data.containsKey('username')) {
         _username = null;
         _isLoggedIn = false;
+
+        // reset header and current raceid
+        currentRaceId = 0;
+        headers['raceid'] = currentRaceId.toString();
         return true;
       }
       return false;
@@ -576,10 +589,16 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.failed_login);
         case 404:
           throw ServerException(S.current.requestet_entity_not_found);
@@ -615,10 +634,16 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.failed_login);
         case 404:
           throw ServerException(S.current.requestet_entity_not_found);
@@ -654,10 +679,16 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.failed_login);
         case 404:
           throw ServerException(S.current.requestet_entity_not_found);
@@ -693,10 +724,16 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.failed_login);
         case 404:
           throw ServerException(S.current.requestet_entity_not_found);
