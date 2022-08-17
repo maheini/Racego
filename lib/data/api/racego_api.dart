@@ -99,6 +99,42 @@ class RacegoApi {
     }
   }
 
+  Future<bool> register(String username, String password) async {
+    try {
+      Map<String, String> loginData = {
+        'username': username,
+        'password': password
+      };
+      String response = await _postRequest(_apiBaseUrl + 'register', loginData);
+      Map<String, dynamic> data = jsonDecode(response);
+      if (data.containsKey('username')) {
+        _username = data['username'];
+        _isLoggedIn = true;
+
+        // Set raceid to 0 for the new user
+        currentRaceId = 0;
+        headers['raceid'] = currentRaceId.toString();
+        return true;
+      }
+      return false;
+    } on AuthException catch (authError) {
+      if (authError.errorMessage.contains(S.current.failed_registration)) {
+        return false;
+      } else {
+        rethrow;
+      }
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
   Future<bool> logout() async {
     try {
       String response = await _postRequest(_apiBaseUrl + 'logout', '');
