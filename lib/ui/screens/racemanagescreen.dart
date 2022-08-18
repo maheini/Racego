@@ -22,6 +22,7 @@ class RaceManagementScreen extends StatefulWidget {
 class _RaceManagementScreenState extends State<RaceManagementScreen> {
   final ListToolbarCubit _listToolbarCubit = ListToolbarCubit();
   late final RaceManageCubit _cubit;
+  bool _forcedLogout = false;
 
   @override
   void initState() {
@@ -34,10 +35,14 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) async {
         if (state is LoggedOut || state is LoginError) {
-          await loggedOutDialog(context);
-          WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (_forcedLogout) {
             Navigator.pushReplacementNamed(context, '/');
-          });
+          } else {
+            await loggedOutDialog(context);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacementNamed(context, '/');
+            });
+          }
         }
       },
       child: Scaffold(
@@ -87,6 +92,15 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
         S.current.management,
       ),
       centerTitle: true,
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            _forcedLogout = true;
+            context.read<LoginBloc>().add(Logout());
+          },
+        ),
+      ],
     );
   }
 
