@@ -62,23 +62,25 @@
     },
     "@________LOGIN_SCREEN________":{},
     "sign_in_title": "Racego login",
-    "@sign_in_title":{
-        "description": "Login title text"
-    },
+    "register_title": "Racego registration",
     "sign_in": "Login",
     "@sign_in":{
         "description": "Login button text"
     },
+    "register": "Register",
     "log_out": "Logout",
     "retry_login": "Please login again",
     "@retry_login":{
         "description": "Try login again text"
     },
+    "register_now": "No Account? Register now!",
+    "login_now": "Already have an account? Login here!",
     "username": "Username",
     "email": "Email",
     "@email":{
         "description": "Email name"
     },
+    "email_too_short": "Email is too short",
     "email_empty": "Email is empty",
     "@email_empty":{
         "description": "Email is empty message"
@@ -87,6 +89,7 @@
     "@password":{
         "description": "Password name"
     },
+    "password_too_short": "Password is too short",
     "password_empty": "Password is empty",
     "@password_empty":{
         "description": "Password is empty message"
@@ -95,6 +98,7 @@
     "@login_invalid":{
         "description": "Email or Password is incorrrect"
     },
+    "failed_registration": "Registration failed",
     "welcome": "Welcome back",
     "@welcome":{
         "description": "Welcome message"
