@@ -41,7 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_user":
             MessageLookupByLibrary.simpleMessage("Benutzer bearbeiten"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "email_empty": MessageLookupByLibrary.simpleMessage("Email is empty"),
+        "email_empty": MessageLookupByLibrary.simpleMessage("Email ist leer"),
+        "email_too_short":
+            MessageLookupByLibrary.simpleMessage("Email ist zu kurz"),
         "failed_adding_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "Benutzer konnte nicht erstellt werden: Datenbank ID ist ungültig."),
         "failed_adding_user_on_track_invalid_id":
@@ -55,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Login fehlgeschlagen."),
         "failed_parsing_response": MessageLookupByLibrary.simpleMessage(
             "Fehler beim Parsen der Serverantwort."),
+        "failed_registration": MessageLookupByLibrary.simpleMessage(
+            "Registrierung fehlgeschlagen."),
         "failed_removing_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "Benutzer konnte nicht entfernt werden: Id ungültig."),
         "failed_send_conflicting_data": MessageLookupByLibrary.simpleMessage(
@@ -79,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "log_out": MessageLookupByLibrary.simpleMessage("Abmelden"),
         "login_invalid": MessageLookupByLibrary.simpleMessage(
             "Ungültiger Benutzername oder Passwort."),
+        "login_now": MessageLookupByLibrary.simpleMessage(
+            "Konto bereits vorhanden? Hier anmelden!"),
         "manage_your_races":
             MessageLookupByLibrary.simpleMessage("Deine Rennen"),
         "management": MessageLookupByLibrary.simpleMessage("Verwaltung"),
@@ -89,13 +95,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fehlende Berechtigung."),
         "ok_flat": MessageLookupByLibrary.simpleMessage("OK"),
         "participants": MessageLookupByLibrary.simpleMessage("Teilnehmer"),
-        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "password": MessageLookupByLibrary.simpleMessage("Passwort"),
         "password_empty":
-            MessageLookupByLibrary.simpleMessage("Password is empty"),
+            MessageLookupByLibrary.simpleMessage("Passwort ist leer"),
+        "password_too_short":
+            MessageLookupByLibrary.simpleMessage("Passwort ist zu kurz"),
         "race_classes": MessageLookupByLibrary.simpleMessage("Rennklassen"),
         "race_track": MessageLookupByLibrary.simpleMessage("Rennstrecke"),
         "rank": MessageLookupByLibrary.simpleMessage("Rang"),
         "ranking": MessageLookupByLibrary.simpleMessage("Rangliste"),
+        "register": MessageLookupByLibrary.simpleMessage("Registrieren"),
+        "register_now": MessageLookupByLibrary.simpleMessage(
+            "Kein Konto? Jetzt registrieren!"),
+        "register_title":
+            MessageLookupByLibrary.simpleMessage("Racego Registration"),
         "remove_race_warning": MessageLookupByLibrary.simpleMessage(
             "Wollen Sie dieses Rennen wirklich entfernen?"),
         "remove_title": MessageLookupByLibrary.simpleMessage("Entfernen"),
@@ -113,8 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sitzung abgelaufen"),
         "session_expired_details": MessageLookupByLibrary.simpleMessage(
             "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich neu an."),
-        "sign_in": MessageLookupByLibrary.simpleMessage("Login"),
-        "sign_in_title": MessageLookupByLibrary.simpleMessage("Racego login"),
+        "sign_in": MessageLookupByLibrary.simpleMessage("Anmelden"),
+        "sign_in_title": MessageLookupByLibrary.simpleMessage("Racego Login"),
         "switch_role": MessageLookupByLibrary.simpleMessage("Rolle ändern"),
         "sync_errormessage": MessageLookupByLibrary.simpleMessage(
             "Fehler: Synchronisation unterbrochen!"),

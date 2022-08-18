@@ -215,7 +215,17 @@ class S {
     return Intl.message(
       'Racego login',
       name: 'sign_in_title',
-      desc: 'Login title text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Racego registration`
+  String get register_title {
+    return Intl.message(
+      'Racego registration',
+      name: 'register_title',
+      desc: '',
       args: [],
     );
   }
@@ -226,6 +236,16 @@ class S {
       'Login',
       name: 'sign_in',
       desc: 'Login button text',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
       args: [],
     );
   }
@@ -250,6 +270,26 @@ class S {
     );
   }
 
+  /// `No Account? Register now!`
+  String get register_now {
+    return Intl.message(
+      'No Account? Register now!',
+      name: 'register_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account? Login here!`
+  String get login_now {
+    return Intl.message(
+      'Already have an account? Login here!',
+      name: 'login_now',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Username`
   String get username {
     return Intl.message(
@@ -266,6 +306,16 @@ class S {
       'Email',
       name: 'email',
       desc: 'Email name',
+      args: [],
+    );
+  }
+
+  /// `Email is too short`
+  String get email_too_short {
+    return Intl.message(
+      'Email is too short',
+      name: 'email_too_short',
+      desc: '',
       args: [],
     );
   }
@@ -290,6 +340,16 @@ class S {
     );
   }
 
+  /// `Password is too short`
+  String get password_too_short {
+    return Intl.message(
+      'Password is too short',
+      name: 'password_too_short',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Password is empty`
   String get password_empty {
     return Intl.message(
@@ -306,6 +366,16 @@ class S {
       'Incorrect username or password.',
       name: 'login_invalid',
       desc: 'Email or Password is incorrrect',
+      args: [],
+    );
+  }
+
+  /// `Registration failed`
+  String get failed_registration {
+    return Intl.message(
+      'Registration failed',
+      name: 'failed_registration',
+      desc: '',
       args: [],
     );
   }

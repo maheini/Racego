@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit_user": MessageLookupByLibrary.simpleMessage("Edit User"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_empty": MessageLookupByLibrary.simpleMessage("Email is empty"),
+        "email_too_short":
+            MessageLookupByLibrary.simpleMessage("Email is too short"),
         "failed_adding_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "User could not be created: Database ID is invalid."),
         "failed_adding_user_on_track_invalid_id":
@@ -53,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "failed_login": MessageLookupByLibrary.simpleMessage("Login failed."),
         "failed_parsing_response": MessageLookupByLibrary.simpleMessage(
             "Error parsing the server response."),
+        "failed_registration":
+            MessageLookupByLibrary.simpleMessage("Registration failed"),
         "failed_removing_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "User could not be removed: ID invalid."),
         "failed_send_conflicting_data":
@@ -77,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "log_out": MessageLookupByLibrary.simpleMessage("Logout"),
         "login_invalid": MessageLookupByLibrary.simpleMessage(
             "Incorrect username or password."),
+        "login_now": MessageLookupByLibrary.simpleMessage(
+            "Already have an account? Login here!"),
         "manage_your_races": MessageLookupByLibrary.simpleMessage("Your races"),
         "management": MessageLookupByLibrary.simpleMessage("Verwaltung"),
         "manager": MessageLookupByLibrary.simpleMessage("Manager"),
@@ -89,10 +95,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "password_empty":
             MessageLookupByLibrary.simpleMessage("Password is empty"),
+        "password_too_short":
+            MessageLookupByLibrary.simpleMessage("Password is too short"),
         "race_classes": MessageLookupByLibrary.simpleMessage("Race Classes"),
         "race_track": MessageLookupByLibrary.simpleMessage("Race Track"),
         "rank": MessageLookupByLibrary.simpleMessage("Rank"),
         "ranking": MessageLookupByLibrary.simpleMessage("Ranking"),
+        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "register_now":
+            MessageLookupByLibrary.simpleMessage("No Account? Register now!"),
+        "register_title":
+            MessageLookupByLibrary.simpleMessage("Racego registration"),
         "remove_race_warning": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this race?"),
         "remove_title": MessageLookupByLibrary.simpleMessage("Remove"),
