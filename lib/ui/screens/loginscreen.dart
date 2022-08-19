@@ -12,6 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _isRegistration = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,12 +33,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       Text(
-                        S.current.sign_in_title,
-                        style: const TextStyle(fontSize: 20),
+                        _isRegistration
+                            ? S.current.register_title
+                            : S.current.sign_in_title,
+                        style: const TextStyle(fontSize: 25),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 40,
                       ),
                       _emailInput(),
                       const SizedBox(
@@ -44,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       _passwordInput(),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       _loginBar(),
                     ],
@@ -58,7 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                   color: Theme.of(context).colorScheme.onBackground,
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
                 ),
-                padding: const EdgeInsets.all(40),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               );
             }
           },
@@ -140,25 +145,81 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBar() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        if (state is LoggedOut || state is RegeneratingSession) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+        if (state is LoggedOut ||
+            state is RegeneratingSession ||
+            state is LoginError) {
+          if (state is LoggedOut) {
+            if (_isRegistration != state.registerPage) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  _isRegistration = state.registerPage;
+                });
+              });
+            }
+          }
+          return Column(
             children: [
-              SizedBox(
-                child: ColoredButton(
-                  Text(
-                    S.current.sign_in,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
+              if (state is LoginError)
+                Text(
+                  state.errorMessage,
+                  style: const TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    child: ColoredButton(
+                      Text(
+                        _isRegistration
+                            ? S.current.register
+                            : S.current.sign_in,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      color: Colors.blue,
+                      onPressed: () {
+                        if (_isRegistration) {
+                          context.read<LoginBloc>().add(Register(
+                              _emailController.text, _passwordController.text));
+                        } else {
+                          context.read<LoginBloc>().add(Login(
+                              _emailController.text, _passwordController.text));
+                        }
+                      },
                     ),
                   ),
-                  color: Colors.blue,
-                  onPressed: () {
-                    context.read<LoginBloc>().add(
-                        Login(_emailController.text, _passwordController.text));
-                  },
+                ],
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  if (_isRegistration) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      context
+                          .read<LoginBloc>()
+                          .add(SwitchLogin(register: false));
+                    });
+                  } else {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      context
+                          .read<LoginBloc>()
+                          .add(SwitchLogin(register: true));
+                    });
+                  }
+                },
+                child: Text(
+                  _isRegistration
+                      ? S.current.login_now
+                      : S.current.register_now,
+                  style: const TextStyle(
+                    color: Colors.blue,
+                  ),
                 ),
               ),
             ],
