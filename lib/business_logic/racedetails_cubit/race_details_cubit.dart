@@ -20,11 +20,11 @@ class RaceDetailsCubit extends Cubit<RaceDetailsState> {
       emit(RaceDetailsLoaded(details));
     } catch (e) {
       if (e is RacegoException) {
-        emit(RaceDetailsSaveFailure(e));
+        emit(RaceDetailsError(e));
       } else {
         UnknownException error = UnknownException(
             S.current.unknown_error, e.toString(), e.runtimeType.toString());
-        emit(RaceDetailsSaveFailure(error));
+        emit(RaceDetailsError(error));
       }
     }
   }
