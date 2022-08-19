@@ -4,7 +4,6 @@ import '../../business_logic/listtoolbar/listtoolbar_cubit.dart';
 import '../../business_logic/login/login_bloc.dart';
 import '../../business_logic/race_manage_cubit/race_manage_cubit.dart';
 import '../../data/api/racego_api.dart';
-import '../../data/exceptions/racego_exception.dart';
 import '../../generated/l10n.dart';
 import '../widgets/coloredbutton.dart';
 import '../widgets/generaldialog.dart';
@@ -134,12 +133,16 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
                 }
               },
             );
-          } else if (state is RaceManageError) {
+          } else {
+            String error = S.of(context).unknown_error;
+            if (state is RaceManageError) {
+              error = state.exception.errorMessage;
+            }
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(state.exception.errorMessage),
+                  Text(error),
                   const SizedBox(height: 20),
                   ColoredButton(
                     Text(
@@ -157,7 +160,6 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
               ),
             );
           }
-          return Center(child: Text(S.current.unknown_error));
         },
       ),
     );
