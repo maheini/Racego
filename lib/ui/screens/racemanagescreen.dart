@@ -211,7 +211,7 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
                       onPressed: () async {
                         await _cubit
                             .setRaceId(_listToolbarCubit.getSelectedId());
-                        Navigator.of(context).pop();
+                        Navigator.pushReplacementNamed(context, '/');
                       },
                       isDisabled: disabled,
                     ),
