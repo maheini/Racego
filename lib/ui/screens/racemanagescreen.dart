@@ -63,10 +63,7 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
                         fontSize: 20,
                       ),
                       const SizedBox(height: 5),
-                      BlocProvider(
-                        create: (context) => _cubit,
-                        child: _manager(),
-                      ),
+                      _manager(),
                       const SizedBox(height: 5),
                       _toolbar(),
                     ],
