@@ -61,13 +61,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _register(Register event, Emitter<LoginState> emit) async {
     emit(Loading());
+    if (event._username.trim().isEmpty) {
+      emit(LoginError(S.current.email_too_short));
+      return;
+    }
     if (event._password.length < 8) {
       emit(LoginError(S.current.password_too_short));
       return;
     }
+
     try {
-      bool isLoggedIn = await _api.register(event._username, event._password);
-      if (isLoggedIn) {
+      bool isRegistered = await _api.register(event._username, event._password);
+      if (isRegistered) {
         emit(LoggedIn(username: _api.username));
       } else {
         emit(LoginError(S.current.login_invalid));
