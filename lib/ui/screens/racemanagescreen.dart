@@ -135,11 +135,26 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
               },
             );
           } else if (state is RaceManageError) {
-            if (state.exception is AuthException) {
-              context.read<LoginBloc>().add(Logout());
-            }
             return Center(
-              child: Text(state.exception.errorMessage),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(state.exception.errorMessage),
+                  const SizedBox(height: 20),
+                  ColoredButton(
+                    Text(
+                      S.current.retry,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    color: Colors.blue,
+                    onPressed: () => _cubit.loadRaces(),
+                  ),
+                ],
+              ),
             );
           }
           return Center(child: Text(S.current.unknown_error));
