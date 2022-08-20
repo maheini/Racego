@@ -129,7 +129,7 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
               },
               onAddPressed: (name) {
                 if (name.isNotEmpty) {
-                  context.read<RaceManageCubit>().addRace(name);
+                  _cubit.addRace(name);
                 }
               },
             );
