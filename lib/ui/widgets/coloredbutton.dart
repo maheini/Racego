@@ -34,17 +34,17 @@ class ColoredButton extends StatelessWidget {
           backgroundColor:
               color != null ? MaterialStateProperty.all<Color>(color!) : null,
           padding:
-              MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(20)),
+              MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(15)),
         ),
         onPressed: isLoading || isDisabled ? () {} : onPressed,
         child: SizedBox(
-          height: 25,
+          height: 30,
           child: isLoading
               ? const FittedBox(
                   fit: BoxFit.fitHeight,
                   child: CircularProgressIndicator(),
                 )
-              : child,
+              : Center(child: child),
         ),
       ),
     );
