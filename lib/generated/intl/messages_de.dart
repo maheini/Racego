@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "manage_your_races":
             MessageLookupByLibrary.simpleMessage("Deine Rennen"),
         "management": MessageLookupByLibrary.simpleMessage("Verwaltung"),
+        "management_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Erstelle, bearbeite oder wähle ein Rennen aus um fortzufahren"),
         "manager": MessageLookupByLibrary.simpleMessage("Verwalter"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "name_empty": MessageLookupByLibrary.simpleMessage("Name ist leer"),

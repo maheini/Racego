@@ -50,6 +50,7 @@
     "rank": "Rang",
     "@________MANAGEMENT_SCREEN________":{},
     "management": "Verwaltung",
+    "management_subtitle": "Erstelle, bearbeite oder wähle ein Rennen aus um fortzufahren",
     "manage_your_races": "Deine Rennen",
     "manager": "Verwalter",
     "add_ranking_hint": "Rennen hinzufügen...",

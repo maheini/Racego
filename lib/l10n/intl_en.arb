@@ -50,6 +50,7 @@
     "rank": "Rank",
     "@________MANAGEMENT_SCREEN________":{},
     "management": "Verwaltung",
+    "management_subtitle": "Add, edit or select a race to continue",
     "manage_your_races": "Your races",
     "manager": "Manager",
     "add_ranking_hint": "Add ranking...",

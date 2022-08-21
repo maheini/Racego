@@ -81,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Already have an account? Login here!"),
         "manage_your_races": MessageLookupByLibrary.simpleMessage("Your races"),
         "management": MessageLookupByLibrary.simpleMessage("Verwaltung"),
+        "management_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Add, edit or select a race to continue"),
         "manager": MessageLookupByLibrary.simpleMessage("Manager"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "name_empty": MessageLookupByLibrary.simpleMessage("Name is empty"),

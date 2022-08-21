@@ -480,6 +480,16 @@ class S {
     );
   }
 
+  /// `Add, edit or select a race to continue`
+  String get management_subtitle {
+    return Intl.message(
+      'Add, edit or select a race to continue',
+      name: 'management_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Your races`
   String get manage_your_races {
     return Intl.message(

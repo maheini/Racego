@@ -59,6 +59,7 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
                     children: [
                       TitleBar(
                         S.current.manage_your_races,
+                        subtitle: S.current.management_subtitle,
                         fontSize: 20,
                       ),
                       const SizedBox(height: 5),
