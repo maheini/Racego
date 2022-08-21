@@ -443,6 +443,7 @@ class _HomeScreenState extends State<HomeScreen> {
           value: 3,
         ),
       ],
+      color: Theme.of(context).colorScheme.onBackground,
     );
   }
 
@@ -451,9 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
       children: <Widget>[
         Icon(
           icon,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.white
-              : Colors.black,
+          color: Theme.of(context).iconTheme.color,
         ),
         const SizedBox(width: 10),
         Flexible(child: Text(name)),
