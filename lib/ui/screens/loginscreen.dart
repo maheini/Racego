@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
         hintText: S.current.username,
         labelText: S.current.username,
         labelStyle: TextStyle(
-          color: Theme.of(context).textTheme.bodyText2?.color ?? Colors.black,
+          color: Theme.of(context).hintColor,
         ),
       ),
     );
@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
         hintText: S.current.password,
         labelText: S.current.password,
         labelStyle: TextStyle(
-          color: Theme.of(context).textTheme.bodyText2?.color ?? Colors.black,
+          color: Theme.of(context).hintColor,
         ),
       ),
     );
