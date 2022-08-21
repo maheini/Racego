@@ -62,7 +62,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _register(Register event, Emitter<LoginState> emit) async {
     emit(Loading());
     if (event._username.trim().isEmpty) {
-      emit(LoginError(S.current.email_too_short));
+      emit(LoginError(S.current.username_too_short));
       return;
     }
     if (event._password.length < 8) {
