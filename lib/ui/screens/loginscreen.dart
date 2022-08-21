@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(
                         height: 40,
                       ),
-                      _emailInput(),
+                      _usernameInput(),
                       const SizedBox(
                         height: 20,
                       ),
@@ -73,50 +73,50 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // Password input field
-  bool _showEmailEmptyMessage = false;
-  final TextEditingController _emailController = TextEditingController();
-  Widget _emailInput() {
+  bool _showUsernameEmptyMessage = false;
+  final TextEditingController _usernameController = TextEditingController();
+  Widget _usernameInput() {
     return TextField(
       onSubmitted: (_) {
-        if (_emailController.text.isNotEmpty &&
+        if (_usernameController.text.isNotEmpty &&
             _passwordController.text.isNotEmpty) {
           context
               .read<LoginBloc>()
-              .add(Login(_emailController.text, _passwordController.text));
+              .add(Login(_usernameController.text, _passwordController.text));
         }
       },
-      controller: _emailController,
-      onChanged: (email) {
-        if (email.isEmpty && !_showEmailEmptyMessage) {
+      controller: _usernameController,
+      onChanged: (username) {
+        if (username.isEmpty && !_showUsernameEmptyMessage) {
           setState(() {
-            _showEmailEmptyMessage = true;
+            _showUsernameEmptyMessage = true;
           });
-        } else if (email.isNotEmpty && _showEmailEmptyMessage) {
+        } else if (username.isNotEmpty && _showUsernameEmptyMessage) {
           setState(() {
-            _showEmailEmptyMessage = false;
+            _showUsernameEmptyMessage = false;
           });
         }
       },
       decoration: InputDecoration(
-        errorText: _showEmailEmptyMessage ? S.current.email_empty : null,
+        errorText: _showUsernameEmptyMessage ? S.current.username_empty : null,
         border: const OutlineInputBorder(),
-        hintText: S.current.email,
-        labelText: S.current.email,
+        hintText: S.current.username,
+        labelText: S.current.username,
       ),
     );
   }
 
-  // Email input field
+  // Username input field
   bool _showPasswordEmptyMessage = false;
   final TextEditingController _passwordController = TextEditingController();
   Widget _passwordInput() {
     return TextField(
       onSubmitted: (_) {
-        if (_emailController.text.isNotEmpty &&
+        if (_usernameController.text.isNotEmpty &&
             _passwordController.text.isNotEmpty) {
           context
               .read<LoginBloc>()
-              .add(Login(_emailController.text, _passwordController.text));
+              .add(Login(_usernameController.text, _passwordController.text));
         }
       },
       obscureText: true,
@@ -186,10 +186,12 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         if (_isRegistration) {
                           context.read<LoginBloc>().add(Register(
-                              _emailController.text, _passwordController.text));
+                              _usernameController.text,
+                              _passwordController.text));
                         } else {
                           context.read<LoginBloc>().add(Login(
-                              _emailController.text, _passwordController.text));
+                              _usernameController.text,
+                              _passwordController.text));
                         }
                       },
                     ),
@@ -251,7 +253,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.blue,
                     onPressed: () {
                       context.read<LoginBloc>().add(Login(
-                          _emailController.text, _passwordController.text));
+                          _usernameController.text, _passwordController.text));
                     },
                   ),
                 ],
