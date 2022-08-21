@@ -61,6 +61,13 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.onBackground,
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                    ),
+                  ],
                 ),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -102,6 +109,9 @@ class _LoginPageState extends State<LoginPage> {
         border: const OutlineInputBorder(),
         hintText: S.current.username,
         labelText: S.current.username,
+        labelStyle: TextStyle(
+          color: Theme.of(context).textTheme.bodyText2?.color ?? Colors.black,
+        ),
       ),
     );
   }
@@ -137,6 +147,9 @@ class _LoginPageState extends State<LoginPage> {
         border: const OutlineInputBorder(),
         hintText: S.current.password,
         labelText: S.current.password,
+        labelStyle: TextStyle(
+          color: Theme.of(context).textTheme.bodyText2?.color ?? Colors.black,
+        ),
       ),
     );
   }
