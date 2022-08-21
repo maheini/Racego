@@ -300,32 +300,22 @@ class S {
     );
   }
 
-  /// `Email`
-  String get email {
+  /// `Username is too short`
+  String get username_too_short {
     return Intl.message(
-      'Email',
-      name: 'email',
-      desc: 'Email name',
-      args: [],
-    );
-  }
-
-  /// `Email is too short`
-  String get email_too_short {
-    return Intl.message(
-      'Email is too short',
-      name: 'email_too_short',
+      'Username is too short',
+      name: 'username_too_short',
       desc: '',
       args: [],
     );
   }
 
-  /// `Email is empty`
-  String get email_empty {
+  /// `Username is empty`
+  String get username_empty {
     return Intl.message(
-      'Email is empty',
-      name: 'email_empty',
-      desc: 'Email is empty message',
+      'Username is empty',
+      name: 'username_empty',
+      desc: '',
       args: [],
     );
   }
@@ -365,7 +355,7 @@ class S {
     return Intl.message(
       'Incorrect username or password.',
       name: 'login_invalid',
-      desc: 'Email or Password is incorrrect',
+      desc: 'Username or Password is incorrrect',
       args: [],
     );
   }

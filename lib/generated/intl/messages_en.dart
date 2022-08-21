@@ -38,10 +38,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_class_hint":
             MessageLookupByLibrary.simpleMessage("Create Class..."),
         "edit_user": MessageLookupByLibrary.simpleMessage("Edit User"),
-        "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "email_empty": MessageLookupByLibrary.simpleMessage("Email is empty"),
-        "email_too_short":
-            MessageLookupByLibrary.simpleMessage("Email is too short"),
         "failed_adding_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "User could not be created: Database ID is invalid."),
         "failed_adding_user_on_track_invalid_id":
@@ -133,6 +129,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "unprocessable_entity": MessageLookupByLibrary.simpleMessage(
             "Couldn\'t process the request."),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
+        "username_empty":
+            MessageLookupByLibrary.simpleMessage("Username is empty"),
+        "username_too_short":
+            MessageLookupByLibrary.simpleMessage("Username is too short"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome back")
       };
 }

@@ -40,10 +40,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Klasse erstellen..."),
         "edit_user":
             MessageLookupByLibrary.simpleMessage("Benutzer bearbeiten"),
-        "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "email_empty": MessageLookupByLibrary.simpleMessage("Email ist leer"),
-        "email_too_short":
-            MessageLookupByLibrary.simpleMessage("Email ist zu kurz"),
         "failed_adding_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "Benutzer konnte nicht erstellt werden: Datenbank ID ist ungültig."),
         "failed_adding_user_on_track_invalid_id":
@@ -136,6 +132,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "unprocessable_entity": MessageLookupByLibrary.simpleMessage(
             "Die Anfrage konnte nicht bearbeitet werden."),
         "username": MessageLookupByLibrary.simpleMessage("Benutzername"),
+        "username_empty":
+            MessageLookupByLibrary.simpleMessage("Benutzername ist leer"),
+        "username_too_short":
+            MessageLookupByLibrary.simpleMessage("Benutzername ist zu kurz"),
         "welcome": MessageLookupByLibrary.simpleMessage("Willkommen zurück")
       };
 }
