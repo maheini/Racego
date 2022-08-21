@@ -111,7 +111,31 @@ class _RaceDetailScreenState extends State<RaceDetailScreen> {
                 }
                 return _editor();
               } else {
-                return Text(S.of(context).unknown_error);
+                String error = S.of(context).unknown_error;
+                if (state is RaceDetailsError) {
+                  error = state.error.errorMessage;
+                }
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(error),
+                      const SizedBox(height: 20),
+                      ColoredButton(
+                        Text(
+                          S.current.retry,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        color: Colors.blue,
+                        onPressed: () => _cubit.loadDetails(widget.id),
+                      ),
+                    ],
+                  ),
+                );
               }
             },
           ),
