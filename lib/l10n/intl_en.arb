@@ -2,139 +2,52 @@
     "@@locale": "en",
     "@________GENERAL________":{},
     "language": "English",
-    "@language":{
-        "description": "The current language"
-    },
     "save": "Save",
-    "@save":{
-        "description": "Display text for storing changes"
-    },
     "cancel": "Cancel",
-    "@cancel":{
-        "description": "Display text for cancelling changes"
-    },
     "retry": "Try again",
-    "@retry":{
-        "description": "Try again text"
-    },
     "ok_flat": "OK",
-    "@ok_flat":{
-        "description": "ok label for flat buttons"
-    },
     "cancel_flat": "CANCEL",
-    "@cancel_flat":{
-        "description": "Cancel label for flat buttons"
-    },
     "back": "Back",
-    "@back":{
-        "description": "Display text for going back"
-    },
     "name": "Name",
     "name_empty": "Name is empty",
     "@________RACEGO_SPECIFIC________":{},
     "race_track": "Race Track",
-    "@race_track":{
-        "description": "How a race track is called"
-    },
     "participants": "Participants",
-    "@participants":{
-        "description": "How the participants are beeing called"
-    },
     "race_classes": "Race Classes",
-    "@race_classes":{
-        "description": "How race classes are called"
-    },
     "laps": "Laps",
-    "@laps":{
-        "description": "How laps are called"
-    },
     "id": "ID",
-    "@id":{
-        "description": "Name of an ID"
-    },
     "first_name": "First Name",
-    "@first_name":{
-        "description": "How the first name is called"
-    },
     "last_name": "Last Name",
-    "@last_name":{
-        "description": "How the last name is called"
-    },
     "@________LOGIN_SCREEN________":{},
     "sign_in_title": "Racego login",
     "register_title": "Racego registration",
     "sign_in": "Login",
-    "@sign_in":{
-        "description": "Login button text"
-    },
     "register": "Register",
     "log_out": "Logout",
     "retry_login": "Please login again",
-    "@retry_login":{
-        "description": "Try login again text"
-    },
     "register_now": "No Account? Register now!",
     "login_now": "Already have an account? Login here!",
     "username": "Username",
     "username_too_short": "Username is too short",
     "username_empty": "Username is empty",
     "password": "Password",
-    "@password":{
-        "description": "Password name"
-    },
     "password_too_short": "Password is too short",
     "password_empty": "Password is empty",
-    "@password_empty":{
-        "description": "Password is empty message"
-    },
     "login_invalid": "Incorrect username or password.",
-    "@login_invalid":{
-        "description": "Username or Password is incorrrect"
-    },
     "failed_registration": "Registration failed",
     "welcome": "Welcome back",
-    "@welcome":{
-        "description": "Welcome message"
-    },
     "session_expired": "Session expired",
-    "@session_expired":{
-        "description": "Message if session expires"
-    },
     "session_expired_details": "Your session has expired. Please log in again.",
-    "@session_expired_details":{
-        "description": "Detailed message if session expires"
-    },
     "@________HOME_SCREEN________":{},
     "search_hint": "Search...",
-    "@search_hint":{
-        "description": "Hint text which is displayed for search bars"
-    },
     "@________USER_SCREEN________":{},
     "edit_user": "Edit User",
-    "@edit_user":{
-        "description": "Edit user title"
-    },
     "create_class_hint": "Create Class...",
-    "@create_class_hint":{
-        "description": "Hint text which is displayed for create class bars"
-    },
     "@________RANKING_SCREEN________":{},
     "ranking": "Ranking",
-    "@ranking":{
-        "description": "Text translation for ranking"
-    },
     "all_classes": "All classes",
-    "@all_classes":{
-        "description": "Text translation for 'all classes'"
-    },
     "lap_time": "Time",
-    "@time":{
-        "description": "Name of a single lap time'"
-    },
     "rank": "Rank",
-    "@rank":{
-        "description": "Name of a rank"
-    },
     "@________MANAGEMENT_SCREEN________":{},
     "management": "Verwaltung",
     "manage_your_races": "Your races",
@@ -150,77 +63,23 @@
     "switch_role": "Switch role",
     "@________ERROR_MESSAGES________":{},
     "sync_errormessage": "Error: Synchronization interrupted!",
-    "@sync_errormessage":{
-        "description": "Warning message if synchronization is interrupted"
-    },
     "unknown_error": "Unbekannter Fehler",
-    "@unknown_error":{
-        "description": "Error message for unknown errors"
-    },
     "loading_user_error": "Error loading the user.",
-    "@loading_user_error":{
-        "description": "Error message if user couldn't be loaded"
-    },
     "failed_cancelling_lap_invalid_id": "User could not be removed from the race track: ID invalid.",
-    "@failed_cancelling_lap_invalid_id":{
-        "description": "Error message if user couldn't be removed from track, because of invalid ID"
-    },
     "failed_finishing_lap_invalid_id": "Lap time could not be recorded: ID or time invalid.",
-    "@failed_finishing_lap_invalid_id":{
-        "description": "Error message if lap could not be stored, because of invalid ID or lap-time"
-    },
     "failed_removing_user_invalid_id": "User could not be removed: ID invalid.",
-    "@failed_removing_user_invalid_id":{
-        "description": "Error message if user couldn't be removed -> because ID is invalid"
-    },
     "failed_adding_user_on_track_invalid_id": "User could not be placed on the race track: ID invalid.",
-    "@failed_adding_user_on_track_invalid_id":{
-        "description": "Error message if user couldn't be placed on the track"
-    },
     "failed_adding_user_invalid_id": "User could not be created: Database ID is invalid.",
-    "@failed_adding_user_invalid_id":{
-        "description": "Error message if user couldn't be created"
-    },
     "failed_updating_user_unexpected_response": "User could not be updated: Unexpected server response.",
-    "@failed_updating_user_unexpected_response":{
-        "description": "Error message if user couldn't be updated because of a unexpected server response"
-    },
     "@________API_ERROR_MESSAGES________":{},
     "failed_parsing_response": "Error parsing the server response.",
-    "@failed_parsing_response":{
-        "description": "Error message if server response couldn't be parsed."
-    },
     "failed_login": "Login failed.",
-    "@failed_login":{
-        "description": "Error message if login wasn't successful."
-    },
     "failed_updating_user_invalid_data": "The user details are insufficient.",
-    "@failed_updating_user_invalid_data":{
-        "description": "Error message if user couldn't be updated"
-    },
     "no_permission": "No authorization.",
-    "@no_permission":{
-        "description": "Error message if user has no permission"
-    },
     "requestet_entity_not_found": "Requested entity was not found..",
-    "@requestet_entity_not_found":{
-        "description": "Error message if entity couldn't be found"
-    },
     "failed_send_conflicting_data": "Conflict in the sent data.",
-    "@failed_conflicting_data":{
-        "description": "Error message if send data produces conflict"
-    },
     "unprocessable_entity": "Couldn't process the request.",
-    "@unprocessable_entity":{
-        "description": "Error message if send data couldn't be processed"
-    },
     "invalid_server_response": "Invalid server response: Errorcode: {errorCode}",
-    "@invalid_server_response":{
-        "description": "Error message if the server response is invalid"
-    },
-    "failed_server_timeout": "The server cannot be reached: Timeout.",
-    "@failed_server_timeout":{
-        "description": "Error message if the server cannot be reached"
-    }
+    "failed_server_timeout": "The server cannot be reached: Timeout."
 }
 

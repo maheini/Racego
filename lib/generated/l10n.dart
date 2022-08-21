@@ -55,7 +55,7 @@ class S {
     return Intl.message(
       'English',
       name: 'language',
-      desc: 'The current language',
+      desc: '',
       args: [],
     );
   }
@@ -65,7 +65,7 @@ class S {
     return Intl.message(
       'Save',
       name: 'save',
-      desc: 'Display text for storing changes',
+      desc: '',
       args: [],
     );
   }
@@ -75,7 +75,7 @@ class S {
     return Intl.message(
       'Cancel',
       name: 'cancel',
-      desc: 'Display text for cancelling changes',
+      desc: '',
       args: [],
     );
   }
@@ -85,7 +85,7 @@ class S {
     return Intl.message(
       'Try again',
       name: 'retry',
-      desc: 'Try again text',
+      desc: '',
       args: [],
     );
   }
@@ -95,7 +95,7 @@ class S {
     return Intl.message(
       'OK',
       name: 'ok_flat',
-      desc: 'ok label for flat buttons',
+      desc: '',
       args: [],
     );
   }
@@ -105,7 +105,7 @@ class S {
     return Intl.message(
       'CANCEL',
       name: 'cancel_flat',
-      desc: 'Cancel label for flat buttons',
+      desc: '',
       args: [],
     );
   }
@@ -115,7 +115,7 @@ class S {
     return Intl.message(
       'Back',
       name: 'back',
-      desc: 'Display text for going back',
+      desc: '',
       args: [],
     );
   }
@@ -145,7 +145,7 @@ class S {
     return Intl.message(
       'Race Track',
       name: 'race_track',
-      desc: 'How a race track is called',
+      desc: '',
       args: [],
     );
   }
@@ -155,7 +155,7 @@ class S {
     return Intl.message(
       'Participants',
       name: 'participants',
-      desc: 'How the participants are beeing called',
+      desc: '',
       args: [],
     );
   }
@@ -165,7 +165,7 @@ class S {
     return Intl.message(
       'Race Classes',
       name: 'race_classes',
-      desc: 'How race classes are called',
+      desc: '',
       args: [],
     );
   }
@@ -175,7 +175,7 @@ class S {
     return Intl.message(
       'Laps',
       name: 'laps',
-      desc: 'How laps are called',
+      desc: '',
       args: [],
     );
   }
@@ -185,7 +185,7 @@ class S {
     return Intl.message(
       'ID',
       name: 'id',
-      desc: 'Name of an ID',
+      desc: '',
       args: [],
     );
   }
@@ -195,7 +195,7 @@ class S {
     return Intl.message(
       'First Name',
       name: 'first_name',
-      desc: 'How the first name is called',
+      desc: '',
       args: [],
     );
   }
@@ -205,7 +205,7 @@ class S {
     return Intl.message(
       'Last Name',
       name: 'last_name',
-      desc: 'How the last name is called',
+      desc: '',
       args: [],
     );
   }
@@ -235,7 +235,7 @@ class S {
     return Intl.message(
       'Login',
       name: 'sign_in',
-      desc: 'Login button text',
+      desc: '',
       args: [],
     );
   }
@@ -265,7 +265,7 @@ class S {
     return Intl.message(
       'Please login again',
       name: 'retry_login',
-      desc: 'Try login again text',
+      desc: '',
       args: [],
     );
   }
@@ -325,7 +325,7 @@ class S {
     return Intl.message(
       'Password',
       name: 'password',
-      desc: 'Password name',
+      desc: '',
       args: [],
     );
   }
@@ -345,7 +345,7 @@ class S {
     return Intl.message(
       'Password is empty',
       name: 'password_empty',
-      desc: 'Password is empty message',
+      desc: '',
       args: [],
     );
   }
@@ -355,7 +355,7 @@ class S {
     return Intl.message(
       'Incorrect username or password.',
       name: 'login_invalid',
-      desc: 'Username or Password is incorrrect',
+      desc: '',
       args: [],
     );
   }
@@ -375,7 +375,7 @@ class S {
     return Intl.message(
       'Welcome back',
       name: 'welcome',
-      desc: 'Welcome message',
+      desc: '',
       args: [],
     );
   }
@@ -385,7 +385,7 @@ class S {
     return Intl.message(
       'Session expired',
       name: 'session_expired',
-      desc: 'Message if session expires',
+      desc: '',
       args: [],
     );
   }
@@ -395,7 +395,7 @@ class S {
     return Intl.message(
       'Your session has expired. Please log in again.',
       name: 'session_expired_details',
-      desc: 'Detailed message if session expires',
+      desc: '',
       args: [],
     );
   }
@@ -405,7 +405,7 @@ class S {
     return Intl.message(
       'Search...',
       name: 'search_hint',
-      desc: 'Hint text which is displayed for search bars',
+      desc: '',
       args: [],
     );
   }
@@ -415,7 +415,7 @@ class S {
     return Intl.message(
       'Edit User',
       name: 'edit_user',
-      desc: 'Edit user title',
+      desc: '',
       args: [],
     );
   }
@@ -425,7 +425,7 @@ class S {
     return Intl.message(
       'Create Class...',
       name: 'create_class_hint',
-      desc: 'Hint text which is displayed for create class bars',
+      desc: '',
       args: [],
     );
   }
@@ -435,7 +435,7 @@ class S {
     return Intl.message(
       'Ranking',
       name: 'ranking',
-      desc: 'Text translation for ranking',
+      desc: '',
       args: [],
     );
   }
@@ -445,7 +445,7 @@ class S {
     return Intl.message(
       'All classes',
       name: 'all_classes',
-      desc: 'Text translation for \'all classes\'',
+      desc: '',
       args: [],
     );
   }
@@ -465,7 +465,7 @@ class S {
     return Intl.message(
       'Rank',
       name: 'rank',
-      desc: 'Name of a rank',
+      desc: '',
       args: [],
     );
   }
@@ -595,7 +595,7 @@ class S {
     return Intl.message(
       'Error: Synchronization interrupted!',
       name: 'sync_errormessage',
-      desc: 'Warning message if synchronization is interrupted',
+      desc: '',
       args: [],
     );
   }
@@ -605,7 +605,7 @@ class S {
     return Intl.message(
       'Unbekannter Fehler',
       name: 'unknown_error',
-      desc: 'Error message for unknown errors',
+      desc: '',
       args: [],
     );
   }
@@ -615,7 +615,7 @@ class S {
     return Intl.message(
       'Error loading the user.',
       name: 'loading_user_error',
-      desc: 'Error message if user couldn\'t be loaded',
+      desc: '',
       args: [],
     );
   }
@@ -625,8 +625,7 @@ class S {
     return Intl.message(
       'User could not be removed from the race track: ID invalid.',
       name: 'failed_cancelling_lap_invalid_id',
-      desc:
-          'Error message if user couldn\'t be removed from track, because of invalid ID',
+      desc: '',
       args: [],
     );
   }
@@ -636,8 +635,7 @@ class S {
     return Intl.message(
       'Lap time could not be recorded: ID or time invalid.',
       name: 'failed_finishing_lap_invalid_id',
-      desc:
-          'Error message if lap could not be stored, because of invalid ID or lap-time',
+      desc: '',
       args: [],
     );
   }
@@ -647,8 +645,7 @@ class S {
     return Intl.message(
       'User could not be removed: ID invalid.',
       name: 'failed_removing_user_invalid_id',
-      desc:
-          'Error message if user couldn\'t be removed -> because ID is invalid',
+      desc: '',
       args: [],
     );
   }
@@ -658,7 +655,7 @@ class S {
     return Intl.message(
       'User could not be placed on the race track: ID invalid.',
       name: 'failed_adding_user_on_track_invalid_id',
-      desc: 'Error message if user couldn\'t be placed on the track',
+      desc: '',
       args: [],
     );
   }
@@ -668,7 +665,7 @@ class S {
     return Intl.message(
       'User could not be created: Database ID is invalid.',
       name: 'failed_adding_user_invalid_id',
-      desc: 'Error message if user couldn\'t be created',
+      desc: '',
       args: [],
     );
   }
@@ -678,8 +675,7 @@ class S {
     return Intl.message(
       'User could not be updated: Unexpected server response.',
       name: 'failed_updating_user_unexpected_response',
-      desc:
-          'Error message if user couldn\'t be updated because of a unexpected server response',
+      desc: '',
       args: [],
     );
   }
@@ -689,7 +685,7 @@ class S {
     return Intl.message(
       'Error parsing the server response.',
       name: 'failed_parsing_response',
-      desc: 'Error message if server response couldn\'t be parsed.',
+      desc: '',
       args: [],
     );
   }
@@ -699,7 +695,7 @@ class S {
     return Intl.message(
       'Login failed.',
       name: 'failed_login',
-      desc: 'Error message if login wasn\'t successful.',
+      desc: '',
       args: [],
     );
   }
@@ -709,7 +705,7 @@ class S {
     return Intl.message(
       'The user details are insufficient.',
       name: 'failed_updating_user_invalid_data',
-      desc: 'Error message if user couldn\'t be updated',
+      desc: '',
       args: [],
     );
   }
@@ -719,7 +715,7 @@ class S {
     return Intl.message(
       'No authorization.',
       name: 'no_permission',
-      desc: 'Error message if user has no permission',
+      desc: '',
       args: [],
     );
   }
@@ -729,7 +725,7 @@ class S {
     return Intl.message(
       'Requested entity was not found..',
       name: 'requestet_entity_not_found',
-      desc: 'Error message if entity couldn\'t be found',
+      desc: '',
       args: [],
     );
   }
@@ -749,7 +745,7 @@ class S {
     return Intl.message(
       'Couldn\'t process the request.',
       name: 'unprocessable_entity',
-      desc: 'Error message if send data couldn\'t be processed',
+      desc: '',
       args: [],
     );
   }
@@ -759,7 +755,7 @@ class S {
     return Intl.message(
       'Invalid server response: Errorcode: $errorCode',
       name: 'invalid_server_response',
-      desc: 'Error message if the server response is invalid',
+      desc: '',
       args: [errorCode],
     );
   }
@@ -769,7 +765,7 @@ class S {
     return Intl.message(
       'The server cannot be reached: Timeout.',
       name: 'failed_server_timeout',
-      desc: 'Error message if the server cannot be reached',
+      desc: '',
       args: [],
     );
   }
