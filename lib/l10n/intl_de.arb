@@ -53,6 +53,7 @@
     "management_subtitle": "Erstelle, bearbeite oder wähle ein Rennen aus um fortzufahren",
     "manage_your_races": "Deine Rennen",
     "manager": "Verwalter",
+    "manager_subtitle": "Füge Verwalter oder zusätzliche Administratoren hinzu. Wichtig: Der Benutzername muss stimmen.",
     "add_ranking_hint": "Rennen hinzufügen...",
     "role": "Rolle",
     "role_manager": "Nutzer",
