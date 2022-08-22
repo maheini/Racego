@@ -167,43 +167,28 @@ class _HomeScreenState extends State<HomeScreen> {
           child: BlocBuilder<listcubit.UserlistCubit, listcubit.UserlistState>(
             bloc: _userlistCubit,
             builder: (context, state) {
-              if (state is listcubit.Loaded) {
-                return UserList(
-                  state.list,
-                  searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: S.current.participants,
-                  onSelectionChanged: (index, userID, isSelected) {
-                    isSelected
-                        ? _userToolsCubit.selectionChanged(userID)
-                        : _userToolsCubit.userUnselected();
-                  },
-                  onDoubleTap: (index, userID) => Navigator.of(context)
-                      .pushNamed('/user', arguments: userID),
-                  onAddPressed: (searchtest) =>
-                      Navigator.of(context).pushNamed('/user'),
-                );
-              } else {
-                List<User> newList = [];
-                if (state is listcubit.Loading) {
-                  newList = state.previousList;
-                } else if (state is listcubit.Error) {
-                  newList = state.previousList;
-                }
-                return UserList(
-                  newList,
-                  searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: S.current.participants,
-                  onSelectionChanged: (index, userID, isSelected) {
-                    isSelected
-                        ? _userToolsCubit.selectionChanged(userID)
-                        : _userToolsCubit.userUnselected();
-                  },
-                  onDoubleTap: (index, userID) => Navigator.of(context)
-                      .pushNamed('/user', arguments: userID),
-                  onAddPressed: (searchtest) =>
-                      Navigator.of(context).pushNamed('/user'),
-                );
+              List<User> newList = [];
+              if (state is listcubit.Loading) {
+                newList = state.previousList;
+              } else if (state is listcubit.Error) {
+                newList = state.previousList;
+              } else if (state is listcubit.Loaded) {
+                newList = state.list;
               }
+              return UserList(
+                newList,
+                searchChanged: (text) => _userlistCubit.setFilter(text),
+                title: S.current.participants,
+                onSelectionChanged: (index, userID, isSelected) {
+                  isSelected
+                      ? _userToolsCubit.selectionChanged(userID)
+                      : _userToolsCubit.userUnselected();
+                },
+                onDoubleTap: (index, userID) =>
+                    Navigator.of(context).pushNamed('/user', arguments: userID),
+                onAddPressed: (searchtest) =>
+                    Navigator.of(context).pushNamed('/user'),
+              );
             },
           ),
         ),
@@ -264,39 +249,26 @@ class _HomeScreenState extends State<HomeScreen> {
               BlocBuilder<trackcubit.TracklistCubit, trackcubit.TracklistState>(
             bloc: _tracklistCubit,
             builder: (context, state) {
-              if (state is trackcubit.Loaded) {
-                return UserList(
-                  state.list,
-                  searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: S.current.race_track,
-                  onSelectionChanged: (index, userID, isSelected) {
-                    isSelected
-                        ? _trackToolsCubit.selectionChanged(userID)
-                        : _trackToolsCubit.userUnselected();
-                  },
-                  onDoubleTap: (index, userID) => Navigator.of(context)
-                      .pushNamed('/user', arguments: userID),
-                );
-              } else {
-                List<User> newList = [];
-                if (state is trackcubit.Loading) {
-                  newList = state.previousList;
-                } else if (state is trackcubit.Error) {
-                  newList = state.previousList;
-                }
-                return UserList(
-                  newList,
-                  searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: S.current.race_track,
-                  onSelectionChanged: (index, userID, isSelected) {
-                    isSelected
-                        ? _trackToolsCubit.selectionChanged(userID)
-                        : _trackToolsCubit.userUnselected();
-                  },
-                  onDoubleTap: (index, userID) => Navigator.of(context)
-                      .pushNamed('/user', arguments: userID),
-                );
+              List<User> newList = [];
+              if (state is trackcubit.Loading) {
+                newList = state.previousList;
+              } else if (state is trackcubit.Error) {
+                newList = state.previousList;
+              } else if (state is trackcubit.Loaded) {
+                newList = state.list;
               }
+              return UserList(
+                newList,
+                searchChanged: (text) => _tracklistCubit.setFilter(text),
+                title: S.current.race_track,
+                onSelectionChanged: (index, userID, isSelected) {
+                  isSelected
+                      ? _trackToolsCubit.selectionChanged(userID)
+                      : _trackToolsCubit.userUnselected();
+                },
+                onDoubleTap: (index, userID) =>
+                    Navigator.of(context).pushNamed('/user', arguments: userID),
+              );
             },
           ),
         ),
