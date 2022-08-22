@@ -35,6 +35,7 @@ class _RaceManagerListState extends State<RaceManagerList> {
       children: [
         TitleBar(
           S.current.manager,
+          subtitle: S.current.manager_subtitle,
           fontSize: 20,
         ),
         const SizedBox(height: 5),
