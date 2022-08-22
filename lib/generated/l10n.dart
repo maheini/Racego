@@ -510,6 +510,16 @@ class S {
     );
   }
 
+  /// `Add Manager or additional administrators. Important: The username must be correct.`
+  String get manager_subtitle {
+    return Intl.message(
+      'Add Manager or additional administrators. Important: The username must be correct.',
+      name: 'manager_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Add ranking...`
   String get add_ranking_hint {
     return Intl.message(

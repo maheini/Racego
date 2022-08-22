@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "management_subtitle": MessageLookupByLibrary.simpleMessage(
             "Add, edit or select a race to continue"),
         "manager": MessageLookupByLibrary.simpleMessage("Manager"),
+        "manager_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Add Manager or additional administrators. Important: The username must be correct."),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "name_empty": MessageLookupByLibrary.simpleMessage("Name is empty"),
         "no_permission":

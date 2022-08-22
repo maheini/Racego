@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "management_subtitle": MessageLookupByLibrary.simpleMessage(
             "Erstelle, bearbeite oder wähle ein Rennen aus um fortzufahren"),
         "manager": MessageLookupByLibrary.simpleMessage("Verwalter"),
+        "manager_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Füge Verwalter oder zusätzliche Administratoren hinzu. Wichtig: Der Benutzername muss stimmen."),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "name_empty": MessageLookupByLibrary.simpleMessage("Name ist leer"),
         "no_permission":
