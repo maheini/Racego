@@ -169,7 +169,11 @@ class _SelectableListState extends State<SelectableList> {
                 filled: true,
               ),
               onChanged: (filter) => _cubit.changeFilter(filter),
-              onSubmitted: (text) => _addItem(text),
+              onSubmitted: (text) {
+                _addItem(text);
+                _textControlller.clear();
+                _cubit.changeFilter('');
+              },
               controller: _textControlller,
             ),
           ),
