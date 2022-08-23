@@ -398,6 +398,8 @@ class _HomeScreenState extends State<HomeScreen> {
         } else if (result == 3) {
           _forcedLogout = true;
           context.read<LoginBloc>().add(Logout());
+        } else if (result == 4) {
+          Navigator.of(context).pushNamed('/import');
         }
       },
       itemBuilder: (context) => [
@@ -413,6 +415,10 @@ class _HomeScreenState extends State<HomeScreen> {
         PopupMenuItem(
           child: _buildPopupItem(Icons.logout, S.of(context).log_out),
           value: 3,
+        ),
+        PopupMenuItem(
+          child: _buildPopupItem(Icons.archive, 'importssds'),
+          value: 4,
         ),
       ],
       color: Theme.of(context).colorScheme.onBackground,
