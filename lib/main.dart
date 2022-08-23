@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:racego/business_logic/login/login_bloc.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/ui/screens/homescreen.dart';
+import 'package:racego/ui/screens/importscreen.dart';
 import 'package:racego/ui/screens/racedetailscreen.dart';
 import 'package:racego/ui/screens/racemanagescreen.dart';
 import 'package:racego/ui/screens/rankingscreen.dart';
@@ -69,6 +70,8 @@ class Racego extends StatelessWidget {
         } else if (settings.name == '/racedetails') {
           return MaterialPageRoute(
               builder: (_) => RaceDetailScreen(settings.arguments as int));
+        } else if (settings.name == '/import') {
+          return MaterialPageRoute(builder: (_) => const ImportScreen());
         }
 
         return null; // Let `onUnknownRoute` handle this behavior.
