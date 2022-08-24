@@ -160,11 +160,31 @@ class S {
     );
   }
 
+  /// `Race class`
+  String get race_class {
+    return Intl.message(
+      'Race class',
+      name: 'race_class',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Race Classes`
   String get race_classes {
     return Intl.message(
       'Race Classes',
       name: 'race_classes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lap`
+  String get lap {
+    return Intl.message(
+      'Lap',
+      name: 'lap',
       desc: '',
       args: [],
     );
@@ -607,6 +627,98 @@ class S {
       name: 'switch_role',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Import`
+  String get import {
+    return Intl.message(
+      'Import',
+      name: 'import',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CSV import (UTF-8, semicolon seperated)`
+  String get csv_import {
+    return Intl.message(
+      'CSV import (UTF-8, semicolon seperated)',
+      name: 'csv_import',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start import`
+  String get start_import {
+    return Intl.message(
+      'Start import',
+      name: 'start_import',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import multiple users quick and easy via CSV file. You can create this file for example with Excel by selecting Save as -> Save as type -> CSV UTF-8.`
+  String get csv_import_description {
+    return Intl.message(
+      'Import multiple users quick and easy via CSV file. You can create this file for example with Excel by selecting Save as -> Save as type -> CSV UTF-8.',
+      name: 'csv_import_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The CSV file must contain following headers: `
+  String get csv_file_must_contain_headers {
+    return Intl.message(
+      'The CSV file must contain following headers: ',
+      name: 'csv_file_must_contain_headers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The selected file does not exist`
+  String get csv_import_file_not_exists {
+    return Intl.message(
+      'The selected file does not exist',
+      name: 'csv_import_file_not_exists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The selected file is invalid`
+  String get csv_import_file_invalid {
+    return Intl.message(
+      'The selected file is invalid',
+      name: 'csv_import_file_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import cancelled`
+  String get csv_import_cancelled {
+    return Intl.message(
+      'Import cancelled',
+      name: 'csv_import_cancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{howMany, plural, one{1 user added} other{{howMany} users added}}`
+  String csv_import_successful(num howMany) {
+    return Intl.plural(
+      howMany,
+      one: '1 user added',
+      other: '$howMany users added',
+      name: 'csv_import_successful',
+      desc: '',
+      args: [howMany],
     );
   }
 

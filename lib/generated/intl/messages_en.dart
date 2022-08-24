@@ -20,7 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(errorCode) =>
+  static String m0(howMany) =>
+      "${Intl.plural(howMany, one: '1 user added', other: '${howMany} users added')}";
+
+  static String m1(errorCode) =>
       "Invalid server response: Errorcode: ${errorCode}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -37,6 +40,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_flat": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "create_class_hint":
             MessageLookupByLibrary.simpleMessage("Create Class..."),
+        "csv_file_must_contain_headers": MessageLookupByLibrary.simpleMessage(
+            "The CSV file must contain following headers: "),
+        "csv_import": MessageLookupByLibrary.simpleMessage(
+            "CSV import (UTF-8, semicolon seperated)"),
+        "csv_import_cancelled":
+            MessageLookupByLibrary.simpleMessage("Import cancelled"),
+        "csv_import_description": MessageLookupByLibrary.simpleMessage(
+            "Import multiple users quick and easy via CSV file. You can create this file for example with Excel by selecting Save as -> Save as type -> CSV UTF-8."),
+        "csv_import_file_invalid": MessageLookupByLibrary.simpleMessage(
+            "The selected file is invalid"),
+        "csv_import_file_not_exists": MessageLookupByLibrary.simpleMessage(
+            "The selected file does not exist"),
+        "csv_import_successful": m0,
         "edit_user": MessageLookupByLibrary.simpleMessage("Edit User"),
         "failed_adding_user_invalid_id": MessageLookupByLibrary.simpleMessage(
             "User could not be created: Database ID is invalid."),
@@ -67,8 +83,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "User could not be updated: Unexpected server response."),
         "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
-        "invalid_server_response": m0,
+        "import": MessageLookupByLibrary.simpleMessage("Import"),
+        "invalid_server_response": m1,
         "language": MessageLookupByLibrary.simpleMessage("English"),
+        "lap": MessageLookupByLibrary.simpleMessage("Lap"),
         "lap_time": MessageLookupByLibrary.simpleMessage("Time"),
         "laps": MessageLookupByLibrary.simpleMessage("Laps"),
         "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
@@ -97,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Password is empty"),
         "password_too_short":
             MessageLookupByLibrary.simpleMessage("Password is too short"),
+        "race_class": MessageLookupByLibrary.simpleMessage("Race class"),
         "race_classes": MessageLookupByLibrary.simpleMessage("Race Classes"),
         "race_track": MessageLookupByLibrary.simpleMessage("Race Track"),
         "rank": MessageLookupByLibrary.simpleMessage("Rank"),
@@ -125,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your session has expired. Please log in again."),
         "sign_in": MessageLookupByLibrary.simpleMessage("Login"),
         "sign_in_title": MessageLookupByLibrary.simpleMessage("Racego login"),
+        "start_import": MessageLookupByLibrary.simpleMessage("Start import"),
         "switch_role": MessageLookupByLibrary.simpleMessage("Switch role"),
         "sync_errormessage": MessageLookupByLibrary.simpleMessage(
             "Error: Synchronization interrupted!"),

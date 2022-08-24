@@ -20,7 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'de';
 
-  static String m0(errorCode) =>
+  static String m0(howMany) =>
+      "${Intl.plural(howMany, one: '1 Benutzer hinzugefügt', other: '${howMany} Benutzer hinzugefügt')}";
+
+  static String m1(errorCode) =>
       "Ungültige Serverantwort: Fehlercode: ${errorCode}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -38,6 +41,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel_flat": MessageLookupByLibrary.simpleMessage("ABBRECHEN"),
         "create_class_hint":
             MessageLookupByLibrary.simpleMessage("Klasse erstellen..."),
+        "csv_file_must_contain_headers": MessageLookupByLibrary.simpleMessage(
+            "Die CSV Datei muss folgende Spaltenüberschriften enthalten: "),
+        "csv_import": MessageLookupByLibrary.simpleMessage(
+            "CSV Import (UTF-8, Semikolon-getrennt)"),
+        "csv_import_cancelled":
+            MessageLookupByLibrary.simpleMessage("Import abgebrochen"),
+        "csv_import_description": MessageLookupByLibrary.simpleMessage(
+            "Importiere mehrere Benutzer schnell und einfach mittels CSV Datei. Du kannst diese Datei zum Beispiel mit Excel erstellen durch drücken auf Speichern unter ->  Dateityp -> CSV UTF-8."),
+        "csv_import_file_invalid": MessageLookupByLibrary.simpleMessage(
+            "Die ausgewählte Datei ist ungültig"),
+        "csv_import_file_not_exists": MessageLookupByLibrary.simpleMessage(
+            "Die ausgewählte Datei existiert nicht"),
+        "csv_import_successful": m0,
         "edit_user":
             MessageLookupByLibrary.simpleMessage("Benutzer bearbeiten"),
         "failed_adding_user_invalid_id": MessageLookupByLibrary.simpleMessage(
@@ -69,8 +85,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Benutzer konnte nicht aktualisiert werden: Unerwartete Serverantwort."),
         "first_name": MessageLookupByLibrary.simpleMessage("Vorname"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
-        "invalid_server_response": m0,
+        "import": MessageLookupByLibrary.simpleMessage("Importieren"),
+        "invalid_server_response": m1,
         "language": MessageLookupByLibrary.simpleMessage("Deutsch"),
+        "lap": MessageLookupByLibrary.simpleMessage("Runde"),
         "lap_time": MessageLookupByLibrary.simpleMessage("Zeit"),
         "laps": MessageLookupByLibrary.simpleMessage("Runden"),
         "last_name": MessageLookupByLibrary.simpleMessage("Nachname"),
@@ -100,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passwort ist leer"),
         "password_too_short":
             MessageLookupByLibrary.simpleMessage("Passwort ist zu kurz"),
+        "race_class": MessageLookupByLibrary.simpleMessage("Rennklasse"),
         "race_classes": MessageLookupByLibrary.simpleMessage("Rennklassen"),
         "race_track": MessageLookupByLibrary.simpleMessage("Rennstrecke"),
         "rank": MessageLookupByLibrary.simpleMessage("Rang"),
@@ -108,7 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_now": MessageLookupByLibrary.simpleMessage(
             "Kein Konto? Jetzt registrieren!"),
         "register_title":
-            MessageLookupByLibrary.simpleMessage("Racego Registration"),
+            MessageLookupByLibrary.simpleMessage("Racego Registrierung"),
         "remove_race_warning": MessageLookupByLibrary.simpleMessage(
             "Wollen Sie dieses Rennen wirklich entfernen?"),
         "remove_title": MessageLookupByLibrary.simpleMessage("Entfernen"),
@@ -128,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich neu an."),
         "sign_in": MessageLookupByLibrary.simpleMessage("Anmelden"),
         "sign_in_title": MessageLookupByLibrary.simpleMessage("Racego Login"),
+        "start_import": MessageLookupByLibrary.simpleMessage("Import starten"),
         "switch_role": MessageLookupByLibrary.simpleMessage("Rolle ändern"),
         "sync_errormessage": MessageLookupByLibrary.simpleMessage(
             "Fehler: Synchronisation unterbrochen!"),
