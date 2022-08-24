@@ -22,7 +22,7 @@
     "last_name": "Nachname",
     "@________LOGIN_SCREEN________":{},
     "sign_in_title": "Racego Login",
-    "register_title": "Racego Registration",
+    "register_title": "Racego Registrierung",
     "sign_in": "Anmelden",
     "register": "Registrieren",
     "log_out": "Abmelden",
