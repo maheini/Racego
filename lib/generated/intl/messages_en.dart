@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   static String m0(howMany) =>
-      "${Intl.plural(howMany, one: '1 user added', other: '${howMany} users added')}";
+      "${Intl.plural(howMany, zero: 'No user added', one: '1 user added', other: '${howMany} users added')}";
 
   static String m1(errorCode) =>
       "Invalid server response: Errorcode: ${errorCode}";

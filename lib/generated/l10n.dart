@@ -710,10 +710,11 @@ class S {
     );
   }
 
-  /// `{howMany, plural, one{1 user added} other{{howMany} users added}}`
+  /// `{howMany, plural, zero{No user added} one{1 user added} other{{howMany} users added}}`
   String csv_import_successful(num howMany) {
     return Intl.plural(
       howMany,
+      zero: 'No user added',
       one: '1 user added',
       other: '$howMany users added',
       name: 'csv_import_successful',
