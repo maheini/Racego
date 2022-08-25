@@ -74,7 +74,7 @@
     "csv_import_file_not_exists": "The selected file does not exist",
     "csv_import_file_invalid": "The selected file is invalid",
     "csv_import_cancelled": "Import cancelled",
-    "csv_import_successful": "{howMany, plural, one{1 user added} other{{howMany} users added}}",
+    "csv_import_successful": "{howMany, plural, zero{No user added} one{1 user added} other{{howMany} users added}}",
     "@________ERROR_MESSAGES________":{},
     "sync_errormessage": "Error: Synchronization interrupted!",
     "unknown_error": "Unbekannter Fehler",
