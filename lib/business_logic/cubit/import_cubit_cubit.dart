@@ -105,18 +105,45 @@ class ImportCubit extends Cubit<ImportCubitState> {
     return true;
   }
 
+  /// Convert csv data to UserDetails -> IMPORTANT: use checkCsvContent before!
   List<UserDetails> _convertCsvToUserDetails(List<List<dynamic>> content) {
     List<UserDetails> userList = [];
-    for (var element in content) {
-      List<String> classes = [];
-      for (var i = 2; i < element.length; i++) {
-        String className = element[i];
-        if (className.trim().isNotEmpty) {
-          classes.add(className);
+
+    int firstLapTime = -1;
+    for (int row = 0; row < content.length; row++) {
+      List<dynamic> values = content[row];
+      // if row is header? then determine the laptime column
+      if (row == 0) {
+        for (int column = 0; column < values.length; column++) {
+          if (values[column] == S.current.lap) {
+            firstLapTime = column;
+            break;
+          }
         }
+      } else {
+        // Add classes
+        List<String> classes = [];
+        for (int column = 2;
+            column < (firstLapTime > -1 ? firstLapTime : values.length);
+            column++) {
+          if (values[column].isNotEmpty) classes.add(values[column]);
+        }
+
+        // Add lap times
+        List<Time> laps = [];
+        if (firstLapTime > -1) {
+          for (int column = firstLapTime; column < values.length; column++) {
+            if (values[column].isNotEmpty) {
+              laps.add(Time.fromTimeString(values[column]));
+            }
+          }
+        }
+
+        // Generate UserDetails
+        UserDetails user = UserDetails(0, values[0], values[1], classes, laps);
+
+        userList.add(user);
       }
-      UserDetails user = UserDetails(0, element[0], element[1], classes, []);
-      userList.add(user);
     }
     return userList;
   }
