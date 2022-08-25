@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/business_logic/cubit/import_cubit_cubit.dart';
 import 'package:racego/data/api/racego_api.dart';
+import 'package:racego/generated/l10n.dart';
+import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/racego_appbar.dart';
+import 'package:racego/ui/widgets/titlebar.dart';
 
 class ImportScreen extends StatefulWidget {
   const ImportScreen({Key? key}) : super(key: key);
@@ -23,6 +26,49 @@ class _ImportScreenState extends State<ImportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: RacegoAppBar(title: S.of(context).import),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Center(
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      TitleBar(S.of(context).import),
+                      const SizedBox(height: 5),
+                      _csvImport(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ColoredButton(
+                  Text(
+                    S.of(context).back,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  color: Colors.red,
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _csvImport() {
     return BlocBuilder<ImportCubit, ImportCubitState>(
