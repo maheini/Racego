@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/models/userdetails.dart';
 import 'package:racego/generated/l10n.dart';
+import 'package:racego/data/models/time.dart';
 
 part 'import_cubit_state.dart';
 
@@ -50,14 +51,58 @@ class ImportCubit extends Cubit<ImportCubitState> {
   }
 
   bool _checkCsvContent(List<List<dynamic>> content) {
-    for (var element in content) {
-      if (element.length >= 3 &&
-          element.every(
-              (element) => element is String && element.trim().isNotEmpty)) {
-        return true;
+    int firstClassColumn = -1;
+    int firstLapColumn = -1;
+
+    for (int x = 0; x < content.length; x++) {
+      List<dynamic> row = content[x];
+      // if is first row, then check the headers
+      if (x == 0) {
+        for (int column = 0; column < row.length; column++) {
+          if (row[column] is! String) {
+            return false;
+          }
+          final String value = row[column];
+          switch (column) {
+            case 0:
+              if (value != S.current.first_name) return false;
+              break;
+            case 1:
+              if (value != S.current.last_name) return false;
+              break;
+            default:
+              // Does column has a name "race_class" and firstClassColumn is not set
+              if (value == S.current.race_class && firstLapColumn < 0) {
+                if (firstClassColumn < 0) firstClassColumn = column;
+              }
+              // Does column has a name "race_class" and firstClassColumn is not set
+              else if (value == S.current.lap && firstClassColumn > -1) {
+                if (firstLapColumn < 0) firstLapColumn = column;
+              } else {
+                return false;
+              }
+          }
+        }
+      }
+      // If row isn't header, then check if content is string, not empty and time is validTime
+      else {
+        for (int column = 0; column < row.length; column++) {
+          // Is the value not String -> return false
+          if (row[column] is! String) {
+            return false;
+          }
+          // is the value first_name or last_name? check if empty
+          else if (column < firstClassColumn && row[column].trim().isEmpty) {
+            return false;
+          }
+          // if value is a time and not empty, then validate the timeString
+          else if (column >= firstLapColumn && row[column].isNotEmpty) {
+            if (!Time.fromTimeString(row[column]).isValid) return false;
+          }
+        }
       }
     }
-    return false;
+    return true;
   }
 
   List<UserDetails> _convertCsvToUserDetails(List<List<dynamic>> content) {
