@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/models/userdetails.dart';
+import 'package:racego/generated/l10n.dart';
 
 part 'import_cubit_state.dart';
 
@@ -13,33 +14,38 @@ class ImportCubit extends Cubit<ImportCubitState> {
   final RacegoApi _api;
 
   Future<void> importCsv() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    emit(ImportCubitLoading());
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-    if (result != null) {
-      File file = File(result.files.single.path ?? '');
-      if (await file.exists()) {
-        String fileContent = await file.readAsString();
-        List<List<dynamic>> content = const CsvToListConverter()
-            .convert(fileContent, fieldDelimiter: ';');
+      if (result != null) {
+        File file = File(result.files.single.path ?? '');
+        if (await file.exists()) {
+          String fileContent = await file.readAsString();
+          List<List<dynamic>> content = const CsvToListConverter()
+              .convert(fileContent, fieldDelimiter: ';');
 
-        if (!_checkCsvContent(content)) {
-          emit(ImportCubitReady(message: 'errorrrdfsdfsd'));
-          return;
+          if (!_checkCsvContent(content)) {
+            emit(ImportCubitReady(message: S.current.csv_import_file_invalid));
+            return;
+          }
+          // upload list
+          List<UserDetails> userDetails = _convertCsvToUserDetails(content);
+
+          // check result
+          int inserted = await _uploadNewUsers(userDetails);
+          emit(ImportCubitReady(
+              message: S.current.csv_import_successful(inserted)));
+        } else {
+          // File doesn't exist
+          emit(ImportCubitReady(message: S.current.csv_import_file_not_exists));
         }
-        // upload list
-        List<UserDetails> userDetails = _convertCsvToUserDetails(content);
-
-        // check result
-        int inserted = await _uploadNewUsers(userDetails);
-        emit(ImportCubitReady(
-            message: 'hallofsdfsdfsdf ' + inserted.toString()));
       } else {
-        // File doesn't exist
-        emit(ImportCubitReady(message: 'hallofsdfsdfsdf'));
+        // User canceled the picker
+        emit(ImportCubitReady(message: S.current.csv_import_cancelled));
       }
-    } else {
-      // User canceled the picker
-      emit(ImportCubitReady(message: 'hallofsdfsdfsdf'));
+    } catch (_) {
+      emit(ImportCubitReady(message: S.current.unknown_error));
     }
   }
 
