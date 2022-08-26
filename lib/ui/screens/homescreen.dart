@@ -396,10 +396,10 @@ class _HomeScreenState extends State<HomeScreen> {
         } else if (result == 2) {
           Navigator.of(context).pushNamed('/management');
         } else if (result == 3) {
+          Navigator.of(context).pushNamed('/import');
+        } else if (result == 4) {
           _forcedLogout = true;
           context.read<LoginBloc>().add(Logout());
-        } else if (result == 4) {
-          Navigator.of(context).pushNamed('/import');
         }
       },
       itemBuilder: (context) => [
@@ -413,11 +413,11 @@ class _HomeScreenState extends State<HomeScreen> {
           value: 2,
         ),
         PopupMenuItem(
-          child: _buildPopupItem(Icons.logout, S.of(context).log_out),
+          child: _buildPopupItem(Icons.archive, S.of(context).import),
           value: 3,
         ),
         PopupMenuItem(
-          child: _buildPopupItem(Icons.archive, S.of(context).import),
+          child: _buildPopupItem(Icons.logout, S.of(context).log_out),
           value: 4,
         ),
       ],
