@@ -117,16 +117,9 @@ class _RaceManagementScreenState extends State<RaceManagementScreen> {
                     ? _listToolbarCubit.selectionChanged(selection)
                     : _listToolbarCubit.userUnselected();
               },
-              onDoubleTap: (id) {
-                // get current selected id to determine if the current user is admin.
-                // If this is the case, "/racedetails" could be used.
-                int index = state.races.indexWhere((element) =>
-                    element.id == _listToolbarCubit.getSelectedId());
-                if (state.races[index].isAdmin) {
-                  Navigator.of(context)
-                      .pushNamed('/racedetails', arguments: id)
-                      .then((value) => _cubit.loadRaces());
-                }
+              onDoubleTap: (id) async {
+                await _cubit.setRaceId(id);
+                Navigator.pushReplacementNamed(context, '/');
               },
               onAddPressed: (name) {
                 if (name.isNotEmpty) {
