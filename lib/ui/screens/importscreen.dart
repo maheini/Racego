@@ -37,10 +37,8 @@ class _ImportScreenState extends State<ImportScreen> {
                 child: Container(
                   constraints: const BoxConstraints(maxWidth: 800),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TitleBar(S.of(context).import),
-                      const SizedBox(height: 5),
                       _csvImport(),
                     ],
                   ),
