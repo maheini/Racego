@@ -50,9 +50,8 @@ class RacegoApi {
         _isLoggedIn = true;
 
         // retrieve last raceid for the current user from secure storage
-        currentRaceId = await secureStorage.read(
-                key: 'racego_raceid_' + username) as int? ??
-            0;
+        currentRaceId = int.parse(
+            await secureStorage.read(key: 'racego_raceid_' + username) ?? '0');
         headers['raceid'] = currentRaceId.toString();
         return true;
       }
