@@ -99,11 +99,13 @@ class ImportCubit extends Cubit<ImportCubitState> {
             return false;
           }
           // is the value first_name or last_name? check if empty
-          else if (column < firstClassColumn && row[column].trim().isEmpty) {
+          else if (column < 2 && row[column].trim().isEmpty) {
             return false;
           }
           // if value is a time and not empty, then validate the timeString
-          else if (column >= firstLapColumn && row[column].isNotEmpty) {
+          else if (firstLapColumn > -1 &&
+              column >= firstLapColumn &&
+              row[column].isNotEmpty) {
             if (!Time.fromTimeString(row[column]).isValid) return false;
           }
         }
