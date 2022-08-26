@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/data/models/userdetails.dart';
 import 'package:racego/generated/l10n.dart';
@@ -19,28 +21,33 @@ class ImportCubit extends Cubit<ImportCubitState> {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-      if (result != null) {
-        File file = File(result.files.single.path ?? '');
-        if (await file.exists()) {
-          String fileContent = await file.readAsString();
-          List<List<dynamic>> content = const CsvToListConverter()
-              .convert(fileContent, fieldDelimiter: ';');
+      if (result != null && result.files.isNotEmpty) {
+        String fileContent = '';
 
-          if (!_checkCsvContent(content)) {
-            emit(ImportCubitReady(message: S.current.csv_import_file_invalid));
-            return;
-          }
-          // upload list
-          List<UserDetails> userDetails = _convertCsvToUserDetails(content);
-
-          // check result
-          int inserted = await _uploadNewUsers(userDetails);
-          emit(ImportCubitReady(
-              message: S.current.csv_import_successful(inserted)));
+        // convert file to String
+        if (kIsWeb) {
+          final Uint8List fileBytes = result.files.first.bytes ?? Uint8List(0);
+          fileContent = utf8.decode(fileBytes);
         } else {
-          // File doesn't exist
-          emit(ImportCubitReady(message: S.current.csv_import_file_not_exists));
+          fileContent =
+              await File(result.files.single.path ?? '').readAsString();
         }
+
+        List<List<dynamic>> content = const CsvToListConverter()
+            .convert(fileContent, fieldDelimiter: ';');
+
+        if (!_checkCsvContent(content)) {
+          emit(ImportCubitReady(message: S.current.csv_import_file_invalid));
+          return;
+        }
+
+        // upload list
+        List<UserDetails> userDetails = _convertCsvToUserDetails(content);
+
+        // check result
+        int inserted = await _uploadNewUsers(userDetails);
+        emit(ImportCubitReady(
+            message: S.current.csv_import_successful(inserted)));
       } else {
         // User canceled the picker
         emit(ImportCubitReady(message: S.current.csv_import_cancelled));
