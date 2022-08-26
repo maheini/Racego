@@ -30,11 +30,6 @@ class _RankingState extends State<Ranking> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TitleBar(
-          S.current.ranking,
-          fontSize: 20,
-        ),
-        const SizedBox(height: 5),
         _body(),
       ],
     );
