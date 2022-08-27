@@ -58,55 +58,39 @@ class ImportCubit extends Cubit<ImportCubitState> {
   }
 
   bool _checkCsvContent(List<List<dynamic>> content) {
-    int firstClassColumn = -1;
-    int firstLapColumn = -1;
+    int lapColumn = -1;
 
-    for (int x = 0; x < content.length; x++) {
-      List<dynamic> row = content[x];
-      // if is first row, then check the headers
-      if (x == 0) {
-        for (int column = 0; column < row.length; column++) {
-          if (row[column] is! String) {
-            return false;
-          }
-          final String value = row[column];
+    for (int row = 0; row < content.length; row++) {
+      List<dynamic> rowData = content[row];
+
+      if (!rowData.every((element) => element is String)) return false;
+
+      if (row == 0) {
+        for (int column = 0; column < rowData.length; column++) {
           switch (column) {
             case 0:
-              if (value != S.current.first_name) return false;
+              if (rowData[column] != S.current.first_name) return false;
               break;
             case 1:
-              if (value != S.current.last_name) return false;
+              if (rowData[column] != S.current.last_name) return false;
               break;
             default:
-              // Does column has a name "race_class" and firstClassColumn is not set
-              if (value == S.current.race_class && firstLapColumn < 0) {
-                if (firstClassColumn < 0) firstClassColumn = column;
-              }
-              // Does column has a name "race_class" and firstClassColumn is not set
-              else if (value == S.current.lap && firstClassColumn > -1) {
-                if (firstLapColumn < 0) firstLapColumn = column;
+              if (lapColumn < 0 && rowData[column] == S.current.race_class) {
+                break;
+              } else if (rowData[column] == S.current.lap) {
+                if (lapColumn < 0) lapColumn = column;
+                break;
               } else {
                 return false;
               }
           }
         }
-      }
-      // If row isn't header, then check if content is string, not empty and time is validTime
-      else {
-        for (int column = 0; column < row.length; column++) {
-          // Is the value not String -> return false
-          if (row[column] is! String) {
+      } else {
+        for (int column = 0; column < rowData.length; column++) {
+          if ((column == 0 || column == 1) && rowData[column].isEmpty) {
             return false;
-          }
-          // is the value first_name or last_name? check if empty
-          else if (column < 2 && row[column].trim().isEmpty) {
-            return false;
-          }
-          // if value is a time and not empty, then validate the timeString
-          else if (firstLapColumn > -1 &&
-              column >= firstLapColumn &&
-              row[column].isNotEmpty) {
-            if (!Time.fromTimeString(row[column]).isValid) return false;
+          } else if (column >= lapColumn && rowData[column].isNotEmpty) {
+            if (!Time.fromTimeString(rowData[column]).isValid) return false;
           }
         }
       }
@@ -121,7 +105,7 @@ class ImportCubit extends Cubit<ImportCubitState> {
     int firstLapTime = -1;
     for (int row = 0; row < content.length; row++) {
       List<dynamic> values = content[row];
-      // if row is header? then determine the laptime column
+      // if row is header? then determine the first laptime column
       if (row == 0) {
         for (int column = 0; column < values.length; column++) {
           if (values[column] == S.current.lap) {
