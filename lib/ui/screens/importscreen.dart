@@ -84,7 +84,7 @@ class _ImportScreenState extends State<ImportScreen> {
                   S.of(context).last_name +
                   ', ' +
                   S.of(context).race_class +
-                  ', ...,' +
+                  ', ..., ' +
                   S.of(context).lap +
                   ', ...',
             ),
