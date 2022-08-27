@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:racego/business_logic/cubit/import_cubit_cubit.dart';
+import 'package:racego/business_logic/import_cubit/import_cubit_cubit.dart';
 import 'package:racego/data/api/racego_api.dart';
 import 'package:racego/generated/l10n.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
