@@ -89,7 +89,9 @@ class ImportCubit extends Cubit<ImportCubitState> {
         for (int column = 0; column < rowData.length; column++) {
           if ((column == 0 || column == 1) && rowData[column].isEmpty) {
             return false;
-          } else if (column >= lapColumn && rowData[column].isNotEmpty) {
+          } else if (lapColumn > -1 &&
+              column >= lapColumn &&
+              rowData[column].isNotEmpty) {
             if (!Time.fromTimeString(rowData[column]).isValid) return false;
           }
         }
