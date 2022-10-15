@@ -20,7 +20,7 @@ class RacegoApi {
   FlutterSecureStorage secureStorage;
   RacegoApi(this._client, this.secureStorage);
   Map<String, String> headers = {};
-  static const String _apiBaseUrl = 'http://localhost/api.php/';
+  static const String _apiBaseUrl = 'https://racego.neofix.ch/api/api.php/';
 
   final http.Client _client;
 
