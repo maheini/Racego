@@ -12,8 +12,8 @@ A cross-platform race-management tool for Desktop and web.
 </p>
 <p align="center">Home screen with dark an light theme: quick access to user-management and ranking list</p>
 
-[<img src="https://user-images.githubusercontent.com/65506676/196290622-a041e9b1-3f40-475b-97ba-6d382aff2c94.svg" height="45"></img>](https://racego.neofix.ch/download/Racego%20Setup.exe)
-
+[<img src="https://user-images.githubusercontent.com/65506676/196290622-a041e9b1-3f40-475b-97ba-6d382aff2c94.svg" height="45" alt="Windows Download"></img>](https://racego.neofix.ch/download/Racego%20Setup.exe)
+[<img src="https://user-images.githubusercontent.com/65506676/196292811-60710efe-5c8b-4e3a-9879-4cee8ed55e8b.png" height="45" alt="WebApp"></img>](https://racego.neofix.ch/manager/)
 
 [Windows Download](https://racego.neofix.ch/download/Racego%20Setup.exe)
 [Web Version](https://racego.neofix.ch/manager/)
