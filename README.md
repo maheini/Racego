@@ -11,11 +11,6 @@ Racego is a cross-platform race-management software for managing & evaluating sp
 [<img src="https://user-images.githubusercontent.com/65506676/196290622-a041e9b1-3f40-475b-97ba-6d382aff2c94.svg" height="45" alt="Windows Download"></img>](PASTE_DOWNLOAD_LINK)
 [<img src="https://user-images.githubusercontent.com/65506676/196293379-269afd46-a235-45ad-aec4-76ae75945627.png" height="45" alt="WebApp"></img>](https://racego.neofix.ch/manager/)
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/65506676/162324108-207cc035-1e04-45c3-9d93-313787e18d29.png">
-</p>
-<p align="center">Home screen with dark an light theme: quick access to user-management and ranking list</p>
-
 ## Languages
 
 English and German languages are supported.
@@ -37,6 +32,11 @@ Racego was first released as a native Windows application in 2020. Later on, Neo
 Licensed under the [GPLv3 License](LICENSE).
 
 ## Screenshots
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/65506676/162324108-207cc035-1e04-45c3-9d93-313787e18d29.png">
+</p>
+<p align="center">Home screen with dark an light theme: quick access to user-management and ranking list</p>
 
 <p align="center">Edit profile of every participant</p>
 <p align="center">
