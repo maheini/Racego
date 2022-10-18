@@ -5,7 +5,10 @@ abstract class LoginState {}
 
 class RegeneratingSession extends LoginState {}
 
-class LoggedOut extends LoginState {}
+class LoggedOut extends LoginState {
+  LoggedOut({this.registerPage = false});
+  final bool registerPage;
+}
 
 class Loading extends LoginState {}
 

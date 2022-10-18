@@ -4,6 +4,7 @@ import 'package:racego/business_logic/ranking_cubit/ranking_cubit.dart';
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:racego/data/models/rankinglist.dart';
 import 'package:racego/ui/widgets/dropdownmenu.dart';
+import 'package:racego/ui/widgets/titlebar.dart';
 
 import '../../data/api/racego_api.dart';
 import '../../generated/l10n.dart';
@@ -29,36 +30,8 @@ class _RankingState extends State<Ranking> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _title(),
-        const SizedBox(height: 5),
         _body(),
       ],
-    );
-  }
-
-  Widget _title() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onBackground,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-            // offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(10),
-      width: double.infinity,
-      child: Text(
-        S.current.ranking,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
     );
   }
 
@@ -176,7 +149,6 @@ class _RankingState extends State<Ranking> {
   Widget _generateList(RankingList list) {
     return Column(
       children: [
-        // _title(),
         const SizedBox(height: 3),
         const Divider(thickness: 2, height: 4),
         Expanded(

@@ -22,7 +22,7 @@ class UserDetails {
   }
 
   Map<String, dynamic> toJson() {
-    List<String> laps = lapTimes.map((name) => name.toTimeString).toList();
+    List<String> laps = lapTimes.map((name) => name.isoTime).toList();
     return {
       'id': _id,
       'first_name': _firstName,

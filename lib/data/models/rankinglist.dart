@@ -5,7 +5,7 @@ class RankingList {
 
   Map<String, String> getValue(int index) {
     if (index >= _ranks.length || index < 0) {
-      return {'dsf': 'sdf'};
+      return {};
     } else {
       return _ranks[index];
     }

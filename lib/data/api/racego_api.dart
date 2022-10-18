@@ -5,12 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:racego/data/exceptions/racego_exception.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:racego/data/models/racedetails.dart';
 import 'package:racego/data/models/rankinglist.dart';
 import 'package:racego/data/models/time.dart';
 import 'package:racego/data/models/user.dart';
 import 'package:racego/data/models/userdetails.dart';
 
 import '../../generated/l10n.dart';
+import '../models/race.dart';
 
 class RacegoApi {
   String? _username;
@@ -18,12 +20,20 @@ class RacegoApi {
   FlutterSecureStorage secureStorage;
   RacegoApi(this._client, this.secureStorage);
   Map<String, String> headers = {};
-  static const String _apiBaseUrl = 'http://localhost/api.php/';
+  static const String _apiBaseUrl = 'https://racego.neofix.ch/api/api.php/';
 
   final http.Client _client;
 
+  int currentRaceId = 0;
   bool get isLoggedIn => _isLoggedIn;
   String get username => _username ?? '';
+
+  Future<void> updateRaceId(int raceId) async {
+    currentRaceId = raceId;
+    headers['raceid'] = currentRaceId.toString();
+    await secureStorage.write(
+        key: 'racego_raceid_' + username, value: currentRaceId.toString());
+  }
 
   Future<bool> regenerateSession() async {
     try {
@@ -38,6 +48,11 @@ class RacegoApi {
       if (status.containsKey('username')) {
         _username = status['username'];
         _isLoggedIn = true;
+
+        // retrieve last raceid for the current user from secure storage
+        currentRaceId = int.parse(
+            await secureStorage.read(key: 'racego_raceid_' + username) ?? '0');
+        headers['raceid'] = currentRaceId.toString();
         return true;
       }
       return false;
@@ -66,11 +81,52 @@ class RacegoApi {
       if (data.containsKey('username')) {
         _username = data['username'];
         _isLoggedIn = true;
+
+        // retrieve last raceid for the current user from secure storage
+        currentRaceId = int.parse(
+            await secureStorage.read(key: 'racego_raceid_' + username) ?? '0');
+        headers['raceid'] = currentRaceId.toString();
         return true;
       }
       return false;
     } on AuthException catch (authError) {
       if (authError.errorMessage.contains(S.current.failed_login)) {
+        return false;
+      } else {
+        rethrow;
+      }
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<bool> register(String username, String password) async {
+    try {
+      Map<String, String> loginData = {
+        'username': username,
+        'password': password
+      };
+      String response = await _postRequest(_apiBaseUrl + 'register', loginData);
+      Map<String, dynamic> data = jsonDecode(response);
+      if (data.containsKey('username')) {
+        _username = data['username'];
+        _isLoggedIn = true;
+
+        // Set raceid to 0 for the new user
+        currentRaceId = 0;
+        headers['raceid'] = currentRaceId.toString();
+        return true;
+      }
+      return false;
+    } on AuthException catch (authError) {
+      if (authError.errorMessage.contains(S.current.failed_registration)) {
         return false;
       } else {
         rethrow;
@@ -94,6 +150,10 @@ class RacegoApi {
       if (data.containsKey('username')) {
         _username = null;
         _isLoggedIn = false;
+
+        // reset header and current raceid
+        currentRaceId = 0;
+        headers['raceid'] = currentRaceId.toString();
         return true;
       }
       return false;
@@ -316,7 +376,7 @@ class RacegoApi {
   Future<bool> finishLap(int userId, Time time) async {
     try {
       if (!time.isValid) return false;
-      Map<String, dynamic> bodyMap = {'id': userId, 'time': time.toTimeString};
+      Map<String, dynamic> bodyMap = {'id': userId, 'time': time.isoTime};
       String body = jsonEncode(bodyMap);
       String response = await _putRequest(_apiBaseUrl + 'v1/ontrack', body);
       Map<String, dynamic> map = jsonDecode(response);
@@ -387,6 +447,135 @@ class RacegoApi {
     }
   }
 
+  Future<List<Race>> getRaces() async {
+    try {
+      String response = '';
+      response = await _getRequest(_apiBaseUrl + 'v1/races/');
+
+      final parsed = jsonDecode(response).cast<Map<String, dynamic>>();
+      return parsed.map<Race>((json) => Race.fromJson(json)).toList();
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<int> addRace(String name) async {
+    try {
+      if (name.isEmpty) {
+        throw DataException(S.current.add_race_failed_invalid_input_data);
+      }
+      Map<String, String> bodyMap = {'name': name};
+      String body = jsonEncode(bodyMap);
+      String response = await _postRequest(_apiBaseUrl + 'v1/race/', body);
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('race_id') && map['race_id'] > 0) {
+        return map['race_id'];
+      }
+      return 0;
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<bool> deleteRace(int raceID) async {
+    try {
+      Map<String, int> bodyMap = {'id': raceID};
+      String body = jsonEncode(bodyMap);
+      String response = await _deleteRequest(_apiBaseUrl + 'v1/race/', body);
+      Map<String, dynamic> map = jsonDecode(response);
+
+      if (map.keys.contains('affected_rows') &&
+          map['affected_rows'] is int &&
+          map['affected_rows'] >= 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(
+        S.current.unknown_error,
+        error.toString(),
+        error.runtimeType.toString(),
+      );
+    }
+  }
+
+  Future<RaceDetails> getRaceDetails(int raceId) async {
+    try {
+      String response = '';
+      response =
+          await _getRequest(_apiBaseUrl + 'v1/race/' + raceId.toString());
+      return RaceDetails.fromJson(jsonDecode(response));
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
+  Future<bool> setRaceDetails(RaceDetails raceDetails) async {
+    try {
+      if (raceDetails.id <= 0 ||
+          raceDetails.name.isEmpty ||
+          raceDetails.managers.isEmpty) {
+        throw DataException(S.current.failed_updating_user_invalid_data);
+      }
+
+      String response = await _postRequest(
+          _apiBaseUrl + 'v1/race/' + raceDetails.id.toString(),
+          jsonEncode(raceDetails.toJson()));
+      Map<String, dynamic> map = jsonDecode(response);
+      if (map.keys.contains('result') && map['result'] == 'successful') {
+        return true;
+      }
+      return false;
+    } on AuthException catch (_) {
+      rethrow;
+    } on RacegoException catch (_) {
+      rethrow;
+    } on TypeError catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } on FormatException catch (_) {
+      throw DataException(S.current.failed_parsing_response);
+    } catch (error) {
+      throw UnknownException(S.current.unknown_error, error.toString(),
+          error.runtimeType.toString());
+    }
+  }
+
   Future<String> _getRequest(String url) async {
     try {
       http.Response response =
@@ -399,10 +588,16 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.failed_login);
         case 404:
           throw ServerException(S.current.requestet_entity_not_found);
@@ -438,10 +633,16 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.failed_login);
         case 404:
           throw ServerException(S.current.requestet_entity_not_found);
@@ -477,10 +678,16 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.failed_login);
         case 404:
           throw ServerException(S.current.requestet_entity_not_found);
@@ -516,10 +723,16 @@ class RacegoApi {
         case 401:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.no_permission);
         case 403:
           _isLoggedIn = false;
           _username = null;
+          // reset header and current raceid
+          currentRaceId = 0;
+          headers['raceid'] = currentRaceId.toString();
           throw AuthException(S.current.failed_login);
         case 404:
           throw ServerException(S.current.requestet_entity_not_found);

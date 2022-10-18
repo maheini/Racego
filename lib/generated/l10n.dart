@@ -55,7 +55,7 @@ class S {
     return Intl.message(
       'English',
       name: 'language',
-      desc: 'The current language',
+      desc: '',
       args: [],
     );
   }
@@ -65,7 +65,7 @@ class S {
     return Intl.message(
       'Save',
       name: 'save',
-      desc: 'Display text for storing changes',
+      desc: '',
       args: [],
     );
   }
@@ -75,7 +75,7 @@ class S {
     return Intl.message(
       'Cancel',
       name: 'cancel',
-      desc: 'Display text for cancelling changes',
+      desc: '',
       args: [],
     );
   }
@@ -85,7 +85,7 @@ class S {
     return Intl.message(
       'Try again',
       name: 'retry',
-      desc: 'Try again text',
+      desc: '',
       args: [],
     );
   }
@@ -95,7 +95,17 @@ class S {
     return Intl.message(
       'OK',
       name: 'ok_flat',
-      desc: 'ok label for flat buttons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CANCEL`
+  String get cancel_flat {
+    return Intl.message(
+      'CANCEL',
+      name: 'cancel_flat',
+      desc: '',
       args: [],
     );
   }
@@ -105,7 +115,27 @@ class S {
     return Intl.message(
       'Back',
       name: 'back',
-      desc: 'Display text for going back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name is empty`
+  String get name_empty {
+    return Intl.message(
+      'Name is empty',
+      name: 'name_empty',
+      desc: '',
       args: [],
     );
   }
@@ -115,7 +145,7 @@ class S {
     return Intl.message(
       'Race Track',
       name: 'race_track',
-      desc: 'How a race track is called',
+      desc: '',
       args: [],
     );
   }
@@ -125,7 +155,17 @@ class S {
     return Intl.message(
       'Participants',
       name: 'participants',
-      desc: 'How the participants are beeing called',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Race class`
+  String get race_class {
+    return Intl.message(
+      'Race class',
+      name: 'race_class',
+      desc: '',
       args: [],
     );
   }
@@ -135,7 +175,17 @@ class S {
     return Intl.message(
       'Race Classes',
       name: 'race_classes',
-      desc: 'How race classes are called',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lap`
+  String get lap {
+    return Intl.message(
+      'Lap',
+      name: 'lap',
+      desc: '',
       args: [],
     );
   }
@@ -145,7 +195,7 @@ class S {
     return Intl.message(
       'Laps',
       name: 'laps',
-      desc: 'How laps are called',
+      desc: '',
       args: [],
     );
   }
@@ -155,7 +205,7 @@ class S {
     return Intl.message(
       'ID',
       name: 'id',
-      desc: 'Name of an ID',
+      desc: '',
       args: [],
     );
   }
@@ -165,7 +215,7 @@ class S {
     return Intl.message(
       'First Name',
       name: 'first_name',
-      desc: 'How the first name is called',
+      desc: '',
       args: [],
     );
   }
@@ -175,7 +225,7 @@ class S {
     return Intl.message(
       'Last Name',
       name: 'last_name',
-      desc: 'How the last name is called',
+      desc: '',
       args: [],
     );
   }
@@ -185,7 +235,17 @@ class S {
     return Intl.message(
       'Racego login',
       name: 'sign_in_title',
-      desc: 'Login title text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Racego registration`
+  String get register_title {
+    return Intl.message(
+      'Racego registration',
+      name: 'register_title',
+      desc: '',
       args: [],
     );
   }
@@ -195,7 +255,27 @@ class S {
     return Intl.message(
       'Login',
       name: 'sign_in',
-      desc: 'Login button text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get log_out {
+    return Intl.message(
+      'Logout',
+      name: 'log_out',
+      desc: '',
       args: [],
     );
   }
@@ -205,27 +285,57 @@ class S {
     return Intl.message(
       'Please login again',
       name: 'retry_login',
-      desc: 'Try login again text',
+      desc: '',
       args: [],
     );
   }
 
-  /// `Email`
-  String get email {
+  /// `No Account? Register now!`
+  String get register_now {
     return Intl.message(
-      'Email',
-      name: 'email',
-      desc: 'Email name',
+      'No Account? Register now!',
+      name: 'register_now',
+      desc: '',
       args: [],
     );
   }
 
-  /// `Email is empty`
-  String get email_empty {
+  /// `Already have an account? Login here!`
+  String get login_now {
     return Intl.message(
-      'Email is empty',
-      name: 'email_empty',
-      desc: 'Email is empty message',
+      'Already have an account? Login here!',
+      name: 'login_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username`
+  String get username {
+    return Intl.message(
+      'Username',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username is too short`
+  String get username_too_short {
+    return Intl.message(
+      'Username is too short',
+      name: 'username_too_short',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username is empty`
+  String get username_empty {
+    return Intl.message(
+      'Username is empty',
+      name: 'username_empty',
+      desc: '',
       args: [],
     );
   }
@@ -235,7 +345,17 @@ class S {
     return Intl.message(
       'Password',
       name: 'password',
-      desc: 'Password name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is too short`
+  String get password_too_short {
+    return Intl.message(
+      'Password is too short',
+      name: 'password_too_short',
+      desc: '',
       args: [],
     );
   }
@@ -245,7 +365,7 @@ class S {
     return Intl.message(
       'Password is empty',
       name: 'password_empty',
-      desc: 'Password is empty message',
+      desc: '',
       args: [],
     );
   }
@@ -255,7 +375,17 @@ class S {
     return Intl.message(
       'Incorrect username or password.',
       name: 'login_invalid',
-      desc: 'Email or Password is incorrrect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration failed`
+  String get failed_registration {
+    return Intl.message(
+      'Registration failed',
+      name: 'failed_registration',
+      desc: '',
       args: [],
     );
   }
@@ -265,7 +395,7 @@ class S {
     return Intl.message(
       'Welcome back',
       name: 'welcome',
-      desc: 'Welcome message',
+      desc: '',
       args: [],
     );
   }
@@ -275,7 +405,7 @@ class S {
     return Intl.message(
       'Session expired',
       name: 'session_expired',
-      desc: 'Message if session expires',
+      desc: '',
       args: [],
     );
   }
@@ -285,7 +415,7 @@ class S {
     return Intl.message(
       'Your session has expired. Please log in again.',
       name: 'session_expired_details',
-      desc: 'Detailed message if session expires',
+      desc: '',
       args: [],
     );
   }
@@ -295,7 +425,7 @@ class S {
     return Intl.message(
       'Search...',
       name: 'search_hint',
-      desc: 'Hint text which is displayed for search bars',
+      desc: '',
       args: [],
     );
   }
@@ -305,7 +435,7 @@ class S {
     return Intl.message(
       'Edit User',
       name: 'edit_user',
-      desc: 'Edit user title',
+      desc: '',
       args: [],
     );
   }
@@ -315,7 +445,7 @@ class S {
     return Intl.message(
       'Create Class...',
       name: 'create_class_hint',
-      desc: 'Hint text which is displayed for create class bars',
+      desc: '',
       args: [],
     );
   }
@@ -325,7 +455,7 @@ class S {
     return Intl.message(
       'Ranking',
       name: 'ranking',
-      desc: 'Text translation for ranking',
+      desc: '',
       args: [],
     );
   }
@@ -335,7 +465,7 @@ class S {
     return Intl.message(
       'All classes',
       name: 'all_classes',
-      desc: 'Text translation for \'all classes\'',
+      desc: '',
       args: [],
     );
   }
@@ -350,23 +480,246 @@ class S {
     );
   }
 
-  /// `Name`
-  String get name {
-    return Intl.message(
-      'Name',
-      name: 'name',
-      desc: 'Name of a \'name\' (independent of first or last name)\'',
-      args: [],
-    );
-  }
-
   /// `Rank`
   String get rank {
     return Intl.message(
       'Rank',
       name: 'rank',
-      desc: 'Name of a rank',
+      desc: '',
       args: [],
+    );
+  }
+
+  /// `Verwaltung`
+  String get management {
+    return Intl.message(
+      'Verwaltung',
+      name: 'management',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add, edit or select a race to continue`
+  String get management_subtitle {
+    return Intl.message(
+      'Add, edit or select a race to continue',
+      name: 'management_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your races`
+  String get manage_your_races {
+    return Intl.message(
+      'Your races',
+      name: 'manage_your_races',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manager`
+  String get manager {
+    return Intl.message(
+      'Manager',
+      name: 'manager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Manager or additional administrators. Important: The username must be correct.`
+  String get manager_subtitle {
+    return Intl.message(
+      'Add Manager or additional administrators. Important: The username must be correct.',
+      name: 'manager_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add ranking...`
+  String get add_ranking_hint {
+    return Intl.message(
+      'Add ranking...',
+      name: 'add_ranking_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role`
+  String get role {
+    return Intl.message(
+      'Role',
+      name: 'role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User`
+  String get role_manager {
+    return Intl.message(
+      'User',
+      name: 'role_manager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin`
+  String get role_administrator {
+    return Intl.message(
+      'Admin',
+      name: 'role_administrator',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove`
+  String get remove_title {
+    return Intl.message(
+      'Remove',
+      name: 'remove_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this race?`
+  String get remove_race_warning {
+    return Intl.message(
+      'Are you sure you want to delete this race?',
+      name: 'remove_race_warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error while creating the race: Incorrect input data`
+  String get add_race_failed_invalid_input_data {
+    return Intl.message(
+      'Error while creating the race: Incorrect input data',
+      name: 'add_race_failed_invalid_input_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add username`
+  String get add_username {
+    return Intl.message(
+      'Add username',
+      name: 'add_username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch role`
+  String get switch_role {
+    return Intl.message(
+      'Switch role',
+      name: 'switch_role',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import`
+  String get import {
+    return Intl.message(
+      'Import',
+      name: 'import',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CSV import (UTF-8, semicolon seperated)`
+  String get csv_import {
+    return Intl.message(
+      'CSV import (UTF-8, semicolon seperated)',
+      name: 'csv_import',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start import`
+  String get start_import {
+    return Intl.message(
+      'Start import',
+      name: 'start_import',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import multiple users quick and easy via CSV file. You can create this file for example with Excel by selecting Save as -> Save as type -> CSV UTF-8.`
+  String get csv_import_description {
+    return Intl.message(
+      'Import multiple users quick and easy via CSV file. You can create this file for example with Excel by selecting Save as -> Save as type -> CSV UTF-8.',
+      name: 'csv_import_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The CSV file must contain following headers: `
+  String get csv_file_must_contain_headers {
+    return Intl.message(
+      'The CSV file must contain following headers: ',
+      name: 'csv_file_must_contain_headers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The selected file does not exist`
+  String get csv_import_file_not_exists {
+    return Intl.message(
+      'The selected file does not exist',
+      name: 'csv_import_file_not_exists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The selected file is invalid`
+  String get csv_import_file_invalid {
+    return Intl.message(
+      'The selected file is invalid',
+      name: 'csv_import_file_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Import cancelled`
+  String get csv_import_cancelled {
+    return Intl.message(
+      'Import cancelled',
+      name: 'csv_import_cancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{howMany, plural, zero{No user added} one{1 user added} other{{howMany} users added}}`
+  String csv_import_successful(num howMany) {
+    return Intl.plural(
+      howMany,
+      zero: 'No user added',
+      one: '1 user added',
+      other: '$howMany users added',
+      name: 'csv_import_successful',
+      desc: '',
+      args: [howMany],
     );
   }
 
@@ -375,7 +728,7 @@ class S {
     return Intl.message(
       'Error: Synchronization interrupted!',
       name: 'sync_errormessage',
-      desc: 'Warning message if synchronization is interrupted',
+      desc: '',
       args: [],
     );
   }
@@ -385,7 +738,7 @@ class S {
     return Intl.message(
       'Unbekannter Fehler',
       name: 'unknown_error',
-      desc: 'Error message for unknown errors',
+      desc: '',
       args: [],
     );
   }
@@ -395,7 +748,7 @@ class S {
     return Intl.message(
       'Error loading the user.',
       name: 'loading_user_error',
-      desc: 'Error message if user couldn\'t be loaded',
+      desc: '',
       args: [],
     );
   }
@@ -405,8 +758,7 @@ class S {
     return Intl.message(
       'User could not be removed from the race track: ID invalid.',
       name: 'failed_cancelling_lap_invalid_id',
-      desc:
-          'Error message if user couldn\'t be removed from track, because of invalid ID',
+      desc: '',
       args: [],
     );
   }
@@ -416,8 +768,7 @@ class S {
     return Intl.message(
       'Lap time could not be recorded: ID or time invalid.',
       name: 'failed_finishing_lap_invalid_id',
-      desc:
-          'Error message if lap could not be stored, because of invalid ID or lap-time',
+      desc: '',
       args: [],
     );
   }
@@ -427,8 +778,7 @@ class S {
     return Intl.message(
       'User could not be removed: ID invalid.',
       name: 'failed_removing_user_invalid_id',
-      desc:
-          'Error message if user couldn\'t be removed -> because ID is invalid',
+      desc: '',
       args: [],
     );
   }
@@ -438,7 +788,7 @@ class S {
     return Intl.message(
       'User could not be placed on the race track: ID invalid.',
       name: 'failed_adding_user_on_track_invalid_id',
-      desc: 'Error message if user couldn\'t be placed on the track',
+      desc: '',
       args: [],
     );
   }
@@ -448,7 +798,7 @@ class S {
     return Intl.message(
       'User could not be created: Database ID is invalid.',
       name: 'failed_adding_user_invalid_id',
-      desc: 'Error message if user couldn\'t be created',
+      desc: '',
       args: [],
     );
   }
@@ -458,8 +808,7 @@ class S {
     return Intl.message(
       'User could not be updated: Unexpected server response.',
       name: 'failed_updating_user_unexpected_response',
-      desc:
-          'Error message if user couldn\'t be updated because of a unexpected server response',
+      desc: '',
       args: [],
     );
   }
@@ -469,7 +818,7 @@ class S {
     return Intl.message(
       'Error parsing the server response.',
       name: 'failed_parsing_response',
-      desc: 'Error message if server response couldn\'t be parsed.',
+      desc: '',
       args: [],
     );
   }
@@ -479,7 +828,7 @@ class S {
     return Intl.message(
       'Login failed.',
       name: 'failed_login',
-      desc: 'Error message if login wasn\'t successful.',
+      desc: '',
       args: [],
     );
   }
@@ -489,7 +838,7 @@ class S {
     return Intl.message(
       'The user details are insufficient.',
       name: 'failed_updating_user_invalid_data',
-      desc: 'Error message if user couldn\'t be updated',
+      desc: '',
       args: [],
     );
   }
@@ -499,7 +848,7 @@ class S {
     return Intl.message(
       'No authorization.',
       name: 'no_permission',
-      desc: 'Error message if user has no permission',
+      desc: '',
       args: [],
     );
   }
@@ -509,7 +858,7 @@ class S {
     return Intl.message(
       'Requested entity was not found..',
       name: 'requestet_entity_not_found',
-      desc: 'Error message if entity couldn\'t be found',
+      desc: '',
       args: [],
     );
   }
@@ -529,7 +878,7 @@ class S {
     return Intl.message(
       'Couldn\'t process the request.',
       name: 'unprocessable_entity',
-      desc: 'Error message if send data couldn\'t be processed',
+      desc: '',
       args: [],
     );
   }
@@ -539,7 +888,7 @@ class S {
     return Intl.message(
       'Invalid server response: Errorcode: $errorCode',
       name: 'invalid_server_response',
-      desc: 'Error message if the server response is invalid',
+      desc: '',
       args: [errorCode],
     );
   }
@@ -549,7 +898,7 @@ class S {
     return Intl.message(
       'The server cannot be reached: Timeout.',
       name: 'failed_server_timeout',
-      desc: 'Error message if the server cannot be reached',
+      desc: '',
       args: [],
     );
   }

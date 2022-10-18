@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.pushReplacementNamed(context, '/');
             } else {
               await loggedOutDialog(context);
-              WidgetsBinding.instance?.addPostFrameCallback((_) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacementNamed(context, '/');
               });
             }
@@ -127,20 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       centerTitle: true,
       actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            Icons.logout,
-          ),
-          onPressed: () async {
-            _forcedLogout = true;
-            context.read<LoginBloc>().add(Logout());
-          },
-        ),
-        const SizedBox(width: 5),
-        IconButton(
-          icon: const Icon(Icons.emoji_events_rounded),
-          onPressed: () => Navigator.of(context).pushNamed('/ranking'),
-        ),
+        _popupMenu(context),
       ],
     );
   }
@@ -150,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         const SizedBox(height: 30),
         Text(
-          S.current.welcome,
+          S.current.welcome + ", " + context.read<RacegoApi>().username,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 50,
@@ -180,43 +167,28 @@ class _HomeScreenState extends State<HomeScreen> {
           child: BlocBuilder<listcubit.UserlistCubit, listcubit.UserlistState>(
             bloc: _userlistCubit,
             builder: (context, state) {
-              if (state is listcubit.Loaded) {
-                return UserList(
-                  state.list,
-                  searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: S.current.participants,
-                  onSelectionChanged: (index, userID, isSelected) {
-                    isSelected
-                        ? _userToolsCubit.selectionChanged(userID)
-                        : _userToolsCubit.userUnselected();
-                  },
-                  onDoubleTap: (index, userID) => Navigator.of(context)
-                      .pushNamed('/user', arguments: userID),
-                  onAddPressed: (searchtest) =>
-                      Navigator.of(context).pushNamed('/user'),
-                );
-              } else {
-                List<User> newList = [];
-                if (state is listcubit.Loading) {
-                  newList = state.previousList;
-                } else if (state is listcubit.Error) {
-                  newList = state.previousList;
-                }
-                return UserList(
-                  newList,
-                  searchChanged: (text) => _userlistCubit.setFilter(text),
-                  title: S.current.participants,
-                  onSelectionChanged: (index, userID, isSelected) {
-                    isSelected
-                        ? _userToolsCubit.selectionChanged(userID)
-                        : _userToolsCubit.userUnselected();
-                  },
-                  onDoubleTap: (index, userID) => Navigator.of(context)
-                      .pushNamed('/user', arguments: userID),
-                  onAddPressed: (searchtest) =>
-                      Navigator.of(context).pushNamed('/user'),
-                );
+              List<User> newList = [];
+              if (state is listcubit.Loading) {
+                newList = state.previousList;
+              } else if (state is listcubit.Error) {
+                newList = state.previousList;
+              } else if (state is listcubit.Loaded) {
+                newList = state.list;
               }
+              return UserList(
+                newList,
+                searchChanged: (text) => _userlistCubit.setFilter(text),
+                title: S.current.participants,
+                onSelectionChanged: (index, userID, isSelected) {
+                  isSelected
+                      ? _userToolsCubit.selectionChanged(userID)
+                      : _userToolsCubit.userUnselected();
+                },
+                onDoubleTap: (index, userID) =>
+                    Navigator.of(context).pushNamed('/user', arguments: userID),
+                onAddPressed: (searchtest) =>
+                    Navigator.of(context).pushNamed('/user'),
+              );
             },
           ),
         ),
@@ -277,39 +249,26 @@ class _HomeScreenState extends State<HomeScreen> {
               BlocBuilder<trackcubit.TracklistCubit, trackcubit.TracklistState>(
             bloc: _tracklistCubit,
             builder: (context, state) {
-              if (state is trackcubit.Loaded) {
-                return UserList(
-                  state.list,
-                  searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: S.current.race_track,
-                  onSelectionChanged: (index, userID, isSelected) {
-                    isSelected
-                        ? _trackToolsCubit.selectionChanged(userID)
-                        : _trackToolsCubit.userUnselected();
-                  },
-                  onDoubleTap: (index, userID) => Navigator.of(context)
-                      .pushNamed('/user', arguments: userID),
-                );
-              } else {
-                List<User> newList = [];
-                if (state is trackcubit.Loading) {
-                  newList = state.previousList;
-                } else if (state is trackcubit.Error) {
-                  newList = state.previousList;
-                }
-                return UserList(
-                  newList,
-                  searchChanged: (text) => _tracklistCubit.setFilter(text),
-                  title: S.current.race_track,
-                  onSelectionChanged: (index, userID, isSelected) {
-                    isSelected
-                        ? _trackToolsCubit.selectionChanged(userID)
-                        : _trackToolsCubit.userUnselected();
-                  },
-                  onDoubleTap: (index, userID) => Navigator.of(context)
-                      .pushNamed('/user', arguments: userID),
-                );
+              List<User> newList = [];
+              if (state is trackcubit.Loading) {
+                newList = state.previousList;
+              } else if (state is trackcubit.Error) {
+                newList = state.previousList;
+              } else if (state is trackcubit.Loaded) {
+                newList = state.list;
               }
+              return UserList(
+                newList,
+                searchChanged: (text) => _tracklistCubit.setFilter(text),
+                title: S.current.race_track,
+                onSelectionChanged: (index, userID, isSelected) {
+                  isSelected
+                      ? _trackToolsCubit.selectionChanged(userID)
+                      : _trackToolsCubit.userUnselected();
+                },
+                onDoubleTap: (index, userID) =>
+                    Navigator.of(context).pushNamed('/user', arguments: userID),
+              );
             },
           ),
         ),
@@ -427,5 +386,55 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     ).show(context);
+  }
+
+  Widget _popupMenu(BuildContext context) {
+    return PopupMenuButton(
+      onSelected: (result) async {
+        if (result == 1) {
+          Navigator.of(context).pushNamed('/ranking');
+        } else if (result == 2) {
+          Navigator.of(context).pushNamed('/management');
+        } else if (result == 3) {
+          Navigator.of(context).pushNamed('/import');
+        } else if (result == 4) {
+          _forcedLogout = true;
+          context.read<LoginBloc>().add(Logout());
+        }
+      },
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: _buildPopupItem(
+              Icons.emoji_events_rounded, S.of(context).ranking),
+          value: 1,
+        ),
+        PopupMenuItem(
+          child: _buildPopupItem(Icons.settings, S.of(context).management),
+          value: 2,
+        ),
+        PopupMenuItem(
+          child: _buildPopupItem(Icons.archive, S.of(context).import),
+          value: 3,
+        ),
+        PopupMenuItem(
+          child: _buildPopupItem(Icons.logout, S.of(context).log_out),
+          value: 4,
+        ),
+      ],
+      color: Theme.of(context).colorScheme.onBackground,
+    );
+  }
+
+  Widget _buildPopupItem(IconData icon, String name) {
+    return Row(
+      children: <Widget>[
+        Icon(
+          icon,
+          color: Theme.of(context).iconTheme.color,
+        ),
+        const SizedBox(width: 10),
+        Flexible(child: Text(name)),
+      ],
+    );
   }
 }

@@ -20,7 +20,7 @@ class _RankingScreenState extends State<RankingScreen> {
       listener: (context, state) async {
         if (state is LoggedOut || state is LoginError) {
           await loggedOutDialog(context);
-          WidgetsBinding.instance?.addPostFrameCallback((_) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.pushReplacementNamed(context, '/');
           });
         }

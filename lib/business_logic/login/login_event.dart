@@ -11,4 +11,15 @@ class Login extends LoginEvent {
   Login(this._username, this._password);
 }
 
+class Register extends LoginEvent {
+  final String _username;
+  final String _password;
+  Register(this._username, this._password);
+}
+
+class SwitchLogin extends LoginEvent {
+  SwitchLogin({this.register = false});
+  final bool register;
+}
+
 class Logout extends LoginEvent {}

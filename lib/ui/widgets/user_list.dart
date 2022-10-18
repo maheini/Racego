@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:racego/data/models/user.dart';
+import 'package:racego/ui/widgets/titlebar.dart';
 import '../../business_logic/widgets/list_selection_cubit.dart';
 import 'package:racego/generated/l10n.dart';
 
@@ -135,7 +136,6 @@ class _UserListState extends State<UserList> {
         children: [
           Expanded(
             child: TextField(
-              textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 15),
               decoration: InputDecoration(
                 hintText: S.current.search_hint,
@@ -188,27 +188,13 @@ class _UserListState extends State<UserList> {
   }
 
   Widget _userListDecoration({required Widget child}) {
-    if (widget._title == null) {
-      return Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onBackground,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 5,
-              // offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: child,
-        padding: const EdgeInsets.all(10),
-      );
-    } else {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TitleBar(widget._title ?? ''),
+        const SizedBox(height: 5),
+        Expanded(
+          child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onBackground,
               boxShadow: [
@@ -220,39 +206,13 @@ class _UserListState extends State<UserList> {
                 ),
               ],
             ),
+            child: child,
             padding: const EdgeInsets.all(10),
-            width: double.infinity,
-            child: Text(
-              widget._title!,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
           ),
-          const SizedBox(height: 5),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onBackground,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    // offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: child,
-              padding: const EdgeInsets.all(10),
-            ),
-          ),
-          // Expanded(child: child),
-        ],
-      );
-    }
+        ),
+        // Expanded(child: child),
+      ],
+    );
   }
 
   int _pendingTabs = 0;

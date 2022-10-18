@@ -5,6 +5,7 @@ import 'package:racego/data/models/time.dart';
 import 'package:racego/ui/widgets/coloredbutton.dart';
 import 'package:racego/ui/widgets/timeinput.dart';
 import 'package:racego/generated/l10n.dart';
+import 'package:racego/ui/widgets/titlebar.dart';
 
 class LapsEditor extends StatefulWidget {
   const LapsEditor(this.laps, {Key? key}) : super(key: key);
@@ -26,44 +27,21 @@ class _LapsEditorState extends State<LapsEditor> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _title(),
+        BlocBuilder<LapeditorCubit, LapeditorState>(
+          bloc: _cubit,
+          buildWhen: (previous, current) => current is LapsChanged,
+          builder: (index, state) {
+            return TitleBar(
+              S.current.laps + ': ${_cubit.laps.length}',
+              fontSize: 20,
+            );
+          },
+        ),
         const SizedBox(height: 5),
         Expanded(child: _list()),
         const SizedBox(height: 5),
         _toolButtons(),
       ],
-    );
-  }
-
-  Widget _title() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onBackground,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-            // offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(10),
-      width: double.infinity,
-      child: BlocBuilder<LapeditorCubit, LapeditorState>(
-        bloc: _cubit,
-        buildWhen: (previous, current) => current is LapsChanged,
-        builder: (index, state) {
-          return Text(
-            S.current.laps + ': ${_cubit.laps.length}',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          );
-        },
-      ),
     );
   }
 

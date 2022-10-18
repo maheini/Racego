@@ -12,6 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _isRegistration = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
             if (state is RegeneratingSession) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is LoggedIn) {
-              WidgetsBinding.instance?.addPostFrameCallback((_) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacementNamed(context, '/');
               });
               return const SizedBox(height: 20);
@@ -31,20 +33,22 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       Text(
-                        S.current.sign_in_title,
-                        style: const TextStyle(fontSize: 20),
+                        _isRegistration
+                            ? S.current.register_title
+                            : S.current.sign_in_title,
+                        style: const TextStyle(fontSize: 25),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 40,
                       ),
-                      _emailInput(),
+                      _usernameInput(),
                       const SizedBox(
                         height: 20,
                       ),
                       _passwordInput(),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       _loginBar(),
                     ],
@@ -57,8 +61,16 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.onBackground,
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                    ),
+                  ],
                 ),
-                padding: const EdgeInsets.all(40),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               );
             }
           },
@@ -68,50 +80,53 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // Password input field
-  bool _showEmailEmptyMessage = false;
-  final TextEditingController _emailController = TextEditingController();
-  Widget _emailInput() {
+  bool _showUsernameEmptyMessage = false;
+  final TextEditingController _usernameController = TextEditingController();
+  Widget _usernameInput() {
     return TextField(
       onSubmitted: (_) {
-        if (_emailController.text.isNotEmpty &&
+        if (_usernameController.text.isNotEmpty &&
             _passwordController.text.isNotEmpty) {
           context
               .read<LoginBloc>()
-              .add(Login(_emailController.text, _passwordController.text));
+              .add(Login(_usernameController.text, _passwordController.text));
         }
       },
-      controller: _emailController,
-      onChanged: (email) {
-        if (email.isEmpty && !_showEmailEmptyMessage) {
+      controller: _usernameController,
+      onChanged: (username) {
+        if (username.isEmpty && !_showUsernameEmptyMessage) {
           setState(() {
-            _showEmailEmptyMessage = true;
+            _showUsernameEmptyMessage = true;
           });
-        } else if (email.isNotEmpty && _showEmailEmptyMessage) {
+        } else if (username.isNotEmpty && _showUsernameEmptyMessage) {
           setState(() {
-            _showEmailEmptyMessage = false;
+            _showUsernameEmptyMessage = false;
           });
         }
       },
       decoration: InputDecoration(
-        errorText: _showEmailEmptyMessage ? S.current.email_empty : null,
+        errorText: _showUsernameEmptyMessage ? S.current.username_empty : null,
         border: const OutlineInputBorder(),
-        hintText: S.current.email,
-        labelText: S.current.email,
+        hintText: S.current.username,
+        labelText: S.current.username,
+        labelStyle: TextStyle(
+          color: Theme.of(context).hintColor,
+        ),
       ),
     );
   }
 
-  // Email input field
+  // Username input field
   bool _showPasswordEmptyMessage = false;
   final TextEditingController _passwordController = TextEditingController();
   Widget _passwordInput() {
     return TextField(
       onSubmitted: (_) {
-        if (_emailController.text.isNotEmpty &&
+        if (_usernameController.text.isNotEmpty &&
             _passwordController.text.isNotEmpty) {
           context
               .read<LoginBloc>()
-              .add(Login(_emailController.text, _passwordController.text));
+              .add(Login(_usernameController.text, _passwordController.text));
         }
       },
       obscureText: true,
@@ -132,6 +147,9 @@ class _LoginPageState extends State<LoginPage> {
         border: const OutlineInputBorder(),
         hintText: S.current.password,
         labelText: S.current.password,
+        labelStyle: TextStyle(
+          color: Theme.of(context).hintColor,
+        ),
       ),
     );
   }
@@ -140,25 +158,83 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBar() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        if (state is LoggedOut || state is RegeneratingSession) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+        if (state is LoggedOut ||
+            state is RegeneratingSession ||
+            state is LoginError) {
+          if (state is LoggedOut) {
+            if (_isRegistration != state.registerPage) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                setState(() {
+                  _isRegistration = state.registerPage;
+                });
+              });
+            }
+          }
+          return Column(
             children: [
-              SizedBox(
-                child: ColoredButton(
-                  Text(
-                    S.current.sign_in,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
+              if (state is LoginError)
+                Text(
+                  state.errorMessage,
+                  style: const TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    child: ColoredButton(
+                      Text(
+                        _isRegistration
+                            ? S.current.register
+                            : S.current.sign_in,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      color: Colors.blue,
+                      onPressed: () {
+                        if (_isRegistration) {
+                          context.read<LoginBloc>().add(Register(
+                              _usernameController.text,
+                              _passwordController.text));
+                        } else {
+                          context.read<LoginBloc>().add(Login(
+                              _usernameController.text,
+                              _passwordController.text));
+                        }
+                      },
                     ),
                   ),
-                  color: Colors.blue,
-                  onPressed: () {
-                    context.read<LoginBloc>().add(
-                        Login(_emailController.text, _passwordController.text));
-                  },
+                ],
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  if (_isRegistration) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      context
+                          .read<LoginBloc>()
+                          .add(SwitchLogin(register: false));
+                    });
+                  } else {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      context
+                          .read<LoginBloc>()
+                          .add(SwitchLogin(register: true));
+                    });
+                  }
+                },
+                child: Text(
+                  _isRegistration
+                      ? S.current.login_now
+                      : S.current.register_now,
+                  style: const TextStyle(
+                    color: Colors.blue,
+                  ),
                 ),
               ),
             ],
@@ -190,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.blue,
                     onPressed: () {
                       context.read<LoginBloc>().add(Login(
-                          _emailController.text, _passwordController.text));
+                          _usernameController.text, _passwordController.text));
                     },
                   ),
                 ],

@@ -56,7 +56,7 @@ class _UserScreenState extends State<UserScreen> {
           listener: (context, state) async {
             if (state is LoggedOut || state is LoginError) {
               await loggedOutDialog(context);
-              WidgetsBinding.instance?.addPostFrameCallback((_) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacementNamed(context, '/');
               });
             }
@@ -138,7 +138,7 @@ class _UserScreenState extends State<UserScreen> {
                     (state is UserScreenEditError && _dataNeverLoaded)) {
                   return const SizedBox(width: 10);
                 } else if (state is UserScreenStored) {
-                  WidgetsBinding.instance?.addPostFrameCallback((_) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pop(context);
                   });
                 }
