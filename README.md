@@ -8,7 +8,7 @@
 
 Racego is a cross-platform race-management software for managing & evaluating sports or motorsport races. Top features: Multi-User, Auto Ranking, Race Classes, Windows & web support and Multi-Lingual!
 
-[<img src="https://user-images.githubusercontent.com/65506676/196290622-a041e9b1-3f40-475b-97ba-6d382aff2c94.svg" height="45" alt="Windows Download"></img>](https://racego.neofix.ch/download/Racego%20Setup.exe)
+[<img src="https://user-images.githubusercontent.com/65506676/196290622-a041e9b1-3f40-475b-97ba-6d382aff2c94.svg" height="45" alt="Windows Download"></img>](PASTE_DOWNLOAD_LINK)
 [<img src="https://user-images.githubusercontent.com/65506676/196293379-269afd46-a235-45ad-aec4-76ae75945627.png" height="45" alt="WebApp"></img>](https://racego.neofix.ch/manager/)
 
 <p align="center">
